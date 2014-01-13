@@ -42,6 +42,7 @@ Histvest::Application.routes.draw do
   
   get "static_pages/home"
   get "static_pages/admin"
+  get '/om_histvest', to: 'static_pages#about'
   
   get '/references/search/:source/:index/:query', to: 'references#searchSource'
 
