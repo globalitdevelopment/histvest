@@ -21,10 +21,6 @@
 # Ignore application configuration
 /config/application.yml
 
-#Ignore database config
-/config/database.yml
-
-
 #Ignore code analysis tools output
 /coverage/*
 /rails_best_practices_output.html

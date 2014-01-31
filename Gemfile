@@ -96,3 +96,6 @@ gem 'jbuilder'
 
 # to manage configurations
 gem "figaro", "~> 0.7.0"
+
+# For deployment
+gem "recap"
