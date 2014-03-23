@@ -25,7 +25,12 @@
         <% @topic.references.each_with_index do |ref,i| %>
         <li>          
           <%= link_to image_tag( ref.reference_type.nil? ? "rt-ukjent-icon.png" : ref.reference_type.icon, :height => 16, :title => ref.title,  :alt => ref.reference_type.try(:name)), ref.url %>          
-          <%= link_to !ref.title.blank? ? ref.title : ref.url, ref.url, :target => "_blank", :alt=>ref.url, :title=> "#{ref.creator}, #{ref.lang}, #{ref.year},, #{ref.snippet}",:style=>"color: rgb(53, 166, 65);"%> <%= "(#{ref.creator}, #{ref.year})" if ref.creator %>
+          <%= link_to !ref.title.blank? ? ref.title : ref.url, ref.url, 
+              :onclick => "window.open(this.href, 'referencewin', 'left=40,top=40,width=1100,height=960,toolbar=1,resizable=1'); return false;", 
+              :alt => ref.url, 
+              :title => "#{ref.creator}, #{ref.lang}, #{ref.year},, #{ref.snippet}",
+              :style => "color: rgb(53, 166, 65);" %>
+           <%= "(#{ref.creator}, #{ref.year})" if ref.creator %>
           </li>
         <% end if @topic.references %>
       </ul>
