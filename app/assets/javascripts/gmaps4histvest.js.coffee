@@ -40,12 +40,15 @@ class @Gmaps4HistVest
         related_locations = []
         for marker in @markers
             related_locations.push marker if marker.belongs_to_current_topic
-        if related_locations.length > 0
+        console.log related_locations
+        if related_locations.length > 1
             @extend_bounds_with_objects(related_locations)
+            @set_center(@bounds_object.getCenter())
+            @my_map.fitBounds(@bounds_object)
         else
-            @extend_bounds_with_objects(@markers)
-        @set_center(@bounds_object.getCenter())
-        @my_map.fitBounds(@bounds_object)
+            @extend_bounds_with_objects(related_locations)
+            @set_center(@bounds_object.getCenter())
+            @set_zoom(16)
 
     bind_fancybox: ->
         _this = this;
