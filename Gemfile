@@ -41,10 +41,6 @@ end
 # Analyzes code coverage
 gem "simplecov", "~> 0.8.2", :require => false, :group => :test
 
-# System dependent gems, for test notification
-gem "rb-inotify", "~> 0.9.3"
-gem "libnotify", "~> 0.8.2"
-
 # Gems used only for assets and not required
 # in production environments by default.
 gem "sass-rails", "~> 4.0.1"
@@ -59,11 +55,9 @@ gem 'rails-backbone', '0.9.10'
 gem "bootstrap-sass", "~> 2.1.0.0"
 gem 'tinymce-rails', '3.5.8.1'
 gem 'fancybox-rails'
-#gem 'turbolinks'
 
 #Data grid 
 gem "datagrid", "~> 1.0.3"
-#gem "bson", "~> 1.9.2"
 gem "bson_ext", "~> 1.9.2"
 gem "fastercsv", "~> 1.5.5"
 gem "jeweler", "~> 1.8.8"
@@ -91,7 +85,6 @@ gem "paperclip", "~> 3.5.2"
 #gem 'rmagick'
 gem 'truncate_html', '0.9.2'
 # Memcached
-#gem 'dalli'
 gem 'jbuilder'
 
 # to manage configurations
