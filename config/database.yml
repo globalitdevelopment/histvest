@@ -2,7 +2,5 @@ development:
   adapter: postgresql
   encoding: unicode
   database: histvest_dev
-  host: localhost
   pool: 5
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-
+  password:
