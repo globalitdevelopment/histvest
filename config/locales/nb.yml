@@ -231,7 +231,7 @@ nb:
       bibliotek: Bibliotek
       historiske_vestfold: ! ' Historiske Vestfold '
     touch:
-      bibliotek: Bibliotek
+      bibliotek: Historiske Vestfold
   listing:
     actions: Actions
   locations:
