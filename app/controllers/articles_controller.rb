@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :show
   before_filter :authenticate_user!, :except => :show
   # GET /articles
   # GET /articles.json
