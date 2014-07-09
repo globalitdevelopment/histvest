@@ -118,7 +118,7 @@ class TopicsController < ApplicationController
 		marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics })
 
     topic_belongs = false
-    location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] }    
+    location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }    
 		if topic_belongs
 			marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/6991FD/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png")
 			marker.json(belongs_to_current_topic: true)

@@ -17,6 +17,8 @@
 /log/*.yml
 /tmp
 /.rvmrc
+/.idea
+/.idea/*.
 
 # Ignore application configuration
 /config/application.yml
