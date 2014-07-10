@@ -343,7 +343,7 @@ nb:
     password_changed: Passordet er blitt endret.
     send_instructions: Send instruksjoner
     wrong_token: Feil passordnullstillingsdetaljer.
-    must_be_logged_in: 
+    must_be_logged_in: Du har ikke tilgang til denne siden.
   shared:
     footer:
       about_historiske_vestfold: Om Historiske Vestfold
