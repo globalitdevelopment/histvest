@@ -1,5 +1,4 @@
-class UserReport
-	include Datagrid
+class UserReport < DatagridExtended
 
 	scope do
 		User.order("users.created_at desc")

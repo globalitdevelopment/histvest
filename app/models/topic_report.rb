@@ -1,5 +1,4 @@
-class TopicReport
-	include Datagrid
+class TopicReport < DatagridExtended
 	scope do
 		Topic.order("topics.created_at desc")
 	end

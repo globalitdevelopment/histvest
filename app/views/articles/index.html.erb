@@ -51,7 +51,7 @@
     <% end %>
   </div>
   <div class="listing-part">
-    <% articles = @article_report.assets.paginate(:page => params[:page], :per_page => 20)%>    
+    <% articles = @article_report.assets.paginate(:page => params[:page], :per_page => ArticleReport::PAGE_SIZE)%>    
     <table class="data-table" width="100%" cellspacing="0" cellpadding="0" border="0" id="article_index" >
       <thead>
         <tr>
@@ -88,7 +88,7 @@
   </div>
   <div class="paging">
     <div class="pagination">
-      <a href="/articles?page=<%=@article_report.assets.length/5%>"><%= I18n.t("pagination.last")%></a>
+      <a href="/articles?page=<%=@article_report.last_page%>"><%= I18n.t("pagination.last")%></a>
     </div>
     <%= will_paginate(articles) %>
     <div class="pagination">

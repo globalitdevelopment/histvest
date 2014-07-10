@@ -93,7 +93,7 @@
   </div>
   <div class="paging">
     <div class="pagination">
-      <a href="/topics?page=<%=(@topic_report.assets.length/5)%>"><%= I18n.t("pagination.last")%></a>
+      <a href="/topics?page=<%=(@topic_report.last_page)%>"><%= I18n.t("pagination.last")%></a>
     </div>
     <%= will_paginate(topics) %>
     <div class="pagination">
