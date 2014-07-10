@@ -13,13 +13,15 @@ class Ability
 				can :read, Article
 				can :create, Article
 				can :read, User
-				can :update, User, :id => user.id        
+				can :update, User, :id => user.id
+				cannot [:index], User      
 			when 'contributor'
 				can :create, Topic, :user_id => user.id
 				can :update, Topic, :user_id => user.id
 				can :read, Topic, :user_id => user.id
 				can :read, User
-				can :update, User, :id => user.id        
+				can :update, User, :id => user.id
+				cannot [:index], User
 			else
 				can :read, Article
 				can :read, Topic        
