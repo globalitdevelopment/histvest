@@ -1,5 +1,4 @@
-class ArticleReport
-	include Datagrid
+class ArticleReport < DatagridExtended
 	scope do
 		Article.order("articles.created_at desc")
 	end
@@ -14,10 +13,4 @@ class ArticleReport
 	column(:created_at)
 	column(:updated_at)  
 	column(:published, :html => true) { |asset| asset.published? ? "<span style='padding:0 20px 0 30px;'>  #{image_tag('checked.png')} </span>" : "<span style='padding:0 20px 0 30px;'>  #{image_tag('checkbox.png')} </span>" }
-
-	PAGE_SIZE = 20
-
-	def last_page
-		assets.length > PAGE_SIZE ? assets.length / PAGE_SIZE + assets.length % PAGE_SIZE : 1
-	end
 end
