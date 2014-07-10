@@ -2,7 +2,7 @@ require 'recap/recipes/rails'
 require 'yaml'
 
 set :application, 'histvest'
-set :repository, 'https://github.com/saltvedt/histvest.git'
+set :repository, 'https://github.com/globalitdevelopment/histvest.git'
 set :remote_username, 'vds'
 
 server '185.35.184.76', :app
