@@ -31,7 +31,7 @@ class ReferenceType < ActiveRecord::Base
 		if refs.any?
 			return refs.first.id
 		else
-			return 14 # unknown
+			return ReferenceType.find_by(name: "Ukjent").id # unknown
 		end
 	end
 
