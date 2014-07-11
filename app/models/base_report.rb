@@ -1,6 +1,4 @@
-class DatagridExtended
-	include Datagrid
-
+class BaseReport
 	PAGE_SIZE = 20
 
 	def last_page
