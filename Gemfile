@@ -43,7 +43,7 @@ gem "simplecov", :require => false, :group => :test
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem "sass-rails"
+gem "sass-rails", ">= 3.2"
 gem "coffee-rails"
 gem "uglifier"
 
@@ -52,7 +52,7 @@ gem "uglifier"
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "rails-backbone"
-gem "bootstrap-sass"
+gem "bootstrap-sass", "~> 3.2.0"
 gem "tinymce-rails"
 gem "fancybox-rails"
 

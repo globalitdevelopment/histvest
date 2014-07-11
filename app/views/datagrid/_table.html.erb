@@ -4,13 +4,20 @@ Local variables:
 * assets - Array of database Entities
 * options - passed options Hash
 %>
-<%#= content_tag :table, options[:html] do %>
-  <% if assets.empty? %>
-    <tr><td class="noresults" colspan="100%"><center><%= I18n.t 'datagrid.no_results', :default => '&mdash;&mdash;'.html_safe %></center></td></tr>
-  <% else %>
+<%= content_tag :table, 
+# options[:html]
+:class => "data-table", :width => "100%", :cellspacing => "0", :cellpadding => "0", :border => "0", :id => "topic_index" do %>
+  <thead>
+    <%= render partial: "#{options[:class_name]}/head" %>
+  </thead>
+  <tbody>
+    <% if assets.empty? %>
+    <tr><td class="noresults" colspan="100%"><%= I18n.t('datagrid.no_results').html_safe %></td></tr>
+    <% else %>
     <%= datagrid_rows(grid, assets, options) %>
-  <% end %>
-  <tr>
-    <td class="bottom-line" colspan="7"></td>
-  </tr>
-<%# end %>
+    <% end %>
+    <tr>
+      <td class="bottom-line" colspan="7"></td>
+    </tr>
+  </tbody>
+<% end %>
