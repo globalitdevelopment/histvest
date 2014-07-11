@@ -1,9 +1,11 @@
-class TopicReport < DatagridExtended
+class TopicReport < BaseReport
+	include Datagrid
 	scope do
 		Topic.order("topics.created_at desc")
 	end
 
 	filter(:title, :string) {|value| where("title ilike '#{value}%'")}
+	filter(:content, :string) {|value| where("content ilike '#{value}%'")}
 	
 	column(:actions, :html => true) { |topic| render :partial => "/shared/check_box",:locals => { :s => topic }}
 	column(:title, :url => proc {|topic| Rails.application.routes.url_helpers.edit_topic_path(topic) })
