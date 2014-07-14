@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   
+  before_action :set_user, only: [:destroy, :edit, :show, :update]
+
   # GET /users
   # GET /users.json
   def index    
@@ -15,7 +17,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -35,7 +36,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])    
   end
 
   # POST /users
@@ -56,8 +56,9 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-
+    if current_user.admin? and params[:user][:password].blank?
+      @user.novalidate = true
+    end
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: I18n.t("users.update_flash") }
@@ -72,7 +73,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
@@ -93,5 +93,11 @@ class UsersController < ApplicationController
     end
     flash[:notice] = "#{users.length} user(s) have been marked as #{params["batch_action"]}" 
     redirect_to users_url
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
