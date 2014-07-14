@@ -94,7 +94,7 @@ class ArticlesController < ApplicationController
           format.html { redirect_to edit_article_path(@article), notice: I18n.t("articles.create_flash") }
           format.json { render json: edit_topic_path(@article), status: :created, location: @article }
         else
-          format.html { redirect_to @article, notice: I18n.t("articles.create_flash") }
+          format.html { redirect_to articles_path, notice: I18n.t("articles.create_flash") }
           format.json { head :no_content }
         end
       else
