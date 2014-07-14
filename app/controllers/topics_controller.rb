@@ -189,8 +189,8 @@ class TopicsController < ApplicationController
 		  format.html { redirect_to edit_topic_path(@topic), notice: I18n.t("topics.create_flash") }
 		  format.json { render json: edit_topic_path(@topic), status: :created, location: @topic }
 		else
-		  format.html { redirect_to topic_path(@topic), notice: I18n.t("topics.create_flash") }
-		  format.json { render json: @topic, status: :created, location: @topic }
+		  format.html { redirect_to topics_path, notice: I18n.t("topics.create_flash") }
+		  format.json { head :no_content }
 		end
 	  else           
 		@topic.locations.build
