@@ -253,20 +253,20 @@ class TopicsController < ApplicationController
 	end
   end
   
-  def batch_actions        	    	
-	topic_ids = params["top_ids"].split(",")
-	topics = Topic.find_all_by_id(topic_ids)
-	topics.each do |top|  
-	  if params["batch_action"] == "delet"          
-		top.locations.delete_all
-		top.references.delete_all
-		top.destroy
-	  else
-		top.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
-	  end
-	end
-	flash[:notice] = "#{topics.length} topic(s) have been #{params["batch_action"]}ed" 
-	redirect_to topics_url  
+  def batch_actions
+		topic_ids = params["top_ids"].split(",")
+		topics = Topic.find(topic_ids)
+		topics.each do |top|
+		  if params["batch_action"] == "delet"
+				top.locations.delete_all
+				top.references.delete_all
+				top.destroy
+		  else
+			top.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
+		  end
+		end
+		flash[:notice] = "#{topics.length} topic(s) have been #{params["batch_action"]}ed" 
+		redirect_to topics_url  
   end
 
 private
