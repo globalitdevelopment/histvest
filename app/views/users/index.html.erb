@@ -5,32 +5,28 @@
     $('input:checked').each(function() {
        temp.push(this.value);
     });
-    if(temp.length == 0){ alert(<%= raw I18n.t('users.no_selection',default: "Please select atleast one user").to_json %>); return false;}        
+    if(temp.length == 0){ alert(<%= raw I18n.t('users.no_selection', default: 'Please select at least one user').to_json %>); return false;}
     window.location.href = "/users/batch_actions?batch_action="+act+"&user_ids="+temp ;        
     temp = [];
   }
-</script>    
+</script>
 
 <div class="inner-page">
   <div class="inner-head">
-    <h1>
-      <a href="<%=new_user_path%>" class="heading-button"><%=image_tag("/assets/add-icon.1.png")%> <%= I18n.t("users.add_user") %></a> </h1>
-    </h1>
+    <%= link_to new_user_path, :class => 'btn btn-primary' do %>
+        <span class='glyphicon glyphicon-plus-sign'></span> <%= I18n.t('users.add_user') %>
+    <% end %>
+    <%= button_tag I18n.t('top_header.admin_front'), :onclick=>"return makeBatchAction('admin')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('top_header.contributor'), :onclick=>"return makeBatchAction('customer')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('crud_links.delete'), :onclick=>"return makeBatchAction('delet')", :class => 'btn btn-danger' %>
     <div class="head-right">
-      <%= form_for @user_report, :url=>users_path, :html => {:method => :get} do |f| -%>
+      <%= form_for @user_report, :url=>users_path, :html => {:method => :get, :class=>'form-inline'} do |f| -%>
         <% @user_report.filters.each do |filter| -%>
-          <%= f.datagrid_filter filter, :placeholder=> I18n.t("users.#{filter.name}") , :class=>'search-in'%>
+          <%= f.datagrid_filter filter, :placeholder=> I18n.t("users.#{filter.name}") , :class=>'form-control'%>
         <%end -%>   
-        <%= f.submit I18n.t("searchs.search"), :class=>"search-button" %>
+        <%= f.submit I18n.t('searchs.search'), :class=> 'btn btn-primary' %>
       <% end -%>
     </div>
-    <br />
-    <div class="" style="margin-top: 20px;" >
-      <%= button_tag I18n.t('top_header.admin_front'), :onclick=>"return makeBatchAction('admin')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('top_header.contributor'), :onclick=>"return makeBatchAction('customer')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('crud_links.delete'), :onclick=>"return makeBatchAction('delet')", :class => "btn btn-success" %>
-    </div>
-
   </div>
   <div class="listing-part">
     <% users = @user_report.assets.paginate(:page => params[:page], :per_page => 20)%>    

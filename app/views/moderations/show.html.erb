@@ -1,23 +1,20 @@
 <div class="inner-page">
   <div class="inner-head">
-  	<h1>
-      
-      <%= link_to I18n.t('topics.publish',:default=>'Publish') , "javacsript:;", :class => "btn btn-success", :id => "btn-publish" %>  
-      <%= link_to I18n.t('topics.reject',:default=>'Reject') , "javacsript:;", :class => "btn btn-danger", :id => "btn-reject", :data => { :message => I18n.t('topics.rejection_reason',:default=>'Please specify reason of rejection (optional)') } %>  
+      <%= link_to I18n.t('topics.publish',:default=>'Publish') , "javacsript:;", :class => 'btn btn-success', :id => 'btn-publish' %>
+      <%= link_to I18n.t('topics.reject',:default=>'Reject') , "javacsript:;", :class => 'btn btn-danger', :id => 'btn-reject', :data => { :message => I18n.t('topics.rejection_reason',:default=>'Please specify reason of rejection (optional)') } %>
       <% if params[:all].blank? %>
-        <%= link_to I18n.t('topics.all_pending',:default=>'All Pending Topics') ,moderation_path(:all=>1), :class => "btn" %>   
+        <%= link_to I18n.t('topics.all_pending',:default=>'All Pending Topics'), moderation_path(:all=>1), :class => 'btn btn-default' %>
       <% else %>
-        <%= link_to I18n.t('topics.moderation',:default=>'Under moderation') ,moderation_path, :class => "btn" %>   
+        <%= link_to I18n.t('topics.moderation',:default=>'Under moderation'), moderation_path, :class => 'btn btn-default' %>
       <% end %>
-      <%= link_to I18n.t('topics.back_to_topics',:default=>'Back to Topics') ,moderation_path, :class => "btn" %>   
-    </h1>
+      <%= link_to I18n.t('topics.back_to_topics',:default=>'Back to Topics'), moderation_path, :class => 'btn btn-default' %>
     <div class="head-right">
-      <%= form_for @topic_report, :url=>moderation_path, :html => {:method => :get} do |f| -%>
+      <%= form_for @topic_report, :url=>moderation_path, :html => {:method => :get, :class=>'form-inline' } do |f| -%>
          <%= hidden_field_tag :all, params[:all] %>
          <% @topic_report.filters.each do |filter| -%>            
-            <%= f.datagrid_filter filter, :placeholder=> I18n.t("topics.#{filter.name}") , :class=>'search-in'%>            
+            <%= f.datagrid_filter filter, :placeholder=> I18n.t("topics.#{filter.name}") , :class=>'form-control'%>
           <%end -%>   
-          <%= f.submit I18n.t("searchs.search"), :class=>"search-button" %>
+          <%= f.submit I18n.t('searchs.search'), :class=> 'btn btn-primary' %>
         <% end %>      
     </div>
     <div class="clear"></div>    

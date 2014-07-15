@@ -1,2 +1,30 @@
 'en':
   
+
+  article:
+
+  publish: "Publish"
+  unpublish: "Unpublish"
+  delete: "Delete"
+  articles:
+    add_article: "Add article"
+  pagination:
+    last: "Last"
+    first: "First"
+  searchs:
+    search: "Search"
+  users:
+    add_user: "Add user"
+  topics:
+    all_pending: "All Pending Topics"
+    back_to_topics: "Back to Topics"
+    cancel: "Cancel"
+    form:
+      main_images: "Main Images:"
+      add_locations: "Add Locations"
+    add_location: "Add Location"
+  topic:
+    image:
+      replace: "Replace"
+      upload: "Upload"
+    delete_image: "Delete Image"

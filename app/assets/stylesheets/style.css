@@ -47,7 +47,6 @@ img { border:0; outline:0; border:none; outline:none;}
 ol, ul, li { list-style-type:none;}
 h3, h4, h5, h6 { font-size:100%; font-weight:normal;}
 a { text-decoration:none; border:0; outline:0; border:none; outline:none;}
-a:hover { text-decoration:none; border:0; outline:0; border:none; outline:none;}
 .clear { clear:both;}
 .relative { position:relative;}
 .left { float:left;}
@@ -115,9 +114,6 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 .ref-list li {margin: 0px; padding:0 0 0 14px; list-style: none; background:url(/assets/arrow-black.png) no-repeat 0px 4px;}
 .ref-list li a {text-decoration: underline;}
 .ref-list li a:hover {text-decoration: none;}
-.btn-edit-div {float: left; width: 100%;}
-.btn-edit-div a {background: url(/assets/btn-upload.gif) repeat-x;margin:7px 0 0 8px;height: 25px;line-height: 25px;border-radius: 4px;padding: 0 10px;color: #fff;border: 1px solid #2f2f2f;
-display: inline-block;}
 
 #map .infowindow {
     width: 300px;
