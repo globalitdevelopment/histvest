@@ -112,8 +112,6 @@ h2 {line-height:20px; font-size:24px; color:#35a641; font-family: 'zurich_bdxcn_
 .inner-page {background:#fff; border:1px solid #dadada; box-shadow:0 0 1px 1px #ececec; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; float:left; width:1000px;}
 .inner-head {background:url(inner-head-bg.gif) repeat-x #eee; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; padding:13px 10px; float:left; width:980px;}
 .head-right {float:right; position:relative;}
-.head-right input {border:1px solid #ccc; padding:6px; margin:0 0 0 8px}
-.head-right input.search-in {width:125px; padding:6px 25px 6px 6px;}
 .head-right .mrLT {margin-left:15px;}
 .box150 {width:150px;}
 .box225 {width:225px;}
@@ -138,6 +136,11 @@ h2 {line-height:20px; font-size:24px; color:#35a641; font-family: 'zurich_bdxcn_
 .data-table td.last img {padding:0 8px;}
 .data-table td.bottom-line {height:5px; background:#666; padding:0;}
 .data-table input[type=checkbox] {padding:3px 5px 3px 0; float:left; margin:0 10px 0 0;}
+.data-table input[type=text],
+.data-table input[type=password],
+.data-table select {
+  width: 220px;
+}
 
 .paging {background:#eee; float:left; width:990px; padding:6px 5px 8px;}
 .paging ul {float:right;}
