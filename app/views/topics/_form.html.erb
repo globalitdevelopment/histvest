@@ -31,9 +31,9 @@
     <div class="default-main">
       <div class="defult-left">
         <div class="top-btn">
-          <%= f.submit I18n.t('topics.save', :default => "Save"), :class => "grn-btn-rgt-new" %>
-          <%= f.submit I18n.t("topics.form.save_and_quit", :default => "Lagre og avslutt"), :class => "grn-btn-rgt-new" %>
-          <%= link_to I18n.t('topics.cancel',:default=>"Cancel"), topics_path, :class => "gray-btn-rgt" %>
+          <%= f.submit I18n.t('topics.save'), :class => 'btn btn-success' %>
+          <%= f.submit I18n.t('topics.form.save_and_quit'), :class => 'btn btn-success' %>
+          <%= link_to I18n.t('topics.cancel'), topics_path, :class => 'btn btn-default' %>
         </div>
         <div class="welcome-text">
           <div class="topics">
@@ -78,20 +78,23 @@
                 </ul>
               </div>
               <div class="upload-images">
-                <h4><%= I18n.t("topics.form.main_images", :default => "Main Images:") %></h4>
+                <h4><%= I18n.t('topics.form.main_images') %></h4>
                 <div class="upload-img-div" id="upload-img-div">
                   <%= !@topic.nil? && !@topic.avatar.nil? && !@topic.avatar.avatar_img.nil? ? image_tag(@topic.avatar.avatar_img.url(:thumb)) : image_tag("/assets/upload-img.gif") %>
                 </div>
                 <output id="list"></output>
-                <span><% avatar_name = @topic.avatar.avatar_img_file_name if @topic && @topic.avatar && @topic.avatar.avatar_img %></span
-                <a href="#" class="btn-upload">
+                <span><% avatar_name = @topic.avatar.avatar_img_file_name if @topic && @topic.avatar && @topic.avatar.avatar_img %></span>
+                <div>
                   <input type="file" name="avatar[avatar_img]" id="avatar_avatar_img" style="display:none;width:15px;" >
                   <input type="text" id="filename" readonly="true" style="width:80px;" value="<%=avatar_name%>"/><br />
-                  <input type="button" value="<%=params[:action] == 'edit' ? 'Replace' : 'Upload' %>" class="btn-upload" id="fakeBrowse" onclick="HandleBrowseClick();" style="margin-top: 0px;" />
+                  <input type="button" value="<%= I18n.t(params[:action] == 'edit' ? 'topic.image.replace' : 'topic.image.upload') %>" class="btn btn-success" id="fakeBrowse" onclick="HandleBrowseClick();" style="margin-top: 0px;" />
                   <output id="list"></output>
-                </a>
+                </div>
+                <div>
+                  <%= f.check_box :avatar_delete %>
+                  <%= f.label :avatar_delete, I18n.t('topic.delete_image') %>
+                </div>
               </div>
-              &nbsp;&nbsp;&nbsp;<%= f.check_box :avatar_delete %> <%= I18n.t('topic.delete_image',:default => 'Delete Image') %>
             </div>
           </div>
         </div>
@@ -100,12 +103,12 @@
         <div class="map-right-location" id="map_div">
           <div class="location-hd">
               <div class="location-icon">
-                <a href="javascript:void(0)" id="marker_toggle" title="<%= I18n.t("topics.add_location") %>"><img src="/assets/pin-icon.png" alt=""></a>
-                <a href="javascript:void(0)" id ="marker_adder" title="<%= I18n.t("topics.add_location") %>">
+                <a href="javascript:void(0)" id="marker_toggle" title="<%= I18n.t('topics.add_location') %>"><img src="/assets/pin-icon.png" alt=""></a>
+                <a href="javascript:void(0)" id ="marker_adder" title="<%= I18n.t('topics.add_location') %>">
                   <img src="/assets/icon-plus.png" alt="">
                 </a>
               </div>
-              <%= I18n.t("topics.form.add_locations", :default => "Add Locations") %>
+              <%= I18n.t('topics.form.add_locations') %>
           </div>
 
           <div class="location-inner">

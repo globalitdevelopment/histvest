@@ -36,7 +36,7 @@
       </ul>
       <div class="btn-edit-div">
         <% if signed_in? %>
-        <%= link_to I18n.t("crud_links.edit"), edit_topic_path(@topic) %>
+        <%= link_to I18n.t("crud_links.edit"), edit_topic_path(@topic), :class => 'btn btn-success' %>
         <% end %>
       </div>
       <div class='clear'></div>

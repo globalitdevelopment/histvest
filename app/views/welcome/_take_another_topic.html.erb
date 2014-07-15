@@ -8,9 +8,7 @@
 %> 
   	<%= truncate_html(@rand_topic.content, length: 300, omission: '...')%>  
     <p class='view-more-btn'>
-      <a href="<%= topic_path(@rand_topic) %>" title="Les mer" class="les-mer-but">
-        <img src="/assets/les-mer-but.jpg" width="72" height="27" style="margin-top: -5px;">
-      </a>
+      <%= link_to I18n.t("shared.sidebar.read_more", :default => "read more"), topic_path(@rand_topic), :class => 'btn btn-danger' %>
     </p>
   </p>
 <% else %>

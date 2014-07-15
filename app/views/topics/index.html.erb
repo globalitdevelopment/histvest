@@ -16,26 +16,26 @@
 
 <div class="inner-page">
   <div class="inner-head">
-    <h1>
-      <a href="<%=new_topic_path%>" class="heading-button"><%=image_tag("/assets/add-icon.1.png")%> <%= I18n.t("topics.add_topic")%></a>
-      <%= link_to "#{I18n.t('topics.moderation',:default=>'Under moderation')} (#{@under_moderation})" ,moderation_path, :class => "btn btn-warning", :id => "btn-moderation" if can? :verify, Topic %>
-    </h1>
+    <%= link_to new_topic_path, :class => 'btn btn-primary' do %>
+      <span class='glyphicon glyphicon-plus-sign'></span> <%= I18n.t("topics.add_topic") %>
+    <% end %>
+    <%= link_to "#{I18n.t('topics.moderation',:default=>'Under moderation')} (#{@under_moderation})" ,moderation_path, :class => "btn btn-warning", :id => "btn-moderation" if can? :verify, Topic %>
     <div class="head-right">
-      <%= form_for @topic_report, :url=>topics_path, :html => {:method => :get} do |f| -%>
+      <%= form_for @topic_report, :url=>topics_path, :html => {:method => :get, :class=>'form-inline'} do |f| -%>
          <% @topic_report.filters.each do |filter| -%>            
-            <%= f.datagrid_filter filter, :placeholder=> I18n.t("topics.#{filter.name}") , :class=>'search-in'%>            
-          <%end -%>   
-          <%= f.submit I18n.t("searchs.search"), :class=>"search-button" %>
+            <%= f.datagrid_filter filter, :placeholder=> I18n.t("topics.#{filter.name}") , :class=>'form-control'%>
+          <%end -%>
+          <%= f.submit I18n.t('searchs.search'), :class=>'btn btn-primary' %>
         <% end %>      
     </div>
     <br />
-    <div class="" style="margin-top: 20px;" >
+    <div class="" style="margin-top: 5px;" >
       <% if can? :verify, Topic %>
       <%= button_tag I18n.t('crud.publish',default: "Publish"), :onclick=>"return makeBatchAction('publish')", :class => "btn btn-success" %>
       <%= button_tag I18n.t('crud.unpublish',default: "Unpublish"), :onclick=>"return makeBatchAction('unpublish')", :class => "btn btn-success" %>
       <% end %>
       <% if can? :destroy, Topic %>
-      <%= button_tag I18n.t('crud.delete',default: "Delete"), :onclick=>"return makeBatchAction('delet')", :class => "btn btn-success" %>
+      <%= button_tag I18n.t('crud.delete',default: "Delete"), :onclick=>"return makeBatchAction('delet')", :class => "btn btn-danger" %>
       <% end %>
     </div>
 

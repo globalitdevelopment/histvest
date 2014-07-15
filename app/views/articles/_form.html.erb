@@ -51,10 +51,10 @@
     <div class="default-main">
       <div class="defult-left">
         <div class="top-btn">
-          <%= f.submit I18n.t('topics.save', :default => "Save"), :class => "grn-btn-rgt-new" %>
-          <%= f.submit I18n.t("articles.form.save_and_quit", :default => "Lagre og avslutt"), :class => "grn-btn-rgt-new" %>
-          <!--<a class="grn-btn-rgt-new" href="#"><%= I18n.t("articles.form.save_and_quit", :default => "Lagre og avslutt") %></a> -->
-          <%= link_to I18n.t('topics.cancel',:default=>"Cancel"), articles_path, :class => "gray-btn-rgt" %>
+          <%= f.submit I18n.t('topics.save', :default => "Save"), :class => 'btn btn-success' %>
+          <%= f.submit I18n.t("articles.form.save_and_quit", :default => "Lagre og avslutt"), :class => 'btn btn-success' %>
+          <!--<a class="grn-btn-rgt-new" href="#"><%= I18n.t("articles.form.save_and_quit", :default => 'Lagre og avslutt') %></a> -->
+          <%= link_to I18n.t('topics.cancel'), articles_path, :class => "btn btn-default" %>
         </div>
         <div class="welcome-text" style="width:965px;">
           <div class="topics">
@@ -66,7 +66,7 @@
               <%= tinymce %>
             </div>
             <div>&nbsp;</div>
-            <div class="publish-new" style="width: 960px;">
+            <div class="publish-new" style="width: 930px;">
               <div class="publish-left">
                 <ul>
                   <li>
@@ -82,7 +82,7 @@
                   </li>
                   <li>
                     <span style="float:left;">
-                    &nbsp;<%= I18n.t('article.publish_ends', default: 'Publish Ends') %>: </span>
+                    <%= I18n.t('article.publish_ends', default: 'Publish Ends') %>: </span>
                     <span style="float:left;width:130px;"><%= f.text_field :published_end, :value => params[:action]=='edit' && !@article.published_end.nil? ? @article.published_end.strftime('%d.%m.%Y %H:%M') : '',:style=>"width:82px;height:10px;margin-left: 17px;" %>
 
                     <img src="/assets/cal-icon.png" id="pub_end" class="cal-icon1" alt="" style="cursor:pointer;"> </span>
@@ -91,7 +91,7 @@
                     </span>
                   </li>
                   <li class="last">
-                    &nbsp;<%= f.check_box :published %> <%= I18n.t('article.published', default: 'Published') %>
+                    <%= f.check_box :published %> <%= I18n.t('article.published', default: 'Published') %>
                   </li>
                 </ul>
 
@@ -104,20 +104,19 @@
                   <%= !@article.nil? && !@article.avatar.nil? && !@article.avatar.avatar_img.nil? ? image_tag(@article.avatar.avatar_img.url(:thumb)) : image_tag("/assets/upload-img.gif") %>
                 </div>
                 <output id="list"></output>
-                <span><% avatar_name = @article.avatar.avatar_img_file_name if @article && @article.avatar && @article.avatar.avatar_img %></span
-                <a href="#" class="btn-upload">
+                <span><% avatar_name = @article.avatar.avatar_img_file_name if @article && @article.avatar && @article.avatar.avatar_img %></span>
+                <div>
                   <input type="file" name="avatar[avatar_img]" id="avatar_avatar_img" style="display:none;width:15px;" >
                   <input type="text" id="filename" readonly="true" style="width:80px;" value="<%=avatar_name%>"/><br />
-                  <input type="button" value="<%=params[:action] == 'edit' ? I18n.t('article.image.replace') : I18n.t('article.image.upload') %>" class="btn-upload" id="fakeBrowse" onclick="HandleBrowseClick();"/>
+                  <input type="button" value="<%= I18n.t(params[:action] == 'edit' ? 'article.image.replace' : 'article.image.upload') %>" class="btn btn-success" id="fakeBrowse" onclick="HandleBrowseClick();"/>
                   <output id="list"></output>
-                </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div><%= I18n.t("articles.form.&nbsp", :default => "&nbsp;") %></div>
   </div>
 <% end %>
 

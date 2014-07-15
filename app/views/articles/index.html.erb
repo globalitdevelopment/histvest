@@ -13,39 +13,37 @@
 
 <div class="inner-page">
   <div class="inner-head">
-    <h1>
-      <a href="<%=new_article_path%>" class="heading-button"><%=image_tag("/assets/add-icon.1.png")%>         <%= I18n.t("articles.add_article") %>
-      </a>
-    </h1>
-    <div class="head-right">
-      <%= form_for @article_report, :url=>articles_path, :html => {:method => :get} do |f| -%>
+    <%= link_to new_article_path, :class => 'btn btn-primary' do %>
+        <span class='glyphicon glyphicon-plus-sign'></span> <%= I18n.t('articles.add_article') %>
+    <% end %>
+    <%= button_tag I18n.t('article.publish', default: 'Publish'), :onclick=>"return makeBatchAction('publish')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('article.unpublish', default: 'Unpublish'), :onclick=>"return makeBatchAction('unpublish')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('article.delete', default: 'Delete'), :onclick=>"return makeBatchAction('delet')", :class => 'btn btn-danger' %>
+    <div class="head-right ">
+      <%= form_for @article_report, :url=>articles_path, :html => {:method => :get, :class=>'form-inline'} do |f| -%>
         <% @article_report.filters.each do |filter| -%>          
-          <%= f.datagrid_filter filter, :placeholder=>I18n.t("articles.#{filter.name}"), :class=>'search-in'%>
+          <%= f.datagrid_filter filter, :placeholder=>I18n.t("articles.#{filter.name}"), :class=>'form-control'%>
         <%end -%>          
-        <%= f.submit I18n.t("searchs.search"), :class=>"search-button" %>
+        <%= f.submit I18n.t('searchs.search'), :class=>'btn btn-primary' %>
       <% end -%>
     </div>
     <% if can? :manage, Article %>
     <br />
-    <div class="" style="margin-top: 20px;" >
-      
-      <%= button_tag I18n.t('article.publish',default: "Publish"), :onclick=>"return makeBatchAction('publish')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('article.unpublish',default: "Unpublish"), :onclick=>"return makeBatchAction('unpublish')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('article.delete',default: "Delete"), :onclick=>"return makeBatchAction('delet')", :class => "btn btn-success" %>      
-    </div>
     <% end %>
   </div>
   <div class="listing-part">
     <% articles = @article_report.assets.paginate(:page => params[:page], :per_page => ArticleReport::PAGE_SIZE)%>    
     <%= datagrid_table(@article_report, articles, { :class_name=>"articles" }) %>        
   </div>
+
   <div class="paging">
     <div class="pagination">
-      <a href="/articles?page=<%=@article_report.last_page%>"><%= I18n.t("pagination.last")%></a>
+      <% link_to I18n.t('pagination.last'), '/articles?page=<%=@article_report.last_page', :class => 'btn btn-default'%>
+      <a href="/articles?page=<%=@article_report.last_page%>"><%= I18n.t('pagination.last')%></a>
     </div>
     <%= will_paginate(articles) %>
     <div class="pagination">
-      <a href="/articles?page=1"><%= I18n.t("pagination.first")%></a>
+      <a href="/articles?page=1"><%= I18n.t('pagination.first')%></a>
     </div>
   </div>
 </div>
