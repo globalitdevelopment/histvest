@@ -107,7 +107,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @article = Article.find(params[:id])    
+    @article = Article.find(params[:id])
     @article.destroy
 
     respond_to do |format|
@@ -116,15 +116,13 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def batch_actions     
+  def batch_actions
     article_ids = params["art_ids"].split(",")
-    articles = Article.find_all_by_id(article_ids)
-    articles.each do |art|  
-      if params["batch_action"] == "delet"  
-        art.destroy
-      else
-        art.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
-      end
+    articles = Article.find(article_ids)
+    articles.each do |art|
+      (params["batch_action"] == "delet") ?
+          art.destroy :
+          art.update_attribute(:published, params["batch_action"] == "publish" ? true : false)
     end
     flash[:notice] = "#{articles.length} article(s) have been #{params["batch_action"]}ed" 
     redirect_to articles_url    

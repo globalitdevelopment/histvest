@@ -81,15 +81,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def batch_actions         
+  def batch_actions
     user_ids = params["user_ids"].split(",")
-    users = User.find_all_by_id(user_ids)
-    users.each do |user|  
-      if params["batch_action"] == "delet"  
-        user.destroy
-      else
-        user.update_attribute(:role,params["batch_action"])
-      end
+    users = User.find(user_ids)
+    users.each do |user|
+      (params["batch_action"] == "delet") ?
+          user.destroy :
+          user.update_attribute(:role, params["batch_action"])
     end
     flash[:notice] = "#{users.length} user(s) have been marked as #{params["batch_action"]}" 
     redirect_to users_url
