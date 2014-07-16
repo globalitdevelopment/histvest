@@ -11,10 +11,10 @@ class Ability
 				can :manage, Topic        
 				can :verify, Topic
 				can :read, Article
-				can :create, Article
 				can :read, User, :id => user.id
 				can :update, User, :id => user.id
-				cannot [:index], User      
+				cannot [:index], User
+        cannot [:index], Article
 			when 'contributor'
 				can :create, Topic, :user_id => user.id
 				can :update, Topic, :user_id => user.id
