@@ -13,20 +13,23 @@
       dateFormat: 'yy-mm-dd',
       timeFormat: 'hh:mm'
     });
-
+    $( "#search_from" ).focus(function() {
+      $('button.ui-priority-primary').click(function() {
+        window.location.href = '/search_stats?st=2&period='+$('#search_from').val().replace(' ','&time=');
+      });
+    });
   });
 
 </script>
 <div class="inner-page">
   <div class="inner-head">
     <h1><%= I18n.t('search_stats.search_stats', :default => 'Search Statistics') %></h1>
-    <div class="head-right">
+    <div class="head-right form-inline">
       <span id='date_range'>
         <% fld_val = params[:st]=='1' && !params[:period].nil? ? '' : params[:st]=='2' && !params[:period].nil? ? params[:period]+' '+params[:time] : ''%>
-        <%= text_field_tag 'search_from', fld_val, :class=>'span3' %>
-        <%= link_to I18n.t("topics.search_stats.apply", :default => 'apply'), "javascript:void(0)",:onclick=>"window.location.href ='/search_stats?st=2&period='+$('#search_from').val().replace(' ','&time=')" %>
+        <%= text_field_tag 'search_from', fld_val, :placeholder => I18n.t('search_stats.click_to_pick_date', default: 'Click to pick a date'), :class=>'span3 form-control' %>
       </span>
-      <%=select_tag 'with_in', options_for_select([['Last 24 hrs','last_24'],['This week','this_week'],['Last week','last_week'],['This month','this_month'],['Last month','last_month']],:selected=>params[:period]), :prompt => 'Select time period'%>
+      <%=select_tag 'with_in', options_for_select([['Last 24 hrs','last_24'],['This week','this_week'],['Last week','last_week'],['This month','this_month'],['Last month','last_month']],:selected=>params[:period]), :prompt => 'Select time period', :class => 'form-control'%>
     </div>
   </div>
   <div class="listing-part">
@@ -53,7 +56,7 @@
           <% end %>
         <% else %>
            <tr>
-              <td colspan='3'><%= I18n.t("topics.search_stats.no_search_results_found", :default => " No search results found ") %></td>
+              <td colspan='3'><%= I18n.t('topics.search_stats.no_search_results_found', :default => " No search results found ") %></td>
             </tr>
         <% end %>
 
