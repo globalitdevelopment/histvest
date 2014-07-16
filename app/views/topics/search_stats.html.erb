@@ -29,7 +29,7 @@
         <% fld_val = params[:st]=='1' && !params[:period].nil? ? '' : params[:st]=='2' && !params[:period].nil? ? params[:period]+' '+params[:time] : ''%>
         <%= text_field_tag 'search_from', fld_val, :placeholder => I18n.t('search_stats.click_to_pick_date', default: 'Click to pick a date'), :class=>'span3 form-control' %>
       </span>
-      <%=select_tag 'with_in', options_for_select([['Last 24 hrs','last_24'],['This week','this_week'],['Last week','last_week'],['This month','this_month'],['Last month','last_month']],:selected=>params[:period]), :prompt => 'Select time period', :class => 'form-control'%>
+      <%=select_tag 'with_in', options_for_select([[I18n.t('search_stats.last_24'),'last_24'],[I18n.t('search_stats.this_week'),'this_week'],[I18n.t('search_stats.last_week'),'last_week'],[I18n.t('search_stats.this_month'),'this_month'],[I18n.t('search_stats.last_month'), 'last_month']],:selected=>params[:period]), :prompt => I18n.t('search_stats.select_time_period'), :class => 'form-control'%>
     </div>
   </div>
   <div class="listing-part">
