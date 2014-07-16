@@ -8,7 +8,7 @@
   menus << { :url=>menu_home_url, :text=>I18n.t("top_menu.home"), :icon=>"home" } 
   menus << { :url=>{:controller=>:users,:action=>:index}, :text=>I18n.t("top_menu.users"), :icon=>"user" } if can? :manage, User
   menus << { :url=>{:controller=>:topics,:action=>:index}, :text=>I18n.t("top_menu.topics"), :icon=>"theme" } if can? :read, Topic 
-  menus << { :url=>{:controller=>:articles,:action=>:index}, :text=>I18n.t("top_menu.articles"), :icon=>"news" } if can? :read, Article
+  menus << { :url=>{:controller=>:articles,:action=>:index}, :text=>I18n.t("top_menu.articles"), :icon=>"news" } if can? :index, Article
   menus << { :url=>{:controller=>:topics,:action=>:search_stats}, :text=>I18n.t("top_menu.statistics"), :icon=>"setting" } if can? :manage, :all
 %>
 <div id="top-wrapper">

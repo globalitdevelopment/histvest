@@ -10,7 +10,7 @@
         <p><%= I18n.t('admin.topics_description', :default => 'Here you can add and edit topics.') %></p>
     </li>
     <% end %>
-    <% if can? :read, Article %>
+    <% if can? :index, Article %>
     <li><a href="/articles"><span class="news">&nbsp;</span><em><%= I18n.t('admin.news', :default => 'News') %></em></a>
         <p><%= I18n.t('admin.news_description', :default => 'Here you can add and edit topics.') %></p>
     </li>
