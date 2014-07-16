@@ -23,8 +23,22 @@
       main_images: "Main Images:"
       add_locations: "Add Locations"
     add_location: "Add Location"
+    search_stats:
+      no_search_results_found: "No search results found"
   topic:
     image:
       replace: "Replace"
       upload: "Upload"
     delete_image: "Delete Image"
+  search_stats:
+    search_stats: "Search Statistics"
+    click_to_pick_date: "Click to pick a date"
+    search_string: "Search string"
+    last_searched: "Last searched"
+    view_count: "View count"
+    select_time_period: "Select time period"
+    last_month: "Last month"
+    this_month: "This month"
+    last_week: "Last week"
+    this_week: "This week"
+    last_24: "Last 24 hrs"

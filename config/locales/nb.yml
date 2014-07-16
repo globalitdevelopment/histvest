@@ -323,10 +323,17 @@ nb:
   seach:
     no_results: Ingen resultater.
   search_stats:
-    last_searched: Last searched
-    search_string: Search string
-    view_count: View count
-    search_stats: Search Statistics
+    last_searched: Sist søkte
+    search_string: Søkestreng
+    view_count: Vis teller
+    search_stats: Søk Statistikk
+    click_to_pick_date: "Klikk for å velge en dato"
+    select_time_period: "Velg tidsperiode"
+    last_month: "Siste måned"
+    this_month: "Denne måneden"
+    last_week: "Forrige uke"
+    this_week: "Denne uken"
+    last_24: "Siste 24 timer"
   searchs:
     search: Søk
   session:
