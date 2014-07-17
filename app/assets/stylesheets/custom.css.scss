@@ -68,6 +68,7 @@ h2 {line-height:20px; font-size:24px; color:#35a641; font-family: 'zurich_bdxcn_
 #main-wrapper {width:100%;}
 #top-wrapper {background:url(top-bg.jpg) repeat-x top; height:145px; width:100%;}
 #midd-wrapper {width:1000px; margin:0 auto;}
+#midd-wrapper li a {text-decoration: none;}
 #bottom-wrapper {width:1000px; margin:0 auto;}
 .wrapper {width:1000px; margin:0 auto;}
 
@@ -91,6 +92,7 @@ h2 {line-height:20px; font-size:24px; color:#35a641; font-family: 'zurich_bdxcn_
 .pro-right li a:hover strong {color:#ffc8c8;}
 
 .top-comp {width:1000px; float:left;}
+.top-comp li a {text-decoration: none;}
 .logo {margin:20px 0 0 10px; float:left;}
 .nav {float:right; /*width:388px;*/ background:url(nav-box.png) repeat-x; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;  height:55px; margin:27px 0 0;}
 .nav li {float:left; text-align:center; font-family: 'din_mediumregular', Arial, Helvetica, sans-serif; width:77px; display:block; height:55px;}
