@@ -20,9 +20,9 @@ nb:
     image:
       replace: Erstatt
       upload: Laste opp
-    published: Published
-    publish_ends: Publish Ends
-    publish_starts: Publish Starts
+    published: Publisert
+    published_end: Publisering slutter
+    published_start: Publisering starter
   articles:
     add_article: Ny artikkel
     articles: Artikler
@@ -33,7 +33,7 @@ nb:
     edit_article: Endre artikkel
     form:
       ! '&nbsp': ! '&nbsp;'
-      main_images: "Hovedbilder:"
+      main_images: "Hovedbilder"
       save_and_quit: Lagre og avslutt
       time: "Kl:"
     from_updated_at: Oppdatert
@@ -400,6 +400,8 @@ nb:
     image:
       replace: Erstatt
       upload: Laste opp
+    published_end: Publisering slutter
+    published_start: Publisering starter
   topics:
     active_version: Active Version
     add_location: Legg til sted
@@ -419,7 +421,7 @@ nb:
       add_locations: Legg til steder
       if_cwc2011_venue_datalength: ! 'if (cwc2011_venue_data.length '
       locations-explanation-header: Fargekoder
-      main_images: "Hovedbilder:"
+      main_images: "Hovedbilder"
       marker-connected-this-topic: Taggen er knyttet til dette temaet
       marker-not-connected: Taggen er ikke knyttet til noen tema
       marker-not-connected-this-topic: Taggen er ikke knyttet til dette temaet
@@ -433,8 +435,6 @@ nb:
     new_version: Ny versjon
     no_results: Ingen tema å vise
     publish: Publiser
-    published_end: Publisering slutter
-    published_start: Publisering starter
     published_success: Tema ble publisert
     published_version: Publisert versjon
     reason: (ikke spesifisert)

@@ -28,13 +28,7 @@
 
   });
 </script>
-<style>
-  .topics .topic-nam input[type="text"] {width: 96% !important;}
-    .publish-left li img {
-    margin-left: -4px;
-    margin-bottom: 10px;
-  }
-</style>
+
 <%= tinymce_assets %>
 <%= form_for @article, :html => {:multipart => true} do |f| %>
   <% if @article.errors.any? %>
@@ -53,67 +47,10 @@
         <div class="top-btn">
           <%= f.submit I18n.t('topics.save', :default => "Save"), :class => 'btn btn-success' %>
           <%= f.submit I18n.t("articles.form.save_and_quit", :default => "Lagre og avslutt"), :class => 'btn btn-success' %>
-          <!--<a class="grn-btn-rgt-new" href="#"><%= I18n.t("articles.form.save_and_quit", :default => 'Lagre og avslutt') %></a> -->
           <%= link_to I18n.t('topics.cancel'), articles_path, :class => "btn btn-default" %>
         </div>
         <div class="welcome-text" style="width:965px;">
-          <div class="topics">
-            <div class="topic-nam">
-              <%= f.text_field :title, :id => 'article-title', :placeholder => t("article.title",:default=>'Article Title') %>
-            </div>
-            <div class="contnt-area">
-              <%= f.text_area(:content, :class => "tinymce", :id => "article-content", :style=>"width: 960px; height: 444px; ") %>
-              <%= tinymce %>
-            </div>
-            <div>&nbsp;</div>
-            <div class="publish-new" style="width: 930px;">
-              <div class="publish-left">
-                <ul>
-                  <li>
-                     <span style="float:left;">
-                    &nbsp;<%= I18n.t('article.publish_starts', default: 'Publish Starts') %>: </span>
-                    <span style="float:left;width:130px;">
-                      <%= f.text_field :published_start, :value => params[:action]=='edit' && !@article.published_start.nil? ? @article.published_start.strftime('%d.%m.%Y %H:%M') : '',:style=>"width:82px;height:10px;margin-left: 11px;" %>
-
-                    <img src="/assets/cal-icon.png" id="pub_start" class="cal-icon1" alt="" style="cursor:pointer;"> </span>
-                    <span class="km-text" id="km_text_ps" style="margin: 0 10px;color: #393939;font-size:14px;">
-                      <strong><%= I18n.t("articles.form.time", :default => "Kl:") %></strong> <span><%= params[:action]=='edit' && !@article.published_start.nil? ? @article.published_start.strftime('%H:%M') : '00:00'%></span>
-                    </span>
-                  </li>
-                  <li>
-                    <span style="float:left;">
-                    <%= I18n.t('article.publish_ends', default: 'Publish Ends') %>: </span>
-                    <span style="float:left;width:130px;"><%= f.text_field :published_end, :value => params[:action]=='edit' && !@article.published_end.nil? ? @article.published_end.strftime('%d.%m.%Y %H:%M') : '',:style=>"width:82px;height:10px;margin-left: 17px;" %>
-
-                    <img src="/assets/cal-icon.png" id="pub_end" class="cal-icon1" alt="" style="cursor:pointer;"> </span>
-                    <span class="km-text" id="km_text_pe" style="margin: 0 13px;color: #393939; font-size:14px;">
-                      <strong><%= I18n.t("articles.form.time", :default => "Kl:") %></strong> <span><%= params[:action]=='edit' && !@article.published_end.nil? ? @article.published_end.strftime('%H:%M') : '00:00'%></span>
-                    </span>
-                  </li>
-                  <li class="last">
-                    <%= f.check_box :published %> <%= I18n.t('article.published', default: 'Published') %>
-                  </li>
-                </ul>
-
-
-
-              </div>
-              <div class="upload-images" style="width:315px;">
-                <h4><%= I18n.t("articles.form.main_images", :default => "Main Images:") %></h4>
-                <div class="upload-img-div" id="upload-img-div">
-                  <%= !@article.nil? && !@article.avatar.nil? && !@article.avatar.avatar_img.nil? ? image_tag(@article.avatar.avatar_img.url(:thumb)) : image_tag("/assets/upload-img.gif") %>
-                </div>
-                <output id="list"></output>
-                <span><% avatar_name = @article.avatar.avatar_img_file_name if @article && @article.avatar && @article.avatar.avatar_img %></span>
-                <div>
-                  <input type="file" name="avatar[avatar_img]" id="avatar_avatar_img" style="display:none;width:15px;" >
-                  <input type="text" id="filename" readonly="true" style="width:80px;" value="<%=avatar_name%>"/><br />
-                  <input type="button" value="<%= I18n.t(params[:action] == 'edit' ? 'article.image.replace' : 'article.image.upload') %>" class="btn btn-success" id="fakeBrowse" onclick="HandleBrowseClick();"/>
-                  <output id="list"></output>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%= render :partial => 'shared/calendar_and_upload', :locals => { :f => f, :entity => @article, :entity_name => 'article' } %>
         </div>
       </div>
     </div>
@@ -136,7 +73,6 @@
           var span = document.getElementById('upload-img-div');
           span.innerHTML = ['<img height="100" width="100" class="thumb" src="', e.target.result,
                             '" title="', escape(theFile.name), '"/>'].join('');
-          $("#fakeBrowse").attr('value', 'Replace');
           $('output').insertBefore(span, null);
         };
       })(f);

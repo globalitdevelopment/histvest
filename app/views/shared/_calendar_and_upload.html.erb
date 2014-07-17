@@ -1,0 +1,62 @@
+<div class="topics">
+<div class="topic-nam">
+  <%= f.text_field :title, :id => "#{entity_name}-title", :placeholder => t("#{entity_name}.title") %>
+</div>
+<div class="contnt-area">
+  <% if entity_name == 'topic' %>
+  <%= f.text_area(:content, :class => 'tinymce', :id => "#{entity_name}-content") %>
+  <% else %>
+  <%= f.text_area(:content, :class => "tinymce", :id => "article-content", :style=>"width: 960px; height: 444px; ") %>
+  <% end %>
+  <%= tinymce %>
+</div>
+<div>&nbsp;</div>
+<div class="publish-new">
+  <div class="publish-left">
+    <ul>
+      <li>
+        <span class="publish-label">
+          <%= f.label :published_start, I18n.t("#{entity_name}.published_start", default: 'Publish Starts') %>
+        </span>
+        <span class="publish-calendar">
+          <%= f.text_field :published_start, :value => params[:action]=='edit' && !entity.published_start.nil? ? entity.published_start.strftime('%d.%m.%Y %H:%M') : '', :class => 'form-control' %>
+          <img src="/assets/cal-icon.png" id="pub_start" class="cal-icon1" alt="">
+        </span>
+      </li>
+      <li>
+        <span class="publish-label">
+          <%= f.label :published_end, I18n.t("#{entity_name}.published_end", default: 'Publish Ends') %>
+        </span>
+        <span class="publish-calendar">
+          <%= f.text_field :published_end, :value => params[:action]=='edit' && !entity.published_end.nil? ? entity.published_end.strftime('%d.%m.%Y %H:%M') : '', :class => 'form-control' %>
+          <img src="/assets/cal-icon.png" id="pub_end" class="cal-icon1" alt="">
+        </span>
+      </li>
+      <% if entity_name == 'topic' && (can? :verify, Topic) %>
+        <li class="last">
+          <%= f.check_box :published %>
+          <%= f.label :published, I18n.t("#{entity_name}.publish", :default => 'Publish') %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="upload-images">
+    <div class="upload-img-div" id="upload-img-div">
+      <%= !entity.nil? && !entity.avatar.nil? && !entity.avatar.avatar_img.nil? ? image_tag(entity.avatar.avatar_img.url(:thumb), :width => 100, :height => 100) : image_tag('/assets/upload-img.gif', :width => 100, :height => 100) %>
+    </div>
+    <div>
+      <% avatar_name = entity.avatar.avatar_img_file_name if entity && entity.avatar && entity.avatar.avatar_img %>
+      <input type="file" name="avatar[avatar_img]" id="avatar_avatar_img" style="display:none;width:15px;" >
+      <input type="text" id="filename" readonly="true" style="width: 159px; display: inline-block; margin-bottom: 5px;" class="form-control" value="<%=avatar_name%>" onclick="HandleBrowseClick();" placeholder='<%= I18n.t("#{entity_name}s.form.main_images") %>'/>
+      <br />
+      <input type="button" value="<%= I18n.t(("#{entity_name}.image.#{entity.avatar.nil? ? 'upload' : 'replace'}")) %>" class="btn btn-success" id="fakeBrowse" onclick="HandleBrowseClick();" style="margin: 0 0 5px 0;" />
+    </div>
+    <% if entity_name == 'topic' %>
+    <div>
+      <%= f.check_box :avatar_delete %>
+      <%= f.label :avatar_delete, I18n.t("#{entity_name}.delete_image") %>
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>

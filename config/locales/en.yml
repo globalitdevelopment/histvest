@@ -20,7 +20,7 @@
     back_to_topics: "Back to Topics"
     cancel: "Cancel"
     form:
-      main_images: "Main Images:"
+      main_images: "Main Images"
       add_locations: "Add Locations"
     add_location: "Add Location"
     search_stats:
