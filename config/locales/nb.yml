@@ -334,6 +334,7 @@ nb:
     last_week: "Forrige uke"
     this_week: "Denne uken"
     last_24: "Siste 24 timer"
+    reset: "Tøm"
   searchs:
     search: Søk
   session:
