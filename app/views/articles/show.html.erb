@@ -35,8 +35,7 @@
   </div>
 
   <% if signed_in? %>
-  <hr />
-  <%= link_to I18n.t("crud_links.edit"), edit_article_path(@article) %>
+    <%= link_to I18n.t('crud_links.edit'), edit_article_path(@article), :class => 'btn btn-success' %>
   <% end %>
 
 </div>
