@@ -16,8 +16,11 @@
     %>
   </div>
   <div><p><%= raw @topic.content %></p></div>
-  <div class="ref-list admin-table">
-    <h4><%= I18n.t("topics.show.references") %></h4>
+  <% if @topic.references.any? %>
+  <div class="ref-list">
+    <div class="reference-head">
+      <h4><%= I18n.t('topics.show.references') %></h4>
+    </div>
     <ul class="topic-references">
       <% @topic.references.each_with_index do |ref,i| %>
       <li>
@@ -29,7 +32,7 @@
             :style => "color: rgb(53, 166, 65);" %>
          <%= "(#{ref.creator}, #{ref.year})" if ref.creator %>
         </li>
-      <% end if @topic.references %>
+      <% end %>
     </ul>
     <div class='clear'></div>
     <div style="margin: 10px 0 0;">
@@ -37,8 +40,9 @@
         <strong><%= I18n.t("topics.show.updated", :default => "Last updated:") %></strong>
         <%= @topic.updated_at.strftime('%F %H:%M') %>
       </span>
+    </div>
   </div>
-</div>
+  <% end %>
 <form accept-charset="UTF-8" action="/topics/" class="edit_topic" id="lat_topic_frm" method="post">
   <input id="lat_hidden" name="lat" type="hidden" value="">
   <input id="lng_hidden" name="lng" type="hidden" value="">

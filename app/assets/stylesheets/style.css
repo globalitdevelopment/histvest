@@ -103,7 +103,7 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 .button-right {float:right; margin-right: 5px;}
 .right-image {float:right; margin: 0 5px 0 0;}
 .right-image img {border:1px solid #ccc;}
-.ref-list {float:left; width: 380px !important; margin: 0 0 20px 0;}
+.ref-list {float:left; margin: 0 0 20px 0;}
 .ref-list ul {margin: 0px; padding:0px; float:left;}
 .ref-list li {margin: 0px; padding:0 0 0 14px; list-style: none; background:url(/assets/arrow-black.png) no-repeat 0px 4px;}
 .ref-list li a {text-decoration: underline;}

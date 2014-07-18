@@ -220,6 +220,7 @@ a:hover.btn-green span {color:#033b09;}
 .admin-table {float:left; width:720px; padding-top: 10px;}
 .admin-table h1 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px;}
 .admin-table h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px; float: left; width: 50%;}
+.reference-head h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal;}
 .table-con {float:left; width:700px; border:1px solid #ced2d6; margin:15px 0;}
 .even-td {background:#f1f1f1;}
 .odd-td {background:#faf8f8;}
