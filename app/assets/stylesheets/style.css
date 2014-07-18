@@ -60,7 +60,6 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 #header { width:100%; float:left; padding:38px 0 34px 0;}
 #middle { width:100%; float:left;}
 .welcome-text { width:720px; float:left; background:#fff; padding:19px 0 5px 20px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;}
-.welcome-text h1 span { color:#15181f;}
 .welcome-text p { width:636px !important; font-size:12px !important; color:#0e0e0e !important; line-height:17px !important;}
 .map { width: 695px; margin-top:15px; float:left; background:#fff; padding: 22px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;}
 
@@ -100,13 +99,9 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 #map label { width: auto; display:inline; }
 #map img { max-width: none; }
 
-.map_container{margin-left: 2px}
-#topics-locations{margin-left: 22px}
-
-
-
-.social-icon-right {float:left;margin-right:5px; width:250px;}
-.right-image {float:right; margin: 0 30px 0 0;}
+.social-icon-right {float:right;margin-right:15px;}
+.button-right {float:right; margin-right: 5px;}
+.right-image {float:right; margin: 0 5px 0 0;}
 .right-image img {border:1px solid #ccc;}
 .ref-list {float:left; width: 380px !important; margin: 0 0 20px 0;}
 .ref-list ul {margin: 0px; padding:0px; float:left;}
