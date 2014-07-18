@@ -34,7 +34,7 @@
     <a href="http://disqus.com" class="dsq-brlink"><%= I18n.t('disqus.powered_by',default: 'comments powered by') %> <span class="logo-disqus"><%= I18n.t("articles.show.disqus", :default => "Disqus") %></span></a>
   </div>
 
-  <% if signed_in? %>
+  <% if signed_in? && (can? :edit, Article) %>
     <%= link_to I18n.t('crud_links.edit'), edit_article_path(@article), :class => 'btn btn-success' %>
   <% end %>
 
