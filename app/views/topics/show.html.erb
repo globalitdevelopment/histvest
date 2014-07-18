@@ -1,65 +1,59 @@
-<div class="container welcome-text1 <%= @touch? 'touch' : 'desktop' %>">
-  <div class="welcome-text1" style="margin-left:20px">
-    <div id="topics-content container">
-      <div style="margin-bottom:20px; padding-top:0px;" class="admin-table">
-        <h1 style="width:60%">
-          <span ><%= first_word @topic.title %></span>
-          <%= trailing_words @topic.title %>
-        </h1>
-        <div class="social-icon-right">
-          <%= render "/shared/shared_buttons", :share_url => (request.url || "histvest.no").gsub("touch.","") %>    
-        </div>
-      </div>
-    </div>
-    <div class="right-image">
-      <%
+<div class="welcome-text <%= @touch? 'touch' : 'desktop' %>">
+  <h1>
+    <%= first_word @topic.title %>
+    <%= trailing_words @topic.title %>
+  </h1>
+  <div class="button-right">
+    <% if signed_in? %>
+        <%= link_to I18n.t("crud_links.edit"), edit_topic_path(@topic), :class => 'btn btn-success' %>
+    <% end %>
+  </div>
+  <div class="right-image">
+    <%
       if (!@topic.nil? && !@topic.avatar.nil? && !@topic.avatar.avatar_img.nil?)
         concat image_tag(@topic.avatar.avatar_img.url(:medium))
       end
-      %>
+    %>
+  </div>
+  <div><p><%= raw @topic.content %></p></div>
+  <% if @topic.references.any? %>
+  <div class="ref-list">
+    <div class="reference-head">
+      <h4><%= I18n.t('topics.show.references') %></h4>
     </div>
-    <div><p><%= raw @topic.content %></p></div>
-    <div class="ref-list admin-table">
-      <h1><%= I18n.t("topics.show.references") %></h1>
-      <ul class="topic-references">
-        <% @topic.references.each_with_index do |ref,i| %>
-        <li>          
-          <%= link_to image_tag( ref.reference_type.nil? ? "rt-ukjent-icon.png" : ref.reference_type.icon, :height => 16, :title => ref.title,  :alt => ref.reference_type.try(:name)), ref.url %>          
-          <%= link_to !ref.title.blank? ? ref.title : ref.url, ref.url, 
-              :onclick => "window.open(this.href, 'referencewin', 'left=40,top=40,width=1100,height=960,toolbar=1,resizable=1'); return false;", 
-              :alt => ref.url, 
-              :title => "#{ref.creator}, #{ref.lang}, #{ref.year},, #{ref.snippet}",
-              :style => "color: rgb(53, 166, 65);" %>
-           <%= "(#{ref.creator}, #{ref.year})" if ref.creator %>
-          </li>
-        <% end if @topic.references %>
-      </ul>
-      <div class="btn-edit-div">
-        <% if signed_in? %>
-        <%= link_to I18n.t("crud_links.edit"), edit_topic_path(@topic), :class => 'btn btn-success' %>
-        <% end %>
-      </div>
-      <div class='clear'></div>
-      <div style="margin: 10px 0 0;">
-        <span>
-          <strong><%= I18n.t("topics.show.updated", :default => "Last updated:") %></strong>
-          <%= @topic.updated_at.strftime('%F %H:%M') %>
-        </span>
-      </div>
-
+    <ul class="topic-references">
+      <% @topic.references.each_with_index do |ref,i| %>
+      <li>
+        <%= link_to image_tag( ref.reference_type.nil? ? "rt-ukjent-icon.png" : ref.reference_type.icon, :height => 16, :title => ref.title,  :alt => ref.reference_type.try(:name)), ref.url %>
+        <%= link_to !ref.title.blank? ? ref.title : ref.url, ref.url,
+            :onclick => "window.open(this.href, 'referencewin', 'left=40,top=40,width=1100,height=960,toolbar=1,resizable=1'); return false;",
+            :alt => ref.url,
+            :title => "#{ref.creator}, #{ref.lang}, #{ref.year},, #{ref.snippet}",
+            :style => "color: rgb(53, 166, 65);" %>
+         <%= "(#{ref.creator}, #{ref.year})" if ref.creator %>
+        </li>
+      <% end %>
+    </ul>
+    <div class='clear'></div>
+    <div style="margin: 10px 0 0;">
+      <span>
+        <strong><%= I18n.t("topics.show.updated", :default => "Last updated:") %></strong>
+        <%= @topic.updated_at.strftime('%F %H:%M') %>
+      </span>
     </div>
   </div>
-  <form accept-charset="UTF-8" action="/topics/" class="edit_topic" id="lat_topic_frm" method="post">  
-    <input id="lat_hidden" name="lat" type="hidden" value="">
-    <input id="lng_hidden" name="lng" type="hidden" value="">
-  </form>
+  <% end %>
+<form accept-charset="UTF-8" action="/topics/" class="edit_topic" id="lat_topic_frm" method="post">
+  <input id="lat_hidden" name="lat" type="hidden" value="">
+  <input id="lng_hidden" name="lng" type="hidden" value="">
+</form>
 
-  <% unless @touch %>
-  <div id="topics-locations">         
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
+<% unless @touch %>
+<div id="topics-locations">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
 
-    <script>
+  <script>
     $(window).load(function(){
       Gmaps4HistVest.map = new Gmaps4HistVest();
       Gmaps4HistVest.map.initialize();
@@ -69,35 +63,35 @@
       Gmaps4HistVest.map.adjust_to_bounds_of_related_locations();
       Gmaps4HistVest.map.clusterize();
     });
-    </script>
+  </script>
 
-    <div class="map_container"> 
-      <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
-    </div>  
+  <div class="map_container">
+    <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
   </div>
-  <% end %> 
+</div>
+<% end %>
 
-  <div style="margin-left:22px">
-    <div class="admin-table">
-      <h1><%= I18n.t("comments.comments") %></h1> 
-      <div id="disqus_thread"></div>
-      <% unless request.xhr? %>
-      <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  <div class="admin-table">
+    <h4><%= I18n.t("comments.comments") %></h4>
+    <div class="social-icon-right">
+      <%= render "/shared/shared_buttons", :share_url => (request.url || "histvest.no").gsub("touch.","") %>
+    </div>
+    <div id="disqus_thread"></div>
+    <% unless request.xhr? %>
+    <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
       var disqus_shortname = 'historiskevestfold'; // required: replace example with your forum shortname
-
       /* * * DON'T EDIT BELOW THIS LINE * * */
       (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
-      </script>
-      <% end%>
+    </script>
+    <% end%>
     <noscript><%= I18n.t('disqus.no_script', default: 'Please enable JavaScript to view the') %> <a href="http://disqus.com/?ref_noscript"><%= I18n.t("topics.show.comments_powered_by_disqus", :default => "comments powered by Disqus.") %></a></noscript>
     <a href="http://disqus.com" class="dsq-brlink"><%= I18n.t('disqus.powered_by',default: 'comments powered by') %> <span class="logo-disqus"><%= I18n.t("topics.show.disqus", :default => "Disqus") %></span></a>
   </div>
-</div>
 </div>
 
 <style>

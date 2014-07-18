@@ -217,8 +217,10 @@ a:hover.btn-green span {color:#033b09;}
 .defult-left {float:left; width:740px;}
 .defult-left h2 {font-size:22px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#666666; font-weight:normal; margin-bottom:6px;}
 .defult-left p {font-size:11px; color:#45454b;}
-.admin-table {float:left; width:720px !important; padding-top:20px;}
+.admin-table {float:left; width:720px; padding-top: 10px;}
 .admin-table h1 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px;}
+.admin-table h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px; float: left; width: 50%;}
+.reference-head h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal;}
 .table-con {float:left; width:700px; border:1px solid #ced2d6; margin:15px 0;}
 .even-td {background:#f1f1f1;}
 .odd-td {background:#faf8f8;}
@@ -244,11 +246,18 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
 .line-h { line-height:27px;}
 
 
-.welcome-text { width:705px; float:left; background:#fff; padding:19px 15px 15px 20px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;margin-top: 13px;}
-.welcome-text h1 {color: #35A641;font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif;font-size: 36px;font-weight: normal; width:100%; margin-bottom:8px;}
+.welcome-text { width:740px; float:left; background:#fff; padding:19px 15px 15px 20px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;margin-top: 14px;}
+.welcome-text h1 {
+    color: #35A641;
+    font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif;
+    font-size: 36px;
+    font-weight: normal;
+    width:89%;
+    margin-bottom:8px;
+    margin-top: 0;
+}
 .welcome-text h1 span { color:#15181f;}
 .welcome-text p {font-size:12px; color:#0e0e0e; line-height:17px;}
-.welcome-text a { color:#cf2e2d;}
 
 /*-----------NEW CSS ADDED BY HB 07-02-2013-------------*/
 
@@ -314,7 +323,7 @@ a:hover.forgot-pass {text-decoration:none;}
 .login-bott {float:left; background:url(/assets/login-bot.png) no-repeat; width:465px; height:17px; margin-bottom:100px;}
 .copy-right {margin:0 auto; width:1000px; clear:both; text-align:center; color:#727272;}
 .login-img {position:absolute; right:-50px; top:-60px;}
-#disqus_thread{width:95%;}
+#disqus_thread{width:98%;}
 ul.dropdown-menu li a:hover{background:#000 !important;}
 .res-date{float: left; width:100%; clear:both; display:block; font-size: 11px; line-height: 16px; color: #A0A0A0;font-family: 'LucidaGrandeRegular'; }
 a.read-more{color: rgb(53, 166, 65); font-size: 12px; text-decoration: underline; margin-top: 4px;}
