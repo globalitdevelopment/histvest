@@ -10,14 +10,14 @@ class SessionsController < ApplicationController
 		user = User.find_by_email(params[:session][:email].downcase)
 	  	if user && user.authenticate(params[:session][:password])
         unless user.status
-          flash[:error] = I18n.t("session.status_error", :default => "Your account is blocked temporary, please contact administrator.")   #'Invalid email/password combination'
+          flash[:danger] = I18n.t('session.status_error', :default => "Your account is blocked temporary, please contact administrator.")   #'Invalid email/password combination'
           redirect_to :action => :new and return
         end
 
 	  		sign_in user
 	   		redirect_back_or "/static_pages/admin"
 	  	else
-	  		flash[:error] = I18n.t("session.flash_error")   #'Invalid email/password combination'
+	  		flash[:danger] = I18n.t('session.flash_error')   #'Invalid email/password combination'
 	  		redirect_to :action => :new
 	  	end  
 	end
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       flash[:success] = I18n.t('sessions.instructions_sent', :default => "Instructions to reset password has been sent to your email")
   		redirect_to signin_path
   	else  		
-      flash[:error] = I18n.t('sessions.email_not_exists', :default => "Email not exists in records.")
+      flash[:danger] = I18n.t('sessions.email_not_exists', :default => "Email not exists in records.")
   		redirect_to forgot_pass_path
   	end  		  	
   end
@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
   def change_password_form
   	@user = User.find_by_id_and_reset_token(params[:id],params[:token])    
     unless @user
-      flash[:error] = I18n.t('sessions.wrong_token', :default => "Wrong reset password details.")
+      flash[:danger] = I18n.t('sessions.wrong_token', :default => "Wrong reset password details.")
       redirect_to forgot_pass_path
     end 
   end
@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
   def update_new_password
     @user = User.find_by_id_and_reset_token(params[:id],params[:token])    
     unless @user
-      flash[:error] = I18n.t('sessions.wrong_token', :default => "Wrong reset password details.")
+      flash[:danger] = I18n.t('sessions.wrong_token', :default => "Wrong reset password details.")
       redirect_to forgot_pass_path
     end      
     

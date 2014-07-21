@@ -44,7 +44,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])    
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: I18n.t("users.create_flash") }
+        flash[:success] = I18n.t('users.create_flash')
+        format.html { redirect_to @user }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -61,7 +62,8 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: I18n.t("users.update_flash") }
+        flash[:success] = I18n.t('users.update_flash')
+        format.html { redirect_to @user }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -89,7 +91,7 @@ class UsersController < ApplicationController
           user.destroy :
           user.update_attribute(:role, params["batch_action"])
     end
-    flash[:notice] = "#{users.length} user(s) have been marked as #{params["batch_action"]}" 
+    flash[:success] = "#{users.length} user(s) have been marked as #{params["batch_action"]}"
     redirect_to users_url
   end
 
