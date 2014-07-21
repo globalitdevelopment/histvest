@@ -8,6 +8,7 @@
   delete: "Delete"
   articles:
     add_article: "Add article"
+    article_not_published: "Article not published"
   pagination:
     last: "Last"
     first: "First"
