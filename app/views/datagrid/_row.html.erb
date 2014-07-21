@@ -1,7 +1,13 @@
 <tr class="<%= options[:cycle] && cycle(*options[:cycle]) %>">
   <% grid.columns(*options[:columns]).each do |column| %>
     <td class="<%=cycle('odd','even') %>">
-      <%= datagrid_format_value(grid, column, asset) %>
+      <% if column.to_s == 'Content' && (asset.class.name == 'Topic' || asset.class.name == 'Article') %>
+        <% content = strip_tags(asset.content)
+           size = (dots = content.size > 39) ? 36 : content.size %>
+        <%= sanitize content[0..size] %><%= dots ? '...' : '' %>
+      <% else %>
+        <%= datagrid_format_value(grid, column, asset) %>
+      <% end %>
     </td>
   <% end %>
   <td><%= link_to icon('view-icon-new'), asset, title: "view" %>
