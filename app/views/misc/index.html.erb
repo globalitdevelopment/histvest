@@ -19,6 +19,11 @@
         <% end %>
         </td>
       </tr>
+      <tr>
+        <td>References with unknown type</td>
+        <td><%= @num_unknown_references %></td>
+        <td><%= link_to "Repair", repair_references_path, :method=>:post %></td>
+      </tr>
     </table>
   </div>
 </div>
