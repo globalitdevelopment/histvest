@@ -2,7 +2,7 @@
 require 'spec_helper'
 require 'openssl'
 
-describe WikipediaWrapper do
+describe WikipediaWrapper, :type => :model do
 	describe ".search" do
 		ww = WikipediaWrapper.new("svend foyn")
 		before { @result = ww.search() }
@@ -10,12 +10,12 @@ describe WikipediaWrapper do
 		subject { @result }
 
 		it "should return array" do
-			@result.should be_an_instance_of(Array)
+			expect(@result).to be_an_instance_of(Array)
 		end
 
 		it "should return array of References" do
 			@result.each do |r|
-				r.should be_an_instance_of(Reference)
+				expect(r).to be_an_instance_of(Reference)
 			end
 		end
 	end
@@ -27,14 +27,14 @@ describe WikipediaWrapper do
 		subject { @ref }
 
 		it "should be a reference" do
-			@ref.should be_an_instance_of(Reference)
+			expect(@ref).to be_an_instance_of(Reference)
 		end
 
 		it "should have correct info" do
-			@ref.title.should == "Svend Foyn"
-			@ref.creator.should == "Wikipedia"
-			@ref.lang.should == "no"
-			@ref.year.should == nil
+			expect(@ref.title).to eq("Svend Foyn")
+			expect(@ref.creator).to eq("Wikipedia")
+			expect(@ref.lang).to eq("no")
+			expect(@ref.year).to eq(nil)
 		end
 	end
 end

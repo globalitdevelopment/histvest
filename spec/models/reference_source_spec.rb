@@ -10,25 +10,25 @@
 
 require 'spec_helper'
 
-describe ReferenceSource do
-	it { should have_many(:references)}
+describe ReferenceSource, :type => :model do
+	it { is_expected.to have_many(:references)}
 
 	before { @reference_source = ReferenceSource.new(name: "Example") }
 
 	subject { @reference_source }
 
-	it { should respond_to(:name) }
+	it { is_expected.to respond_to(:name) }
 
-	it { should be_valid }
+	it { is_expected.to be_valid }
 
 	describe "when name is not present" do
 		before { @reference_source.name = " " }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 
 	describe "when name is too long" do
 		before { @reference_source.name = "a" * 51 }
-		it {should_not be_valid }
+		it {is_expected.not_to be_valid }
 	end
 
 	describe ".search_all" do
@@ -37,12 +37,12 @@ describe ReferenceSource do
 		subject { @result }
 
 		it "should return array" do
-			@result.should be_an_instance_of(Array)
+			expect(@result).to be_an_instance_of(Array)
 		end
 
 		it "should return array of References" do
 			@result.each do |r|
-				r.should be_an_instance_of(Reference)
+				expect(r).to be_an_instance_of(Reference)
 			end
 		end
 	end

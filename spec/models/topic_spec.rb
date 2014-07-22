@@ -15,10 +15,10 @@
 
 require 'spec_helper'
 
-describe Topic do
-	it { should belong_to(:user)}
-	it { should have_and_belong_to_many(:locations)}
-	it { should have_many(:references)}
+describe Topic, :type => :model do
+	it { is_expected.to belong_to(:user)}
+	it { is_expected.to have_and_belong_to_many(:locations)}
+	it { is_expected.to have_many(:references)}
 
 	before { 
 		@topic = Topic.new(
@@ -29,21 +29,21 @@ describe Topic do
 
 	subject { @topic }
 
-	it { should respond_to(:title) }
-	it { should respond_to(:content) }
+	it { is_expected.to respond_to(:title) }
+	it { is_expected.to respond_to(:content) }
 
-	it { should respond_to :versions } # check paper_trail attachment
+	it { is_expected.to respond_to :versions } # check paper_trail attachment
 
-	it { should be_valid }
+	it { is_expected.to be_valid }
 
 	describe "when title is not present" do
 		before { @topic.title = " " }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 
 	describe "when title is too long" do
 		before { @topic.title = "a" * 101 }
-		it {should_not be_valid }
+		it {is_expected.not_to be_valid }
 	end
 
 

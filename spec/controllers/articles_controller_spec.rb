@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ArticlesController do
+describe ArticlesController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Article. As you add validations to Article, be sure to
@@ -63,7 +63,7 @@ describe ArticlesController do
   describe "GET new" do
     it "assigns a new article as @article" do
       get :new, {}, valid_session
-      assigns(:article).should be_a_new(Article)
+      expect(assigns(:article)).to be_a_new(Article)
     end
   end
 
@@ -71,7 +71,7 @@ describe ArticlesController do
     it "assigns the requested article as @article" do
       article = Article.create! valid_attributes
       get :edit, {:id => article.to_param}, valid_session
-      assigns(:article).should eq(article)
+      expect(assigns(:article)).to eq(article)
     end
   end
 
@@ -85,29 +85,29 @@ describe ArticlesController do
 
       it "assigns a newly created article as @article" do
         post :create, {:article => valid_attributes}, valid_session
-        assigns(:article).should be_a(Article)
-        assigns(:article).should be_persisted
+        expect(assigns(:article)).to be_a(Article)
+        expect(assigns(:article)).to be_persisted
       end
 
       it "redirects to the created article" do
         post :create, {:article => valid_attributes}, valid_session
-        response.should redirect_to(Article.last)
+        expect(response).to redirect_to(Article.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved article as @article" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Article.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Article).to receive(:save).and_return(false)
         post :create, {:article => { }}, valid_session
-        assigns(:article).should be_a_new(Article)
+        expect(assigns(:article)).to be_a_new(Article)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Article.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Article).to receive(:save).and_return(false)
         post :create, {:article => { }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -120,20 +120,20 @@ describe ArticlesController do
         # specifies that the Article created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Article.any_instance.should_receive(:update_attributes).with({ "user" => "" })
+        expect_any_instance_of(Article).to receive(:update_attributes).with({ "user" => "" })
         put :update, {:id => article.to_param, :article => { "user" => "" }}, valid_session
       end
 
       it "assigns the requested article as @article" do
         article = Article.create! valid_attributes
         put :update, {:id => article.to_param, :article => valid_attributes}, valid_session
-        assigns(:article).should eq(article)
+        expect(assigns(:article)).to eq(article)
       end
 
       it "redirects to the article" do
         article = Article.create! valid_attributes
         put :update, {:id => article.to_param, :article => valid_attributes}, valid_session
-        response.should redirect_to(article)
+        expect(response).to redirect_to(article)
       end
     end
 
@@ -141,17 +141,17 @@ describe ArticlesController do
       it "assigns the article as @article" do
         article = Article.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Article.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Article).to receive(:save).and_return(false)
         put :update, {:id => article.to_param, :article => {}}, valid_session
-        assigns(:article).should eq(article)
+        expect(assigns(:article)).to eq(article)
       end
 
       it "re-renders the 'edit' template" do
         article = Article.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Article.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Article).to receive(:save).and_return(false)
         put :update, {:id => article.to_param, :article => {}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -167,7 +167,7 @@ describe ArticlesController do
     it "redirects to the articles list" do
       article = Article.create! valid_attributes
       delete :destroy, {:id => article.to_param}, valid_session
-      response.should redirect_to(articles_url)
+      expect(response).to redirect_to(articles_url)
     end
   end
 

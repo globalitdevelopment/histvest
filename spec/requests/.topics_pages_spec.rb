@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "Topic pages" do
+describe "Topic pages", :type => :request do
 
   subject { page }
 
@@ -15,8 +15,8 @@ describe "Topic pages" do
     end
 
     describe "has subheadings", :js => true do
-      it { should have_content("Steder") }
-      it { should have_content("Referanser") }
+      it { is_expected.to have_content("Steder") }
+      it { is_expected.to have_content("Referanser") }
     end
 
     describe "can fill in forms" do
@@ -36,7 +36,7 @@ describe "Topic pages" do
         click_link "add-location"
       end
 
-      it { should have_content "Oslo, Norway" }
+      it { is_expected.to have_content "Oslo, Norway" }
     end
 
     describe "can remove locations", :js => true do
@@ -48,7 +48,7 @@ describe "Topic pages" do
         click_link "c7" # ID of remove button for oslo, c7 refers to the client id of the oslo model in backbone.js
       end
 
-      it { should_not have_content "Oslo, Norway" }
+      it { is_expected.not_to have_content "Oslo, Norway" }
     end
 
     describe "can search references", :js => true do
@@ -58,7 +58,7 @@ describe "Topic pages" do
         sleep 2
       end
 
-      it { should have_content "et mindeskrift" }
+      it { is_expected.to have_content "et mindeskrift" }
     end
 
     describe "can add references", :js => true do
@@ -69,7 +69,7 @@ describe "Topic pages" do
         click_link "c17" # ID of add button for Svend Foyn : et mindeskrfit, c17 refers to the client id of the reference model in backbonejs
       end
 
-      it { should have_css "#reference-list-container>li>button#c17" }
+      it { is_expected.to have_css "#reference-list-container>li>button#c17" }
     end
   end
 

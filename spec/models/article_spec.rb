@@ -16,6 +16,6 @@
 
 require 'spec_helper'
 
-describe Article do
-  it { should belong_to(:user)}
+describe Article, :type => :model do
+  it { is_expected.to belong_to(:user)}
 end

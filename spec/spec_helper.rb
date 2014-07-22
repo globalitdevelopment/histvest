@@ -132,7 +132,7 @@ RSpec.configure do |config|
     load "#{Rails.root}/db/seeds.rb"
   end
 
-  config.before(:each) do
+  config.before(:each) do |example|
     if example.metadata[:js]
       DatabaseCleaner.strategy = :truncation
     else

@@ -13,6 +13,6 @@
 
 require 'spec_helper'
 
-describe Location do
-  it { should have_and_belong_to_many(:topics)}
+describe Location, :type => :model do
+  it { is_expected.to have_and_belong_to_many(:topics)}
 end
