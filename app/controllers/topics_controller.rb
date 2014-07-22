@@ -114,48 +114,49 @@ class TopicsController < ApplicationController
   def show
   	@topic_locations = []
 	  @all_locations = Location.joins(:topics).merge(Topic.published).to_gmaps4rails do |location, marker|
-		
-		marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics })
+      marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics })
 
-    topic_belongs = false
-    location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }    
-		if topic_belongs
-			marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/6991FD/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png")
-			marker.json(belongs_to_current_topic: true)
-		else
-			marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")
-			marker.json(belongs_to_current_topic: false)
-		end
-	end
+      topic_belongs = false
+      location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }
+      if topic_belongs
+        marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/6991FD/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png")
+        marker.json(belongs_to_current_topic: true)
+      else
+        marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")
+        marker.json(belongs_to_current_topic: false)
+      end
+    end
 
-	begin
-		@topic = Topic.includes(:locations, :references).find params[:id]
-		@topic = Topic.working_version(@topic) if !@topic.published and (params[:moderation].nil? or current_user.nil?)
-		
-		raise Exception.new if @topic.nil?
-		raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
-  rescue Exception => e
-    flash[:danger] = 'This topic is not published'
-		redirect_to root_path
-    return
-	end
+    begin
+      @topic = Topic.includes(:locations, :references).find params[:id]
+      @topic = Topic.working_version(@topic) if !@topic.published and (params[:moderation].nil? or current_user.nil?)
 
-	title @topic.title
+      raise Exception.new if @topic.nil?
+      raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
+    rescue Exception => e
+      flash[:danger] = 'This topic is not published'
+      redirect_to root_path
+      return
+    end
 
-	@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
-	@touch = request.subdomains.first == "touch"
-	if @touch
-		layout = false
-		action = "show"
-	else
-		layout = "public"
-		action = "show"
-	end
+    title @topic.title
 
-	respond_to do |format|		
-		format.html {render :layout => layout, :action => action } 
-		format.json { render json: @topic.to_json(:include => [:locations, :references]) }		
-	end
+    @frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
+    @touch = request.subdomains.first == "touch"
+    if @touch
+      layout = false
+      action = "show"
+    else
+      layout = "public"
+      action = "show"
+    end
+
+    set_cache_buster
+    
+    respond_to do |format|
+      format.html {render :layout => layout, :action => action }
+      format.json { render json: @topic.to_json(:include => [:locations, :references]) }
+    end
   end
 
   # GET /topics/new
@@ -275,7 +276,13 @@ class TopicsController < ApplicationController
   end
 
 private
-  
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
   def save_in_locations
     if !params["locations_attributes"].blank?
       new_location_ids = []     
