@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe WelcomeController do
+describe WelcomeController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do
-      get("/").should route_to("welcome#index")
+      expect(get("/")).to route_to("welcome#index")
     end
   end
 end

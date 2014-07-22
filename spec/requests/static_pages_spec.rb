@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "StaticPages" do
+describe "StaticPages", :type => :request do
   let(:user) { FactoryGirl.create(:user) }
   before do 
       sign_in user
@@ -10,9 +10,9 @@ describe "StaticPages" do
 
     it "should have the content 'Historiske Vestfold'" do
       visit '/static_pages/admin'
-      page.should have_content('Tema')
-      page.should have_content('Brukere')
-      page.should have_content('Nyheter')
+      expect(page).to have_content('Tema')
+      expect(page).to have_content('Brukere')
+      expect(page).to have_content('Nyheter')
     end
   end
 end

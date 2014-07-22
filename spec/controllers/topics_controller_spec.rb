@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe TopicsController do
+describe TopicsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Topic. As you add validations to Topic, be sure to
@@ -56,14 +56,14 @@ describe TopicsController do
     it "assigns the requested topic as @topic" do
       topic = Topic.create! valid_attributes
       get :show, {:id => topic.to_param}, valid_session
-      assigns(:topic).should eq(topic)
+      expect(assigns(:topic)).to eq(topic)
     end
   end
 
   describe "GET new" do
     it "assigns a new topic as @topic" do
       get :new, {}, valid_session
-      assigns(:topic).should be_a_new(Topic)
+      expect(assigns(:topic)).to be_a_new(Topic)
     end
   end
 
@@ -71,7 +71,7 @@ describe TopicsController do
     it "assigns the requested topic as @topic" do
       topic = Topic.create! valid_attributes
       get :edit, {:id => topic.to_param}, valid_session
-      assigns(:topic).should eq(topic)
+      expect(assigns(:topic)).to eq(topic)
     end
   end
 
@@ -85,29 +85,29 @@ describe TopicsController do
 
       it "assigns a newly created topic as @topic" do
         post :create, {:topic => valid_attributes}, valid_session
-        assigns(:topic).should be_a(Topic)
-        assigns(:topic).should be_persisted
+        expect(assigns(:topic)).to be_a(Topic)
+        expect(assigns(:topic)).to be_persisted
       end
 
       it "redirects to the created topic" do
         post :create, {:topic => valid_attributes}, valid_session
-        response.should redirect_to(Topic.last)
+        expect(response).to redirect_to(Topic.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved topic as @topic" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Topic).to receive(:save).and_return(false)
         post :create, {:topic => {}}, valid_session
-        assigns(:topic).should be_a_new(Topic)
+        expect(assigns(:topic)).to be_a_new(Topic)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Topic).to receive(:save).and_return(false)
         post :create, {:topic => {}}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -120,20 +120,20 @@ describe TopicsController do
         # specifies that the Topic created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Topic.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Topic).to receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => topic.to_param, :topic => {'these' => 'params'}}, valid_session
       end
 
       it "assigns the requested topic as @topic" do
         topic = Topic.create! valid_attributes
         put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
-        assigns(:topic).should eq(topic)
+        expect(assigns(:topic)).to eq(topic)
       end
 
       it "redirects to the topic" do
         topic = Topic.create! valid_attributes
         put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
-        response.should redirect_to(topic)
+        expect(response).to redirect_to(topic)
       end
     end
 
@@ -141,17 +141,17 @@ describe TopicsController do
       it "assigns the topic as @topic" do
         topic = Topic.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Topic).to receive(:save).and_return(false)
         put :update, {:id => topic.to_param, :topic => {}}, valid_session
-        assigns(:topic).should eq(topic)
+        expect(assigns(:topic)).to eq(topic)
       end
 
       it "re-renders the 'edit' template" do
         topic = Topic.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Topic.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Topic).to receive(:save).and_return(false)
         put :update, {:id => topic.to_param, :topic => {}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -167,7 +167,7 @@ describe TopicsController do
     it "redirects to the topics list" do
       topic = Topic.create! valid_attributes
       delete :destroy, {:id => topic.to_param}, valid_session
-      response.should redirect_to(topics_url)
+      expect(response).to redirect_to(topics_url)
     end
   end
 

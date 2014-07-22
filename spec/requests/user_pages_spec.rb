@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "User pages" do
+describe "User pages", :type => :request do
 
   subject { page }
   
@@ -12,8 +12,8 @@ describe "User pages" do
       visit user_path(user)
     end
 
-    it { should have_selector('h1',    text: user.name) }
-    it { should have_selector('title', text: user.name) }
+    it { is_expected.to have_selector('h1',    text: user.name) }
+    it { is_expected.to have_selector('title', text: user.name) }
   end
 
   describe "account creation" do

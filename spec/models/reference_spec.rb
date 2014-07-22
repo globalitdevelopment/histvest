@@ -19,7 +19,7 @@
 
 require 'spec_helper'
 
-describe Reference do
+describe Reference, :type => :model do
 
 	before { @ref = Reference.new(
 		title: "Svend Foyn - et mindeskrift", 
@@ -30,18 +30,18 @@ describe Reference do
 
 	subject { @ref }
 
-	it { should belong_to(:reference_type) }
-	it { should belong_to(:reference_source) }
-	it { should belong_to(:topic) }
+	it { is_expected.to belong_to(:reference_type) }
+	it { is_expected.to belong_to(:reference_source) }
+	it { is_expected.to belong_to(:topic) }
 
-	it { should respond_to(:title) }
-	it { should respond_to(:creator) }
-	it { should respond_to(:year) }
-	it { should respond_to(:lang) }
-	it { should respond_to(:snippet) }
-	it { should respond_to(:url) }
+	it { is_expected.to respond_to(:title) }
+	it { is_expected.to respond_to(:creator) }
+	it { is_expected.to respond_to(:year) }
+	it { is_expected.to respond_to(:lang) }
+	it { is_expected.to respond_to(:snippet) }
+	it { is_expected.to respond_to(:url) }
 
-	it { should be_valid }
+	it { is_expected.to be_valid }
 
 	describe "it should be possible to create from URL" do
 		before {
@@ -50,10 +50,10 @@ describe Reference do
 		}
 
 		it "with correctly fetched data" do
-			@new_ref.title.should == "Svend Foyn : et mindeskrift"
-			@new_ref.creator.should == "Klæboe, Hans B."
-			@new_ref.lang.should == "und"
-			@new_ref.year.should == 1895 
+			expect(@new_ref.title).to eq("Svend Foyn : et mindeskrift")
+			expect(@new_ref.creator).to eq("Klæboe, Hans B.")
+			expect(@new_ref.lang).to eq("und")
+			expect(@new_ref.year).to eq(1895) 
 		end
 	end
 end
