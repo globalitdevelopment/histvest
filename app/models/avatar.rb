@@ -17,6 +17,7 @@ class Avatar < ActiveRecord::Base
 	attr_accessible :topic_id, :article_id, :avatar_img
 
 	has_attached_file :avatar_img,:url => "/system/:attachment/:id/:style/:filename", :styles => { :infowindow => "200x200>", :medium => "300x300>", :thumb => "100x100>", :marker_mini => "50x50>" }
+	validates_attachment_content_type :avatar_img, :content_type => /\Aimage\/.*\Z/
 	belongs_to :topic
 	belongs_to :article
 end

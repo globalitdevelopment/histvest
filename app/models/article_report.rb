@@ -1,4 +1,4 @@
-class ArticleReport
+class ArticleReport < BaseReport
 	include Datagrid
 	scope do
 		Article.order("articles.created_at desc")

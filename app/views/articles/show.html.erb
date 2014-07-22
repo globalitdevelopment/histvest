@@ -1,23 +1,25 @@
-<div class="welcome-text"> 
-  <div style="margin-bottom:20px;">
-    <%= render "/shared/shared_buttons"%>    
-  </div> 
+<div class="welcome-text">
   <h1>
-    <span><%= first_word @article.title %></span>
+    <%= first_word @article.title %>
     <%= trailing_words @article.title %>
   </h1>
-
+  <% if signed_in? && (can? :edit, Article) %>
+    <div class="button-right">
+      <%= link_to I18n.t('crud_links.edit'), edit_article_path(@article), :class => 'btn btn-success' %>
+    </div>
+  <% end %>
   <div id="topics-content">
     <%= raw @article.content %>
   </div>
-
   <div id="topics-content">
     <%= !@article.nil? && !@article.avatar.nil? && !@article.avatar.avatar_img.nil? ? image_tag(@article.avatar.avatar_img.url(:medium)) : '' %>
   </div>
-  
-  <div class="admin-table">
-    <h1><%= I18n.t("comments.comments") %></h1>
 
+  <div class="admin-table">
+    <h4><%= I18n.t('comments.comments') %></h4>
+    <div class="social-icon-right">
+      <%= render '/shared/shared_buttons'%>
+    </div>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -30,13 +32,7 @@
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
     </script>
-    <noscript><%= I18n.t('disqus.no_script', default: 'Please enable JavaScript to view the') %> <a href="http://disqus.com/?ref_noscript"><%= I18n.t("articles.show.comments_powered_by_disqus", :default => "comments powered by Disqus.") %></a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink"><%= I18n.t('disqus.powered_by',default: 'comments powered by') %> <span class="logo-disqus"><%= I18n.t("articles.show.disqus", :default => "Disqus") %></span></a>
+    <noscript><%= I18n.t('disqus.no_script', default: 'Please enable JavaScript to view the') %> <a href="http://disqus.com/?ref_noscript"><%= I18n.t('articles.show.comments_powered_by_disqus', :default => "comments powered by Disqus.") %></a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink"><%= I18n.t('disqus.powered_by',default: 'comments powered by') %> <span class="logo-disqus"><%= I18n.t('articles.show.disqus', :default => "Disqus") %></span></a>
   </div>
-
-  <% if signed_in? %>
-  <hr />
-  <%= link_to I18n.t("crud_links.edit"), edit_article_path(@article) %>
-  <% end %>
-
 </div>

@@ -353,7 +353,7 @@ DEPENDENCIES
   bcrypt
   better_errors
   binding_of_caller
-  bootstrap-sass
+  bootstrap-sass (~> 3.2.0)
   bson_ext
   cancan
   capybara
@@ -388,7 +388,7 @@ DEPENDENCIES
   rb-readline
   recap
   rspec-rails
-  sass-rails
+  sass-rails (>= 3.2)
   selenium-webdriver
   shoulda-matchers
   simplecov

@@ -35,7 +35,7 @@ Histvest::Application.routes.draw do
   match '/forgot_password', to: 'sessions#forgot_password', :as => :forgot_pass, via: [:get,:post]
   match '/get_new_password', to: 'sessions#get_new_password', :as => :get_new_password, via: [:get,:post]
   get 'reset_password/:id/:token', to: 'sessions#change_password_form', :as => :reset_password
-  put 'reset_password/:id/:token', to: 'sessions#update_new_password', :as => :update_new_password
+  patch 'reset_password/:id/:token', to: 'sessions#update_new_password', :as => :update_new_password
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/delete_all_topics', to: 'topics#delete_all_topics', via: [:get,:post]
   match '/show_topic_in_touch', to: 'topics#show_topic_in_touch', via: [:get,:post]

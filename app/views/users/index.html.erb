@@ -5,91 +5,43 @@
     $('input:checked').each(function() {
        temp.push(this.value);
     });
-    if(temp.length == 0){ alert(<%= raw I18n.t('users.no_selection',default: "Please select atleast one user").to_json %>); return false;}        
+    if(temp.length == 0){ alert(<%= raw I18n.t('users.no_selection', default: 'Please select at least one user').to_json %>); return false;}
     window.location.href = "/users/batch_actions?batch_action="+act+"&user_ids="+temp ;        
     temp = [];
   }
-</script>    
-
-<% if params[:user_report] &&  params[:user_report][:descending].to_s == "false"%>
-  <% up_arrow_img = image_tag("/assets/arrow-down-h.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
-<% elsif params[:user_report] &&  params[:user_report][:descending].to_s == "true"%>
-  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-up-h.png") %>
-<% else %>
-  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
-<% end %>
-
-<% up_img = image_tag("/assets/arrow-up.png") %>
-<% down_img = image_tag("/assets/arrow-down.png") %>
+</script>
 
 <div class="inner-page">
   <div class="inner-head">
-    <h1>
-      <a href="<%=new_user_path%>" class="heading-button"><%=image_tag("/assets/add-icon.1.png")%> <%= I18n.t("users.add_user") %></a> </h1>
-    </h1>
+    <%= link_to new_user_path, :class => 'btn btn-primary' do %>
+        <span class='glyphicon glyphicon-plus-sign'></span> <%= I18n.t('users.add_user') %>
+    <% end %>
+    <%= button_tag I18n.t('top_header.admin_front'), :onclick=>"return makeBatchAction('admin')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('top_header.contributor'), :onclick=>"return makeBatchAction('customer')", :class => 'btn btn-success' %>
+    <%= button_tag I18n.t('crud_links.delete'), :onclick=>"return makeBatchAction('delet')", :class => 'btn btn-danger' %>
     <div class="head-right">
-      <%= form_for @user_report, :url=>users_path, :html => {:method => :get} do |f| -%>
+      <%= form_for @user_report, :url=>users_path, :html => {:method => :get, :class=>'form-inline'} do |f| -%>
         <% @user_report.filters.each do |filter| -%>
-          <%= f.datagrid_filter filter, :placeholder=> I18n.t("users.#{filter.name}") , :class=>'search-in'%>
+          <%= f.datagrid_filter filter, :placeholder=> I18n.t("users.#{filter.name}") , :class=>'form-control'%>
         <%end -%>   
-        <%= f.submit I18n.t("searchs.search"), :class=>"search-button" %>
+        <%= f.submit I18n.t('searchs.search'), :class=> 'btn btn-primary' %>
       <% end -%>
     </div>
-    <br />
-    <div class="" style="margin-top: 20px;" >
-      <%= button_tag I18n.t('top_header.admin_front'), :onclick=>"return makeBatchAction('admin')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('top_header.contributor'), :onclick=>"return makeBatchAction('customer')", :class => "btn btn-success" %>
-      <%= button_tag I18n.t('crud_links.delete'), :onclick=>"return makeBatchAction('delet')", :class => "btn btn-success" %>
-    </div>
-
   </div>
   <div class="listing-part">
     <% users = @user_report.assets.paginate(:page => params[:page], :per_page => 20)%>    
     <table class="data-table" width="100%" cellspacing="0" cellpadding="0" border="0" >
       <thead>
-        <tr>   
-          <th width="3%" class="even">
-            <input type="checkbox" name="check_users" id="check_all">
-          </th>  
-          <th width="22%"><%= link_to I18n.t("users.name"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=name&user_report[name]="%>  
-            <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=name&user_report[name]=">
-              <%= params[:user_report] && params[:user_report][:order]=="name" ? up_arrow_img : up_img %>
-            </a>
-            <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=name&user_report[name]=">
-              <%= params[:user_report] && params[:user_report][:order]=="name" ? down_arrow_img : down_img %>
-            </a>
-          </th>
-          <th width="30%" class="even"><%= link_to I18n.t("users.email"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=email&user_report[name]="%>
-            <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=email&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="email" ? up_arrow_img : up_img %></a>
-            <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=email&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="email" ? down_arrow_img : down_img %></a>
-          </th>
-          <th width="17%"><%= link_to I18n.t("users.role"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=role&user_report[name]="%>
-            <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=role&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="role" ? up_arrow_img : up_img %></a>
-            <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=role&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="role" ? down_arrow_img : down_img %></a>
-          </th>
-          <th>
-            <%= link_to I18n.t("users.status",:default=>"Active"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=status&user_report[name]="%>
-            <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=status&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="status" ? up_arrow_img : up_img %></a>
-            <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=status&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="status" ? down_arrow_img : down_img %></a>
-          </th>
-          <th width="17%"><%= link_to I18n.t("users.created_at"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=created_at&user_report[name]="%>
-            <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=created_at&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="created_at" ? up_arrow_img : up_img %></a>
-            <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=created_at&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="created_at" ? down_arrow_img : down_img %></a>
-          </th>                       
-          <th width="8%" class="even">&nbsp;</th>
-        </tr>
+        
       </thead>
       <tbody>    
-        <%= datagrid_table(@user_report, users) %>
+        <%= datagrid_table(@user_report, users, { :class_name=>"users" }) %>
       </tbody> 
     </table>
   </div>
   <div class="paging">
     <div class="pagination">
-      <a href="/users?page=<%=(@user_report.assets.length/5)%>"><%= I18n.t("pagination.last")%></a>
+      <a href="/users?page=<%=(@user_report.last_page)%>"><%= I18n.t("pagination.last")%></a>
     </div>
     <%= will_paginate(users) %>
     <div class="pagination">

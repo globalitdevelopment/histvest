@@ -1,0 +1,40 @@
+<% if params[:topic_report] &&  params[:topic_report][:descending].to_s == "false"%>
+  <% up_arrow_img = image_tag("/assets/arrow-down-h.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+<% elsif params[:topic_report] &&  params[:topic_report][:descending].to_s == "true"%>
+  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-up-h.png") %>
+<% else %>
+  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+<% end %>
+
+<% up_img = image_tag("/assets/arrow-up.png") %>
+<% down_img = image_tag("/assets/arrow-down.png") %>
+<tr>  
+  <th width="3%" class="even">
+    <input type="checkbox" name="check_topics" id="check_all">
+  </th>
+  <th width="17%"><%= link_to I18n.t("topics.title"), "/topics?topic_report[content]=&topic_report[descending]=#{@flag}&topic_report[order]=title&topic_report[title]="%>  
+    <a href="/topics?topic_report[content]=&topic_report[descending]=false&topic_report[order]=title&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="title" ? up_arrow_img : up_img %></a>  
+    <a href="/topics?topic_report[content]=&topic_report[descending]=true&topic_report[order]=title&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="title" ? down_arrow_img : down_img %></a>
+  </th>
+  <th width="30%" class="even"><%= link_to I18n.t("topics.content"), "/topics?topic_report[content]=&topic_report[descending]=#{@flag}&topic_report[order]=content&topic_report[title]="%>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=false&topic_report[order]=content&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="content" ? up_arrow_img : up_img %></a>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=true&topic_report[order]=content&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="content" ? down_arrow_img : down_img %></a>
+  </th>
+  <th width="14%"><%= link_to I18n.t("topics.created_at"),"/topics?topic_report[content]=&topic_report[descending]=#{@flag}&topic_report[order]=created_at&topic_report[title]="%>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=false&topic_report[order]=created_at&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="created_at" ? up_arrow_img : up_img %></a>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=true&topic_report[order]=created_at&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="created_at" ? down_arrow_img : down_img %></a>
+  </th>             
+  <th width="14%" class="even"><%= link_to I18n.t("topics.updated_at"), "/topics?topic_report[content]=&topic_report[descending]=#{@flag}&topic_report[order]=updated_at&topic_report[title]="%>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=false&topic_report[order]=updated_at&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="updated_at" ? up_arrow_img : up_img %></a>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=true&topic_report[order]=updated_at&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="updated_at" ? down_arrow_img : down_img %></a>
+  </th>
+
+  <th width="14%" class="odd"><%= link_to I18n.t("topics.index.published", :default => "Published?"), "/topics?topic_report[content]=&topic_report[descending]=#{@flag}&topic_report[order]=published&topic_report[title]="%>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=false&topic_report[order]=published&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="published" ? up_arrow_img : up_img %></a>
+    <a href="/topics?topic_report[content]=&topic_report[descending]=true&topic_report[order]=published&topic_report[title]="><%= params[:topic_report] && params[:topic_report][:order]=="published" ? down_arrow_img : down_img %></a>
+  </th>
+  <th width="8%" class="even" valign="middle"></th>
+</tr>

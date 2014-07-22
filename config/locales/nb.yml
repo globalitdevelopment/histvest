@@ -19,9 +19,10 @@ nb:
     unpublish: Avpubliser
     image:
       replace: Erstatt
-    published: Published
-    publish_ends: Publish Ends
-    publish_starts: Publish Starts
+      upload: Laste opp
+    published: Publisert
+    published_end: Publisering slutter
+    published_start: Publisering starter
   articles:
     add_article: Ny artikkel
     articles: Artikler
@@ -32,9 +33,9 @@ nb:
     edit_article: Endre artikkel
     form:
       ! '&nbsp': ! '&nbsp;'
-      main_images: ! 'Hovedbilder:'
+      main_images: "Hovedbilder"
       save_and_quit: Lagre og avslutt
-      time: ! 'Kl:'
+      time: "Kl:"
     from_updated_at: Oppdatert
     index:
       published: Publisert?
@@ -45,6 +46,7 @@ nb:
     title: Tittel
     to_updated_at: Oppdatert
     updated_at: Oppdatert
+    article_not_published: "Artikkel ikke publisert"
   backend:
     store: Lagre
   comments:
@@ -247,14 +249,14 @@ nb:
         delimiter: ! ' '
         format: ! '%n %u'
         precision: 2
-        separator: ! ','
+        separator: ","
         significant: false
         strip_insignificant_zeros: true
         unit: kr
     format:
       delimiter: ! ' '
       precision: 2
-      separator: ! ','
+      separator: ","
       significant: false
       strip_insignificant_zeros: true
     human:
@@ -322,10 +324,18 @@ nb:
   seach:
     no_results: Ingen resultater.
   search_stats:
-    last_searched: Last searched
-    search_string: Search string
-    view_count: View count
-    search_stats: Search Statistics
+    last_searched: Sist søkte
+    search_string: Søkestreng
+    view_count: Vis teller
+    search_stats: Søk Statistikk
+    click_to_pick_date: "Klikk for å velge en dato"
+    select_time_period: "Velg tidsperiode"
+    last_month: "Siste måned"
+    this_month: "Denne måneden"
+    last_week: "Forrige uke"
+    this_week: "Denne uken"
+    last_24: "Siste 24 timer"
+    reset: "Tøm"
   searchs:
     search: Søk
   session:
@@ -343,7 +353,7 @@ nb:
     password_changed: Passordet er blitt endret.
     send_instructions: Send instruksjoner
     wrong_token: Feil passordnullstillingsdetaljer.
-    must_be_logged_in: 
+    must_be_logged_in: Du har ikke tilgang til denne siden.
   shared:
     footer:
       about_historiske_vestfold: Om Historiske Vestfold
@@ -385,10 +395,15 @@ nb:
     topics: Tema
     users: Brukere
   topic:
-    delete_image: Delete Image
+    delete_image: Slett bilde
     location_loading: Lagrer sted...
     title: Tittel
     publish: Publish
+    image:
+      replace: Erstatt
+      upload: Laste opp
+    published_end: Publisering slutter
+    published_start: Publisering starter
   topics:
     active_version: Active Version
     add_location: Legg til sted
@@ -408,13 +423,13 @@ nb:
       add_locations: Legg til steder
       if_cwc2011_venue_datalength: ! 'if (cwc2011_venue_data.length '
       locations-explanation-header: Fargekoder
-      main_images: ! 'Hovedbilder:'
+      main_images: "Hovedbilder"
       marker-connected-this-topic: Taggen er knyttet til dette temaet
       marker-not-connected: Taggen er ikke knyttet til noen tema
       marker-not-connected-this-topic: Taggen er ikke knyttet til dette temaet
       save_and_quit: Lagre og avslutt
       sources: Kilder
-      time: ! 'Kl: '
+      time: "Kl: "
     index:
       published: Publisert?
       versions: Versjoner
@@ -422,8 +437,6 @@ nb:
     new_version: Ny versjon
     no_results: Ingen tema å vise
     publish: Publiser
-    published_end: Publisering slutter
-    published_start: Publisering starter
     published_success: Tema ble publisert
     published_version: Publisert versjon
     reason: (ikke spesifisert)
@@ -440,7 +453,7 @@ nb:
       comments_powered_by_disqus: kommentarer levert av Disqus.
       disqus: Disqus
       references: Referanser
-      updated: ! 'Sist oppdatert:'
+      updated: "Sist oppdatert:"
     title: Tittel
     topics: Tema
     update_flash: Tema oppdatert.
@@ -460,7 +473,7 @@ nb:
       user: ! ' Bruker'
     name: Navn
     new_user: Ny bruker
-    no_selection: Please select atleast one user
+    no_selection: Velg minst én bruker
     password: Passord
     password_confirm: Bekreft passord
     role: Rolle

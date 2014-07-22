@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 	#devise :confirmable
 
 	attr_accessible :name, :email, :password, :password_confirmation, :role, :status
+	attr_accessor :novalidate
 	
 	enumerize :role, in: [:admin, :contributor, :trusted_contributor], default: :contributor
 
@@ -41,15 +42,20 @@ class User < ActiveRecord::Base
 	validates :password, 
 		presence: true, 
 		length: { minimum: 6 },
-		:unless => Proc.new { |u| u.persisted? and u.password.try(:strip)=='' }
+		:unless => Proc.new { |u| u.persisted? and u.password.try(:strip)=='' or u.novalidate == true}
 
 	validates :password_confirmation, 
 		presence: true,
-		:unless => Proc.new { |u| u.persisted? and u.password.try(:strip)=='' }
+		:unless => Proc.new { |u| u.persisted? and u.password.try(:strip)=='' or u.novalidate == true}
 
 	# downcase all emails to ensure uniqueness
 	before_save { |user| user.email = email.downcase }
 	before_save :create_remember_token
+
+	def admin?
+  	self.role == "admin"
+  end
+
 
 	private
 	

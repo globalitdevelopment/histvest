@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   
+  before_action :set_user, only: [:destroy, :edit, :show, :update]
+
   # GET /users
   # GET /users.json
   def index    
@@ -15,7 +17,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -35,7 +36,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])    
   end
 
   # POST /users
@@ -44,7 +44,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])    
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: I18n.t("users.create_flash") }
+        flash[:success] = I18n.t('users.create_flash')
+        format.html { redirect_to @user }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -56,11 +57,13 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-
+    if current_user.admin? and params[:user][:password].blank?
+      @user.novalidate = true
+    end
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: I18n.t("users.update_flash") }
+        flash[:success] = I18n.t('users.update_flash')
+        format.html { redirect_to @user }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,7 +75,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
@@ -81,17 +83,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def batch_actions         
+  def batch_actions
     user_ids = params["user_ids"].split(",")
-    users = User.find_all_by_id(user_ids)
-    users.each do |user|  
-      if params["batch_action"] == "delet"  
-        user.destroy
-      else
-        user.update_attribute(:role,params["batch_action"])
-      end
+    users = User.find(user_ids)
+    users.each do |user|
+      (params["batch_action"] == "delet") ?
+          user.destroy :
+          user.update_attribute(:role, params["batch_action"])
     end
-    flash[:notice] = "#{users.length} user(s) have been marked as #{params["batch_action"]}" 
+    flash[:success] = "#{users.length} user(s) have been marked as #{params["batch_action"]}"
     redirect_to users_url
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

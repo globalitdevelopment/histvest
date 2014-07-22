@@ -46,7 +46,8 @@ class ReferencesController < ApplicationController
 
     respond_to do |format|
       if @reference.save
-        format.html { redirect_to @reference, notice: I18n.t("references.create_flash") }
+        flash[:success] = I18n.t('references.create_flash')
+        format.html { redirect_to @reference }
         format.json { render json: @reference, status: :created, location: @reference }
       else
         format.html { render action: "new" }
@@ -62,7 +63,8 @@ class ReferencesController < ApplicationController
 
     respond_to do |format|
       if @reference.update_attributes(params[:reference])
-        format.html { redirect_to @reference, notice: I18n.t("references.update_flash") }
+        flash[:success] = I18n.t('references.update_flash')
+        format.html { redirect_to @reference }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

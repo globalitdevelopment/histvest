@@ -134,10 +134,11 @@ class TopicsController < ApplicationController
 		
 		raise Exception.new if @topic.nil?
 		raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
-	rescue Exception => e
-		redirect_to root_path, notice: "This topic is not published" and return
+  rescue Exception => e
+    flash[:danger] = 'This topic is not published'
+		redirect_to root_path
+    return
 	end
-
 
 	title @topic.title
 
@@ -186,11 +187,13 @@ class TopicsController < ApplicationController
 		  @avatar = Avatar.create(:avatar_img => params[:avatar][:avatar_img], :topic_id => @topic.id)
 		end
 		if params[:commit] == "Lagre"
-		  format.html { redirect_to edit_topic_path(@topic), notice: I18n.t("topics.create_flash") }
+      flash[:success] = I18n.t('topics.create_flash')
+		  format.html { redirect_to edit_topic_path(@topic) }
 		  format.json { render json: edit_topic_path(@topic), status: :created, location: @topic }
-		else
-		  format.html { redirect_to topic_path(@topic), notice: I18n.t("topics.create_flash") }
-		  format.json { render json: @topic, status: :created, location: @topic }
+    else
+      flash[:success] = I18n.t('topics.create_flash')
+		  format.html { redirect_to topics_path }
+		  format.json { head :no_content }
 		end
 	  else           
 		@topic.locations.build
@@ -226,10 +229,12 @@ class TopicsController < ApplicationController
 		  end
 		end
 		if params[:commit] == "Lagre"
-		  format.html { redirect_to edit_topic_path(@topic), notice: I18n.t("topics.create_flash") }
+      flash[:success] = I18n.t("topics.create_flash")
+		  format.html { redirect_to edit_topic_path(@topic) }
 		  format.json { head :no_content }
-		else
-		  format.html { redirect_to topic_path(@topic), notice: I18n.t("topics.create_flash") }
+    else
+      flash[:success] = I18n.t("topics.create_flash")
+		  format.html { redirect_to topics_path }
 		  format.json { head :no_content }
 		end
 	  else
@@ -253,20 +258,20 @@ class TopicsController < ApplicationController
 	end
   end
   
-  def batch_actions        	    	
-	topic_ids = params["top_ids"].split(",")
-	topics = Topic.find_all_by_id(topic_ids)
-	topics.each do |top|  
-	  if params["batch_action"] == "delet"          
-		top.locations.delete_all
-		top.references.delete_all
-		top.destroy
-	  else
-		top.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
-	  end
-	end
-	flash[:notice] = "#{topics.length} topic(s) have been #{params["batch_action"]}ed" 
-	redirect_to topics_url  
+  def batch_actions
+		topic_ids = params["top_ids"].split(",")
+		topics = Topic.find(topic_ids)
+		topics.each do |top|
+		  if params["batch_action"] == "delet"
+				top.locations.delete_all
+				top.references.delete_all
+				top.destroy
+		  else
+			top.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
+		  end
+		end
+		flash[:success] = "#{topics.length} topic(s) have been #{params["batch_action"]}ed"
+		redirect_to topics_url  
   end
 
 private

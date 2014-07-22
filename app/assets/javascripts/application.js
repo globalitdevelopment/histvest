@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery/jconfirm
+//= require bootstrap
+//= require bootbox
 //= require fancybox
 //= require underscore
 //= require backbone

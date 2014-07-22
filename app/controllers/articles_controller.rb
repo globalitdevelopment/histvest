@@ -25,7 +25,8 @@ class ArticlesController < ApplicationController
     @frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10).to_a
     respond_to do |format|
       if @article.published == false
-        format.html { redirect_to articles_path, notice: I18n.t("articles.article_not_published")}        
+        flash[:danger] = I18n.t('articles.article_not_published')
+        format.html { redirect_to articles_path}
       else
         format.html {render :layout => 'public' } 
         format.json { render json: @article.to_json }
@@ -63,11 +64,13 @@ class ArticlesController < ApplicationController
         end
 
         if params[:commit] == "Lagre"
-          format.html { redirect_to edit_article_path(@article), notice: I18n.t("articles.create_flash") }
+          flash[:success] = I18n.t('articles.create_flash')
+          format.html { redirect_to edit_article_path(@article)}
           format.json { render json: edit_topic_path(@article), status: :created, location: @article }
         else
-          format.html { redirect_to @article, notice: I18n.t("articles.create_flash") }
-          format.json { render json: @article, status: :created, location: @article }
+          flash[:success] = I18n.t('articles.create_flash')
+          format.html { redirect_to articles_path}
+          format.json { head :no_content }
         end
       else
         format.html { render action: "new" }
@@ -91,10 +94,12 @@ class ArticlesController < ApplicationController
           end
         end
         if params[:commit] == "Lagre"
-          format.html { redirect_to edit_article_path(@article), notice: I18n.t("articles.create_flash") }
+          flash[:success] = I18n.t('articles.create_flash')
+          format.html { redirect_to edit_article_path(@article) }
           format.json { render json: edit_topic_path(@article), status: :created, location: @article }
         else
-          format.html { redirect_to @article, notice: I18n.t("articles.create_flash") }
+          flash[:success] = I18n.t('articles.create_flash')
+          format.html { redirect_to articles_path }
           format.json { head :no_content }
         end
       else
@@ -107,7 +112,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @article = Article.find(params[:id])    
+    @article = Article.find(params[:id])
     @article.destroy
 
     respond_to do |format|
@@ -116,17 +121,15 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def batch_actions     
+  def batch_actions
     article_ids = params["art_ids"].split(",")
-    articles = Article.find_all_by_id(article_ids)
-    articles.each do |art|  
-      if params["batch_action"] == "delet"  
-        art.destroy
-      else
-        art.update_attribute(:published,params["batch_action"] == "publish" ? true : false)
-      end
+    articles = Article.find(article_ids)
+    articles.each do |art|
+      (params["batch_action"] == "delet") ?
+          art.destroy :
+          art.update_attribute(:published, params["batch_action"] == "publish" ? true : false)
     end
-    flash[:notice] = "#{articles.length} article(s) have been #{params["batch_action"]}ed" 
+    flash[:success] = "#{articles.length} article(s) have been #{params["batch_action"]}ed"
     redirect_to articles_url    
   end
 

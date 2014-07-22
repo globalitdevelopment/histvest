@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   layout 'admin'
  
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to url_for(:controller=>:static_pages,:action=>:admin), :alert => exception.message
+    flash[:danger] = exception.message
+    redirect_to url_for(:controller=>:static_pages,:action=>:admin)
   end
 
   def title(page_title = "")
@@ -23,6 +24,9 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    redirect_to(signin_url, :notice=> I18n.t("sessions.must_be_logged_in")) unless current_user
+    begin
+      flash[:danger] = I18n.t('sessions.must_be_logged_in')
+      redirect_to(signin_url)
+    end unless current_user
   end
 end

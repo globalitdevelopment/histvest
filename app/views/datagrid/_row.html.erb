@@ -1,19 +1,16 @@
-<tr class="<%=cycle('odd','even') %>">
+<tr class="<%= options[:cycle] && cycle(*options[:cycle]) %>">
   <% grid.columns(*options[:columns]).each do |column| %>
-    <td>
-      <% if column.name.to_s == "created_at" || column.name.to_s == "updated_at" %>
-        <%= datagrid_format_value(grid, column, asset).to_date %>
-      <% elsif column.name.to_s == "content"%>               
-        <%= truncate_html(asset.content, length: 50, omission: '...') %>
-        <%#= strip_tags(asset.content).truncate(100) %>
+    <td class="<%=cycle('odd','even') %>">
+      <% if column.to_s == 'Content' && (asset.class.name == 'Topic' || asset.class.name == 'Article') %>
+        <% content = strip_tags(asset.content)
+           size = (dots = content.size > 39) ? 36 : content.size %>
+        <%= sanitize content[0..size] %><%= dots ? '...' : '' %>
       <% else %>
-        <%= datagrid_format_value(grid, column, asset).to_s.html_safe %>
+        <%= datagrid_format_value(grid, column, asset) %>
       <% end %>
     </td>
   <% end %>
-  <td>
-    <%= link_to(icon('view-icon-new'), params[:controller]=="topics" ? topic_path(asset) : asset ) if can? :read, asset.class %>
-    <%= link_to(icon('edit-icon'), {:action=>:edit, :id=>asset.id} ) if can? :update, asset.class %>
-    <%= link_to(icon('delete-icon'), {:action=>:destroy, :id=>asset.id}, :data => {:method=>:delete}) if can? :destroy, asset.class %>    
-  </td>
+  <td><%= link_to icon('view-icon-new'), asset, title: "view" %>
+    <%= link_to icon('edit-icon'), polymorphic_url(asset, :action => "edit"), title: "edit" %>
+    <%= link_to icon('delete-icon'), asset, method: :delete, data: { confirm: 'Er du sikker?' }, title: "delete" %></td>
 </tr>

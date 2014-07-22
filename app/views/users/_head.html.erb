@@ -1,0 +1,45 @@
+<% if params[:user_report] &&  params[:user_report][:descending].to_s == "false"%>
+  <% up_arrow_img = image_tag("/assets/arrow-down-h.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+<% elsif params[:user_report] &&  params[:user_report][:descending].to_s == "true"%>
+  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-up-h.png") %>
+<% else %>
+  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
+  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+<% end %>
+
+<% up_img = image_tag("/assets/arrow-up.png") %>
+<% down_img = image_tag("/assets/arrow-down.png") %>
+
+<tr>   
+  <th width="3%" class="even">
+    <input type="checkbox" name="check_users" id="check_all">
+  </th>  
+  <th width="22%"><%= link_to I18n.t("users.name"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=name&user_report[name]="%>  
+    <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=name&user_report[name]=">
+      <%= params[:user_report] && params[:user_report][:order]=="name" ? up_arrow_img : up_img %>
+    </a>
+    <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=name&user_report[name]=">
+      <%= params[:user_report] && params[:user_report][:order]=="name" ? down_arrow_img : down_img %>
+    </a>
+  </th>
+  <th width="30%" class="even"><%= link_to I18n.t("users.email"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=email&user_report[name]="%>
+    <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=email&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="email" ? up_arrow_img : up_img %></a>
+    <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=email&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="email" ? down_arrow_img : down_img %></a>
+  </th>
+  <th width="17%"><%= link_to I18n.t("users.role"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=role&user_report[name]="%>
+    <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=role&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="role" ? up_arrow_img : up_img %></a>
+    <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=role&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="role" ? down_arrow_img : down_img %></a>
+  </th>
+  <th>
+    <%= link_to I18n.t("users.status",:default=>"Active"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=status&user_report[name]="%>
+    <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=status&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="status" ? up_arrow_img : up_img %></a>
+    <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=status&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="status" ? down_arrow_img : down_img %></a>
+  </th>
+  <th width="17%"><%= link_to I18n.t("users.created_at"), "/users?user_report[email]=&user_report[descending]=#{@flag}&user_report[order]=created_at&user_report[name]="%>
+    <a href="/users?user_report[email]=&user_report[descending]=false&user_report[order]=created_at&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="created_at" ? up_arrow_img : up_img %></a>
+    <a href="/users?user_report[email]=&user_report[descending]=true&user_report[order]=created_at&user_report[name]="><%= params[:user_report] && params[:user_report][:order]=="created_at" ? down_arrow_img : down_img %></a>
+  </th>                       
+  <th width="8%" class="even">&nbsp;</th>
+</tr>

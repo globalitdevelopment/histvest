@@ -213,12 +213,14 @@ a:hover.btn-green span {color:#033b09;}
 .footer a:hover {text-decoration:underline;}
 
 /*-----------NEW CSS ADDED BY HB 06-02-2013---------*/
-.default-main {float:left; width:100%; padding-top:20px;}
+.default-main {float:left; width:100%;}
 .defult-left {float:left; width:740px;}
 .defult-left h2 {font-size:22px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#666666; font-weight:normal; margin-bottom:6px;}
 .defult-left p {font-size:11px; color:#45454b;}
-.admin-table {float:left; width:720px !important; padding-top:20px;}
+.admin-table {float:left; width:720px; padding-top: 10px;}
 .admin-table h1 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px;}
+.admin-table h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal; margin-bottom:6px; float: left; width: 50%;}
+.reference-head h4 {font-size:24px;font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; color:#35a641; font-weight:normal;}
 .table-con {float:left; width:700px; border:1px solid #ced2d6; margin:15px 0;}
 .even-td {background:#f1f1f1;}
 .odd-td {background:#faf8f8;}
@@ -244,11 +246,18 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
 .line-h { line-height:27px;}
 
 
-.welcome-text { width:705px; float:left; background:#fff; padding:19px 15px 5px 20px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;margin-top: 13px;}
-.welcome-text h1 {color: #35A641;font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif;font-size: 36px;font-weight: normal; width:100%; margin-bottom:8px;}
+.welcome-text { width:740px; float:left; background:#fff; padding:19px 15px 15px 20px; -moz-border-radius: 6px; border-radius: 6px; box-shadow:0px 0px 2px 1px #dadada;margin-top: 14px;}
+.welcome-text h1 {
+    color: #35A641;
+    font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif;
+    font-size: 36px;
+    font-weight: normal;
+    width:89%;
+    margin-bottom:8px;
+    margin-top: 0;
+}
 .welcome-text h1 span { color:#15181f;}
 .welcome-text p {font-size:12px; color:#0e0e0e; line-height:17px;}
-.welcome-text a { color:#cf2e2d;}
 
 /*-----------NEW CSS ADDED BY HB 07-02-2013-------------*/
 
@@ -265,8 +274,7 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
 .topics{}
 .topics .topic-nam{clear:both;}
 .topics .topic-nam{padding:0 0 20px 0;}
-.topics .topic-nam input[type=text]{border:solid 1px #ccc; font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif; font-size:24px; color:#35a641; border-radius:5px; box-shadow:inset 0 0 7px #dfdddd; padding:20px 15px; width:95%;}
-.topics .contnt-area{}
+.topics .topic-nam input[type=text]{border:solid 1px #ccc; font-family: 'zurich_bdxcn_btbold',Arial,Helvetica,sans-serif; font-size:24px; color:#35a641; border-radius:5px; box-shadow:inset 0 0 7px #dfdddd; padding:17px 15px; width:100%;}
 .topics .contnt-area textarea{padding:20px 15px; width:95%; border:solid 1px #ccc; font-family: 'LucidaGrandeRegular', Arial,Helvetica,sans-serif; font-size:16px;}
 .wte-bx{background:#fff; border:solid 1px #ccc; padding:10px; border-radius:5px;}
 .grn-btn-rgt{color:#fff; border:1px solid #106919; background:url(/assets/paging-bg-hover.jpg) repeat-x; display:inline-block; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; display:inline-block; text-align:center; width:100px; font-size:12px; height:25px; line-height:25px; margin:4px 0;}
@@ -315,7 +323,7 @@ a:hover.forgot-pass {text-decoration:none;}
 .login-bott {float:left; background:url(/assets/login-bot.png) no-repeat; width:465px; height:17px; margin-bottom:100px;}
 .copy-right {margin:0 auto; width:1000px; clear:both; text-align:center; color:#727272;}
 .login-img {position:absolute; right:-50px; top:-60px;}
-#disqus_thread{width:95%;}
+#disqus_thread{width:98%;}
 ul.dropdown-menu li a:hover{background:#000 !important;}
 .res-date{float: left; width:100%; clear:both; display:block; font-size: 11px; line-height: 16px; color: #A0A0A0;font-family: 'LucidaGrandeRegular'; }
 a.read-more{color: rgb(53, 166, 65); font-size: 12px; text-decoration: underline; margin-top: 4px;}
@@ -324,7 +332,6 @@ a:hover.read-more{text-decoration: none;}
 /*-------------NEW CSS ADDED BY HB 23-04-2013---------*/
 .top-btn {float:left; width:100%; padding-bottom:10px;}
 a.gray-btn-rgt {color:#585858; border:1px solid #cccccc; background:url(/assets/gray-bg.gif) repeat-x; display:inline-block; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; display:inline-block; text-align:center; width:100px; font-size:12px; height:25px; line-height:25px; margin:4px 0;}
-.grn-btn-rgt-new{color:#fff; border:1px solid #106919; background:url(/assets/paging-bg-hover.jpg) repeat-x; display:inline-block; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; display:inline-block; text-align:center; font-size:12px; height:25px; line-height:25px; margin:4px 0; padding:0 10px; margin-left:4px;}
 .mt-10 {margin-top:42px;}
 .map-right-location {float:left; width:233px; border:1px solid #cccccc; border-top:none; border-radius:4px; -moz-border-radius:4px; -webkit-border-raidus:4px; background:#fff;}
 .location-hd {float:left; width:232px; height:31px; background:url(/assets/black-bg.gif) repeat-x; line-height:29px;-webkit-border-raidus:4px 4px 0 0; -moz-border-raidus:4px 4px 0 0; border-radius:4px 4px 0 0; padding-left:10px; color:#ffffff; font-size:13px; border:1px solid #2f2f2f;}
@@ -358,17 +365,46 @@ a.gray-btn-rgt {color:#585858; border:1px solid #cccccc; background:url(/assets/
 .sorce-right-icon img {margin-right:2px;}
 .arrows {float:right;}
 .arrows img {margin-bottom:2px;}
-.publish-new {float:left; width:700px; border:1px solid #e8e8e8; background:url(/assets/pub-bg.png) repeat-y;}
-.publish-left {float:left; width:319px; background:#fff; margin:10px 10px 0 10px;}
+.publish-new {float:left; border:1px solid #e8e8e8;}
+.publish-new label {
+    font-weight: normal;
+}
+.publish-left {float:left; width:50%; background:#fff; margin:10px 10px 0 10px;}
 .publish-left ul {margin:0; padding:0;}
 .publish-left li {margin:0 0 8px 0; padding:0 0 8px 0; list-style:none; float:left; border-bottom:1px solid #d2d2d2; color:#222222; width:100%;}
 .publish-left li.last {border-bottom:none; margin-bottom:0px;}
-.publish-left li img {margin-left:5px;}
+.publish-left li span img {
+    margin-left:5px;
+    cursor:pointer;
+}
+.publish-left span input {
+    width: 149px;
+    display: inline-block;
+}
+.publish-left span label {
+    width: 149px;
+}
+.publish-label{
+    float:left;
+}
+.publish-calendar{
+    float:left;
+    width:185px;
+}
+.publish-time{
+    color: #393939;
+    font-size:14px;
+}
+.publish-file-upload{
+    width: 159px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
 label.date {margin-left:40px; margin-right:0px; color:#787878; width:25%; float:right;}
 label.km-text {color:#393939; float:right; width:20%;}
 label.km-text strong {font-family: 'LucidaGrandeBold'; font-weight:normal;}
 .cal-icon {float:right;}
-.upload-images {float:right; width:345px; padding:8px 5px 8px 5px;}
+.upload-images {float:right; width:299px; padding:8px 5px 8px 5px;}
 .upload-images h4 {color:#222; font-size:12px;font-family: 'LucidaGrandeBold'; font-weight:normal; float:left;}
 .upload-img-div {border:1px solid #d2d2d2; background:#fff; padding:3px; float:left; margin-left:8px; margin-right:8px;}
 .upload-images span {color:#737373; line-height:30px;}
@@ -432,8 +468,6 @@ opacity: 1 !important;
 .welcome-txt-main h3 span{color:#383838;}
 .welcome-txt-main h3 img{float:right;}
 .welcome-txt-main p {color:#0e0e0e; font-size:12px; line-height:18px; padding:10px 0px; margin:0px;}
-.welcome-txt-main p a{color:#cf2e2d;}
-.welcome-txt-main p a:hover{text-decoration:underline;}
 .welcome-txt-main p img{float:right; vertical-align:text-top; margin: 0 0 10px 10px; }
 .main-right-new{margin-top:0px !important;}
 .main-rght-login-main{width:90px; float:left; height:36px; border-right:#333739 1px solid; border-left:#000 1px solid; color:#FFF; margin-left:143px; line-height:36px;}
@@ -477,32 +511,6 @@ opacity: 1 !important;
 .header-left{float:left;width:135px;}
 .header-right{float:left;margin-top: 16px;}
 
-/* Temporary fix, need use bootstrap gem */
-select, textarea,
-input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
-input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"],
-input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
-  .uneditable-input {
-    display: inline-block;
-    width: 210px;
-    padding: 4px 6px;
-    margin-bottom: 9px;
-    font-size: 14px;
-    line-height: 20px;
-    color: #555555;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background-color: white;
-    border: 1px solid #cccccc;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-    transition: border linear 0.2s, box-shadow linear 0.2s;
-}
 select {
     height: 30px;
     border: 1px solid #bbb;
