@@ -46,6 +46,7 @@ nb:
     title: Tittel
     to_updated_at: Oppdatert
     updated_at: Oppdatert
+    article_not_published: "Artikkel ikke publisert"
   backend:
     store: Lagre
   comments:
