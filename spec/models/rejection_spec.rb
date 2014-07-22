@@ -13,18 +13,18 @@
 
 require 'spec_helper'
 
-describe Rejection do 
+describe Rejection, :type => :model do 
 
-	it { should belong_to :user }
-	it { should belong_to :topic }
+	it { is_expected.to belong_to :user }
+	it { is_expected.to belong_to :topic }
 
-	it { should respond_to :reason }
-	it { should respond_to :unchanged }
+	it { is_expected.to respond_to :reason }
+	it { is_expected.to respond_to :unchanged }
 
 	before { @rejection = Rejection.new	}
 
 	describe "new rejection should be unchanged" do
-		it { @rejection.unchanged.should == true }
+		it { expect(@rejection.unchanged).to eq(true) }
 	end
 
 end

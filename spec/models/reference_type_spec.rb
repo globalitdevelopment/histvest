@@ -11,8 +11,8 @@
 
 require 'spec_helper'
 
-describe ReferenceType do
-	it { should have_many(:references)}
+describe ReferenceType, :type => :model do
+	it { is_expected.to have_many(:references)}
 
 	before { @reference_type = ReferenceType.new(
 		name: "Example") 
@@ -20,17 +20,17 @@ describe ReferenceType do
 
 	subject { @reference_type }
 
-	it { should respond_to(:name) }
+	it { is_expected.to respond_to(:name) }
 
-	it { should be_valid }
+	it { is_expected.to be_valid }
 
 	describe "when name is not present" do
 		before { @reference_type.name = " " }
-		it { should_not be_valid }
+		it { is_expected.not_to be_valid }
 	end
 
 	describe "when name is too long" do
 		before { @reference_type.name = "a" * 51 }
-		it {should_not be_valid }
+		it {is_expected.not_to be_valid }
 	end
 end
