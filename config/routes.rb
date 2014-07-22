@@ -25,6 +25,8 @@ Histvest::Application.routes.draw do
   get 'misc', to: 'misc#index', :as => :misc
   post 'misc/set_article', to: 'misc#set_article' 
   post 'misc/delete-orphan-locations', to: 'misc#delete_orphan_locations', :as => :delete_orphan_locations
+  post 'misc/repair_references', to: 'misc#repair_references', :as => :repair_references
+
  
   resources :sessions, only: [:new, :create, :destroy, :forgot_password, :get_new_password]
   resource :moderation, :only => [:show, :update]
