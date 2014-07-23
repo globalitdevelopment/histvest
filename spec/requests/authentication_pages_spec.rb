@@ -7,14 +7,14 @@ describe "AuthenticationPages", :type => :request do
   describe "signin page" do
     before { visit signin_path }
     
-    it { is_expected.to have_selector('div.login-hd',    text: I18n.t("session.sign_in")) }
-    it { is_expected.to have_selector('title', text: I18n.t("session.sign_in")) }
+    it { is_expected.to have_selector('div.login-hd', text: I18n.t("session.sign_in")) }
+    it { page.should have_title(I18n.t("session.sign_in") + ' - ' + I18n.t('layouts.public.historiske_vestfold')) }
 
     describe "with invalid information" do
       before { click_button I18n.t("session.sign_in")}
 
-      it { is_expected.to have_selector('title', text: I18n.t("session.sign_in")) }
-      it { is_expected.to have_selector('div.alert.alert-error', text: I18n.t("session.flash_error")) }
+      it { page.should have_title(I18n.t("session.sign_in") + ' - ' + I18n.t('layouts.public.historiske_vestfold')) }
+      it { is_expected.to have_selector('div.alert.alert-danger', text: I18n.t("session.flash_error")) }
     
       describe "after visiting another page" do
         before { click_link I18n.t("session.sign_in") }
@@ -45,7 +45,7 @@ describe "AuthenticationPages", :type => :request do
         
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
-          it { is_expected.to have_selector('title', text: I18n.t("session.sign_in")) }
+          it { page.should have_title(I18n.t("session.sign_in") + " - " + I18n.t("layouts.public.historiske_vestfold")) }
         end
 
         describe "submitting to the update action" do

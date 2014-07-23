@@ -245,7 +245,7 @@ nb:
   layouts:
     public:
       bibliotek: Bibliotek
-      historiske_vestfold: " Historiske Vestfold "
+      historiske_vestfold: "Historiske Vestfold"
     touch:
       bibliotek: Historiske Vestfold
   listing:
