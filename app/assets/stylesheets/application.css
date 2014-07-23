@@ -18,23 +18,11 @@
 @import "bootstrap";
 
 a.add-reference {
-    background: url("/assets/icon-plus-2.gif") no-repeat;
     margin-top: 5px;
     display: block;
     height: 16px;
     width: 16px;
-}
-
-tr.added-reference td:last-child a {
-    background: url("/assets/icon-plus.png") no-repeat;
-}
-
-a.remove-reference {
-    background: url("/assets/icon-minus.png") no-repeat;
-    margin: 3px 0 0 5px;
-    display: block;
-    height: 16px;
-    width: 16px;
+    text-decoration: none;
 }
 
 /* style for topic page */

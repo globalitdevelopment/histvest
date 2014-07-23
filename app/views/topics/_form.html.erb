@@ -43,9 +43,9 @@
         <div class="map-right-location" id="map_div">
           <div class="location-hd">
               <div class="location-icon">
-                <a href="javascript:void(0)" id="marker_toggle" title="<%= I18n.t('topics.add_location') %>"><img src="/assets/pin-icon.png" alt=""></a>
+                <a href="javascript:void(0)" id="marker_toggle" title="<%= I18n.t('topics.add_location') %>"><span class="glyphicon glyphicon-map-marker location-marker"></span></a>
                 <a href="javascript:void(0)" id ="marker_adder" title="<%= I18n.t('topics.add_location') %>">
-                  <img src="/assets/icon-plus.png" alt="">
+                  <span class="glyphicon glyphicon-plus-sign location-add"></span>
                 </a>
               </div>
               <%= I18n.t('topics.form.add_locations') %>
@@ -56,8 +56,8 @@
               <div id="map_canvas"></div>
             </div>
             <div class="search-box">                      
-              <input type="text" id="add-location-input" placeholder="<%= I18n.t('topics.add_location',:default=>"Add new location") %>">              
-              <a href="javascript:;" id="add-location"><img src="/assets/icon-plus.png"></a>    
+              <input type="text" id="add-location-input" placeholder="<%= I18n.t('topics.add_location',:default=>"Add new location") %>" class="form-control">
+              <a href="javascript:;" id="add-location"><span class="glyphicon glyphicon-plus-sign location-add"></span></a>
             </div>
             <div id="locations-list-container"> </div>
           </div>
@@ -107,9 +107,9 @@
     </div>
     <div>&nbsp;</div>
     <div>&nbsp;</div>
-    <div class="inner-page" id="reference-wrapper">
+    <div class="inner-page reference-head" id="reference-wrapper">
       <div class="inner-head">
-        <h1><%= I18n.t("references.references")%></h1>
+        <h4><%= I18n.t("references.references")%></h4>
       </div>
       <div class="listing-part newlistng">
         <div id="references-container"></div>
