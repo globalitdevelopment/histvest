@@ -12,5 +12,5 @@
   <% end %>
   <td><%= link_to icon('view-icon-new'), asset, title: "view" %>
     <%= link_to icon('edit-icon'), polymorphic_url(asset, :action => "edit"), title: "edit" %>
-    <%= link_to icon('delete-icon'), asset, method: :delete, data: { confirm: 'Er du sikker?' }, title: "delete" %></td>
+    <%= link_to icon('delete-icon'), asset, method: :delete, data: { confirm: I18n.t('confirm_message',:default=>"Are you sure?") }, title: "delete" %></td>
 </tr>

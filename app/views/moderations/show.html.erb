@@ -64,21 +64,60 @@
 
 <script type="text/javascript">
 $(function() {
-	$('#btn-publish').click(function(e) {
-		e.preventDefault();
-		if($('.data-table input:checked').size() > 0 && confirm(<%= raw I18n.t('confirm_message',:default=>"Are you sure?").to_json %>)) {
-            $('#commit').val('publish');
-			$('#listing_form')[0].submit();
+  var confirmBox = function() {
+    return bootbox.dialog({
+      message: "<%= I18n.t('confirm_message') %>",
+      buttons: {
+        success: {
+          label: "OK",
+          className: "btn-danger",
+          callback: function() {
+              $('#commit').val('publish');
+              $('#listing_form')[0].submit();
+          }
+        },
+        danger: {
+          label: "Avbryte",
+          className: "btn-default"
         }
-	});
-    $('#btn-reject').click(function(e) {
-        e.preventDefault();
-        if($('.data-table input:checked').size() > 0 && confirm(<%= raw I18n.t('confirm_message',:default=>"Are you sure?").to_json %>)) {
-            var reason = prompt($(this).data('message'));
-            $('#reason').val(reason);
+      }
+    });
+  };
+  var rejectReasonBox = function() {
+    return bootbox.dialog({
+      message: "<%= I18n.t('topics.rejection_reason')%>" + "<br /><br /><input type='text' id='prompt_result' class='form-control'>",
+      title: "<%= raw I18n.t('confirm_message')%>",
+      buttons: {
+        success: {
+          label: "OK",
+          className: "btn-danger",
+          callback: function() {
+            $('#reason').val($('#prompt_result').val());
             $('#commit').val('reject');
             $('#listing_form')[0].submit();
+          }
+        },
+        danger: {
+          label: "Avbryte",
+          className: "btn-default"
         }
+      }
     });
+  };
+
+  $('#btn-publish').click(function(e) {
+      e.preventDefault();
+    if ($('.data-table input:checked').size() > 0) {
+      confirmBox();
+    }
+  });
+
+  $('#btn-reject').click(function(e) {
+    e.preventDefault();
+    if ($('.data-table input:checked').size() > 0) {
+      rejectReasonBox();
+    };
+  });
+
 });
 </script>
