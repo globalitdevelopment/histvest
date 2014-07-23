@@ -308,13 +308,11 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
 .login-wrap {width:465px; margin:50px auto;}
 .login-inner {float:left; width:465px;}
 .login-hd{background:url(/assets/login-hd-bg.jpg) repeat-x; height:39px; line-height:39px; padding:0 0 0 15px; width:448px; border:1px solid #2f2f2f; border-radius:4px 4px 0 0; -moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0; font-family: 'LucidaGrandeBold', Arial,Helvetica,sans-serif; font-size:14px; color:#fff;}
-.login-cont{border-left:1px solid #cccccc; border-right:1px solid #cccccc; background:#fff; float:left; width:413px; padding:30px 25px 20px 25px;}
-.row {float:left; width:100%; margin:0 0 10px 0;}
+.login-cont{border-left:1px solid #cccccc; border-right:1px solid #cccccc; background:#fff; float:left; width:465px; padding:30px 25px 20px 25px;}
+.row-input {float:left; width:100%; margin:0 0 10px 20px;}
 .login-cont label {float:left; width:80px; line-height:28px;}
-.login-input{float:left !important; background:url(/assets/email-input.png) no-repeat !important; width:255px !important; height:31px !important; line-height:31px !important; border:none !important; padding:0 0 0 40px !important;}
-.pass-input {float:left !important; background:url(/assets/password-input.png) no-repeat !important; width:255px !important; height:31px !important; line-height:31px !important; border:none !important; padding:0 0 0 40px !important;}
-.btn-login {background:url(/assets/btn-login-bg.gif) repeat-x; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; color:#fff; font-size:12px; border:1px solid #1f822a; height:25px; line-height:25px; padding:0 10px; cursor:pointer;}
-.btn-login:hover {background:url(/assets/btn-login-bg-h.gif) repeat-x;}
+.login-input {width:255px !important;}
+.pass-input {width:255px !important;}
 a.forgot-pass {font-size:11px; color:#343434; font-family: 'LucidaGrandeRegular'; text-decoration:underline; margin:0 0 0 8px; background:url(/assets/key-icon.png) no-repeat left 0; padding-left:20px;}
 a:hover.forgot-pass {text-decoration:none;}
 .btn-div {padding-top:8px;}
