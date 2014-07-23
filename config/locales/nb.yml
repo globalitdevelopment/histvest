@@ -3,6 +3,12 @@ nb:
     errors:
       messages:
         record_invalid: Ugyldig data.
+    attributes:
+      topic:
+        content: Innhold
+        title: Tittel
+    models:
+      topic: Tema
   admin:
     news: Nyheter
     statistics: Statistikk
@@ -189,7 +195,7 @@ nb:
         contributor: Bidragsyter
         trusted_contributor: Klarert Bidragsyter
   error_head:
-    header: Topptekst
+    header: feil når du forsøkte å lagre.
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -507,3 +513,6 @@ nb:
     source_code: Kildekode
   misc:
     references_successfully_repaired: Referansene ble oppdatert.
+  will_paginate:
+    next_label: Neste
+    previous_label: Forrige
