@@ -91,7 +91,7 @@ describe ArticlesController, :type => :controller do
 
       it "redirects to the created article" do
         post :create, {:article => valid_attributes}, valid_session
-        expect(response).to redirect_to(Article.last)
+        expect(response).to redirect_to(Article)
       end
     end
 
@@ -133,7 +133,7 @@ describe ArticlesController, :type => :controller do
       it "redirects to the article" do
         article = Article.create! valid_attributes
         put :update, {:id => article.to_param, :article => valid_attributes}, valid_session
-        expect(response).to redirect_to(article)
+        expect(response).to redirect_to(Article)
       end
     end
 

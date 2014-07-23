@@ -91,7 +91,7 @@ describe TopicsController, :type => :controller do
 
       it "redirects to the created topic" do
         post :create, {:topic => valid_attributes}, valid_session
-        expect(response).to redirect_to(Topic.last)
+        expect(response).to redirect_to(Topic)
       end
     end
 
@@ -133,7 +133,7 @@ describe TopicsController, :type => :controller do
       it "redirects to the topic" do
         topic = Topic.create! valid_attributes
         put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
-        expect(response).to redirect_to(topic)
+        expect(response).to redirect_to(Topic)
       end
     end
 

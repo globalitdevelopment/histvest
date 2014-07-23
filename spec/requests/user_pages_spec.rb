@@ -13,7 +13,7 @@ describe "User pages", :type => :request do
     end
 
     it { is_expected.to have_selector('h1',    text: user.name) }
-    it { is_expected.to have_selector('title', text: user.name) }
+    it { page.should have_title(user.name) }
   end
 
   describe "account creation" do
