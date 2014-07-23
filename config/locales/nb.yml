@@ -75,6 +75,14 @@ nb:
       order:
         asc: "&uarr;"
         desc: "&darr;"
+    topic_report:
+      columns:
+        content: Content
+        created_at: Created at
+        published: Published
+        title: Title
+        actions: Actions
+        updated_at: Updated at
   date:
     abbr_day_names:
     - søn
@@ -324,10 +332,10 @@ nb:
   seach:
     no_results: Ingen resultater.
   search_stats:
-    last_searched: Sist søkte
+    last_searched: Sist søkt etter
     search_string: Søkestreng
-    view_count: Vis teller
-    search_stats: Søk Statistikk
+    view_count: Antall søk
+    search_stats: Søkestatistikk
     click_to_pick_date: Klikk for å velge en dato
     select_time_period: Velg tidsperiode
     last_month: Siste måned
@@ -353,7 +361,7 @@ nb:
     password_changed: Passordet er blitt endret.
     send_instructions: Send instruksjoner
     wrong_token: Feil passordnullstillingsdetaljer.
-    must_be_logged_in: Du har ikke tilgang til denne siden.
+    must_be_logged_in: Du må være logget inn.
   shared:
     footer:
       about_historiske_vestfold: Om Historiske Vestfold
@@ -395,17 +403,17 @@ nb:
     topics: Tema
     users: Brukere
   topic:
-    delete_image: Slett bilde
+    delete_image: Slett bilde.
     location_loading: Lagrer sted...
     title: Tittel
-    publish: Publish
+    publish: Publiser
     image:
       replace: Erstatt
       upload: Laste opp
     published_end: Publisering slutter
     published_start: Publisering starter
   topics:
-    active_version: Active Version
+    active_version: Aktiv versjon.
     add_location: Legg til sted
     add_topic: Nytt tema
     address: Addresse
@@ -447,7 +455,7 @@ nb:
     remove_location: Fjern sted
     save: Lagre
     search_stats:
-      apply: bruk
+      apply: Bruk
       no_search_results_found: Ingen søkeresultater funnet.
     show:
       comments_powered_by_disqus: kommentarer levert av Disqus.
@@ -493,7 +501,9 @@ nb:
     link_to_touch_version: Se kun kart
     no_topics: There are no topics
   about:
-    data: License
+    data: Lisens
     license:
-      expanded: The data on HistVest (topics, and their respective locations, references and images) are licensed under NLOD.
-    source_code: Source Code
+      expanded: Dataene på HistVest (tema, lokasjoner, referanser og bilder) er lisensiert etter NLOD.
+    source_code: Kildekode
+  misc:
+    references_successfully_repaired: Referansene ble oppdatert.
