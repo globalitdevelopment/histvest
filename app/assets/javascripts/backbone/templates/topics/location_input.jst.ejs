@@ -7,8 +7,8 @@
   <% } %>
   <div class="location-con">    
     <div class="location-right-icon">                   
-      <a href="javascript:" class="zoom-location"><img src="/assets/view-icon.png" alt=""></a>             
-      <a href="javascript:" class="remove-location"><img src="/assets/icon-minus.png" alt=""></a>
+      <a href="javascript:" class="zoom-location"><span class="glyphicon glyphicon-search"></span></a>
+      <a href="javascript:" class="remove-location"><span class="glyphicon glyphicon-minus-sign location-rm"></span></a>
     </div>        
     <p><%= $.trim(location.get('title'))=='' ? location.get('geo_address') :  location.get('title') %></p>    
   </div>
