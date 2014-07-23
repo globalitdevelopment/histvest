@@ -9,3 +9,5 @@ SMTP_AUTH: 'plain'
 SMTP_DOMAIN: "domain.no"
 SMTP_USER: "noreply@domain.no"
 SMTP_PASS: "password"
+DATABASE_USERNAME: "histvest"
+DATABASE_PASSWORD: "somepassword"
