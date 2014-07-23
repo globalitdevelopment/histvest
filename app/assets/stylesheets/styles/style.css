@@ -288,8 +288,6 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
  
 .newlistng{padding:15px; width:97%;}
 .newlistng .for-srch{padding:0 0 22px 0;}
-.newlistng .for-srch input[type=text]{width:250px; padding:5px; border:solid 1px #ccc; font-family: 'LucidaGrandeRegular', Arial,Helvetica,sans-serif; color:#686868; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; box-shadow:inset 2px 2px 4px #dfdddd;}
-.newlistng .for-srch input[type=submit]{background:url(/assets/btn-2.gif); cursor:pointer; padding:5px 8px; color:#fff; border:none; font-family: 'LucidaGrandeRegular', Arial,Helvetica,sans-serif; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;}
 
 .tbbng{background:#f3f3f3;}
 .tbbng .tbs{clear:both; float:left; width:100%;}
