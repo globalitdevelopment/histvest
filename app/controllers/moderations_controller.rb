@@ -4,7 +4,7 @@ class ModerationsController < ApplicationController
 
 	def show		
 		@topic_report = ModerationReport.new params[:moderation_report] do |scope|
-			scope = scope.where("id NOT IN (SELECT topic_id FROM #{Rejection.table_name} WHERE unchanged=?)",true) if params[:all].blank?
+			scope = scope.where("\"topics\".\"id\" NOT IN (SELECT topic_id FROM #{Rejection.table_name} WHERE unchanged=?)",true) if params[:all].blank?
 			scope
 		end
 		@assets = @topic_report.assets.paginate page: params[:page]		
