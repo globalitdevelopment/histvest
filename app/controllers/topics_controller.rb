@@ -134,7 +134,7 @@ class TopicsController < ApplicationController
       raise Exception.new if @topic.nil?
       raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
     rescue Exception => e
-      flash[:danger] = 'This topic is not published'
+      flash[:danger] = I18n.t('topics.topic_not_published')
       redirect_to Topic
       return
     end
