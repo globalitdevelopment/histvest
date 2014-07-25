@@ -27,12 +27,12 @@ require 'spec_helper'
  			expect(@ref.creator).to eq("Yngvar Halvorsen")
  			expect(@ref.lang).to eq("no")
  			expect(@ref.year).to eq(nil)
- 			expect(@ref.reference_type_id).to eq(14)
+ 			expect(@ref.reference_type_id).to eq(15)
  			expect(@ref.url).to eq(url)
  		end
  	end
  	describe ".new_reference_from with inconsistent api" do
- 		url = "http://www.europeana.eu/portal/record/2021002/C_536_3A2.html?utm_source=api&utm_medium=api&utm_campaign=U4YHdx6jK"
+ 		url = "http://www.europeana.eu/portal/record/2021002/e_IsShownAt_3287D67D_6018_40F1_B5E6_09BBD5F331ED.html?start=1&query=title%3ALucifer+%28P%C3%A4iv%C3%A4%29&startPage=1&rows=24"
  		before { @ref = EuropeanaWrapper::new_reference_from(url) }
  		subject { @ref }
  		it "should be a reference" do
@@ -43,7 +43,7 @@ require 'spec_helper'
  			expect(@ref.creator).to eq("Volpato, Giovanni (taiteilija)")
  			expect(@ref.lang).to eq("fi")
  			expect(@ref.year).to eq(nil)
- 			expect(@ref.reference_type_id).to eq(14)
+ 			expect(@ref.reference_type_id).to eq(15)
  			expect(@ref.url).to eq(url)
  		end
  	end

@@ -57,9 +57,11 @@ class NationalLibraryWrapper
 		
 		# Regex grabs anything that looks like a year
 		# This code is very fragile, but there does not seems to be any better way
-		year = agent.page.parser.css('#preview_metadata div:nth-child(4) .preview_metadata_data').text[/\d{2,}/] 
-
-		type = agent.page.parser.css('div:nth-child(19) .preview_metadata_data').text.strip
+		year = nil
+		agent.page.parser.xpath("//meta[@name='dc:date']/@content").each do |attr|
+			year = attr.value
+			break if not year.nil?
+		end
 
 		creator = agent.page.parser.css('.tableRow .fakeLink').text.strip
 
