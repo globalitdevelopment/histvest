@@ -4,8 +4,8 @@ class ArticleReport < BaseReport
 		Article.order("articles.created_at desc")
 	end
 
-	filter(:title, :string) {|value| where("title ilike '#{value}%'")}
-	filter(:content, :string) {|value| where("content ilike '#{value}%'")}  
+	filter(:title, :string) {|value| where("title ilike '%#{value}%'")}
+	filter(:content, :string) {|value| where("content ilike '%#{value}%'")}
 	#date_range_filters(:updated_at)
 
 	column(:actions, :html => true) { |article| render :partial => "/shared/check_box",:locals => { :s => article }}
