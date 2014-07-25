@@ -4,8 +4,8 @@ class UserReport < BaseReport
 		User.order("users.created_at desc")
 	end
 
-	filter(:name, :string) {|value| where("name ilike '#{value}%'")}
-	filter(:email, :string) {|value| where("email ilike '#{value}%'")}  
+	filter(:name, :string) {|value| where("name ilike '%#{value}%'")}
+	filter(:email, :string) {|value| where("email ilike '%#{value}%'")}
 
 	column(:actions, :html => true) { |user| render :partial => "/shared/check_box",:locals => { :s => user }}
 	column(:name)
