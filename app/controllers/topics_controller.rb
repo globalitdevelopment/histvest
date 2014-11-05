@@ -288,7 +288,8 @@ private
       new_location_ids = []     
       params["locations_attributes"].each do |values|
         if values[:id].blank?
-          location = Location.create values
+        	location = get_location values[:latitude], values[:longitude]
+          location = Location.create values if location.nil?
         else
           location = Location.find values[:id]
           location.update_attributes values         
@@ -298,6 +299,13 @@ private
       params["topic"]["location_ids"] ||= Array.new
       params["topic"]["location_ids"] += new_location_ids     
     end   
+  end
+
+  def get_location latitude, longitude
+  	accuracy = 0.00003
+  	locations = Location.where("latitude > '#{'%.5f' % (latitude.to_f - accuracy)}' AND latitude < '#{'%.5f' % (latitude.to_f + accuracy)}' 
+  			AND longitude > '#{'%.5f' % (longitude.to_f - accuracy)}' AND longitude < '#{'%.5f' % (longitude.to_f + accuracy)}'")
+  	locations.nil? ? nil : locations.first  	
   end
   
 end
