@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby '2.1.0'
+
 # Webserver, rails etc
 gem "thin"
 gem "rails"
