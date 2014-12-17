@@ -12,7 +12,7 @@ gem "rake"
 gem "pg"
 gem "database_cleaner"
 gem "pg_search"
-gem "paper_trail"
+gem 'paper_trail', '~> 3.0.6'
 gem "enumerize"
 gem "protected_attributes"
 
