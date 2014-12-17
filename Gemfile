@@ -4,7 +4,7 @@ ruby '2.1.0'
 
 # Webserver, rails etc
 gem "thin"
-gem "rails"
+gem 'rails', '~> 4.1.4'
 gem "rb-readline"
 gem "rake"
 

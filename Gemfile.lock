@@ -382,7 +382,7 @@ DEPENDENCIES
   pg_search
   protected_attributes
   quiet_assets
-  rails
+  rails (~> 4.1.4)
   rails-backbone
   rake
   rb-readline
