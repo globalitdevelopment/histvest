@@ -89,6 +89,14 @@ nb:
         title: Title
         actions: Actions
         updated_at: Updated at
+    article_report:
+      columns:
+        actions: Actions
+        published: Published
+        content: Content
+        created_at: Created at
+        title: Title
+        updated_at: Updated at
   date:
     abbr_day_names:
     - søn
@@ -245,7 +253,7 @@ nb:
   layouts:
     public:
       bibliotek: Bibliotek
-      historiske_vestfold: "Historiske Vestfold"
+      historiske_vestfold: Historiske Vestfold
     touch:
       bibliotek: Historiske Vestfold
   listing:
