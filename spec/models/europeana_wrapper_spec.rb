@@ -16,7 +16,7 @@ require 'spec_helper'
  		end
  	end
  	describe ".new_reference_from" do
- 		url = "http://www.europeana.eu/portal/record/2022609/3701E9A913A319B8B3154E5A5340F31DECBA883A.html?utm_source=api&utm_medium=api&utm_campaign=U4YHdx6jK"
+ 		url = "http://www.europeana.eu/portal/record/2022611/H_DF_DF_1568.html"
  		before { @ref = EuropeanaWrapper::new_reference_from(url) }
  		subject { @ref }
  		it "should be a reference" do
@@ -32,7 +32,7 @@ require 'spec_helper'
  		end
  	end
  	describe ".new_reference_from with inconsistent api" do
- 		url = "http://www.europeana.eu/portal/record/2021002/e_IsShownAt_3287D67D_6018_40F1_B5E6_09BBD5F331ED.html?start=1&query=title%3ALucifer+%28P%C3%A4iv%C3%A4%29&startPage=1&rows=24"
+ 		url = "http://www.europeana.eu/portal/record/2021002/e_IsShownAt_3287D67D_6018_40F1_B5E6_09BBD5F331ED.html"
  		before { @ref = EuropeanaWrapper::new_reference_from(url) }
  		subject { @ref }
  		it "should be a reference" do
