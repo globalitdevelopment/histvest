@@ -1,8 +1,9 @@
 <div class="infowindow">	
 	<% people.each_with_index do |person, index| %>
 	<div class="marker-topic <%= index==0 ? 'first' : '' %>" data-url="<%= person.url %>">
-		<h5 class="infowindow-header"><%= person.name %></h5>
-		<div class="infowindow-content">			
+		<h5 class="infowindow-header"><%= person.name %> - <%= person.date_of_birth %></h5>
+		<div class="infowindow-content">
+			<strong><%= location.address %></strong><br>
 			<%= person.description %>
 		</div>		
 		<div class="clear"></div>

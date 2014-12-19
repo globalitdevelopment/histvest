@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
 		end
 
 		@people = Location.tagged.includes(:people).joins(:people).to_gmaps4rails do |location, marker|
-			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => location.people })
+			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => location.people, :location => location })
 			marker.picture picture: "/assets/rt-person-icon.png"
 		end
 
