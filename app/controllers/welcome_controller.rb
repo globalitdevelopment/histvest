@@ -15,7 +15,7 @@ class WelcomeController < ApplicationController
 
 		@people = Location.tagged.includes(:people).joins(:people).to_gmaps4rails do |location, marker|
 			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => location.people, :location => location })
-			marker.picture picture: "/assets/rt-person-icon.png"
+			marker.picture picture: location.people.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.people.size}/009900/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png"
 		end
 
 		@front_page_article = Article.where(article_type: "front_page").first
