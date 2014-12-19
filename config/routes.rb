@@ -22,6 +22,8 @@ Histvest::Application.routes.draw do
     :users,
     :articles
 
+  resources :people, only: [:index]
+
   get 'misc', to: 'misc#index', :as => :misc
   post 'misc/set_article', to: 'misc#set_article' 
   post 'misc/delete-orphan-locations', to: 'misc#delete_orphan_locations', :as => :delete_orphan_locations

@@ -13,6 +13,11 @@ class WelcomeController < ApplicationController
 			marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")				
 		end
 
+		@people = Location.tagged.includes(:people).joins(:people).to_gmaps4rails do |location, marker|
+			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => location.people })
+			marker.picture picture: "/assets/rt-person-icon.png"
+		end
+
 		@front_page_article = Article.where(article_type: "front_page").first
 
 		# Render the site using the touch layout if the subdomain is touch.		

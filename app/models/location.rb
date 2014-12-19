@@ -31,12 +31,17 @@ class Location < ActiveRecord::Base
 
 	has_and_belongs_to_many :topics
 
+	has_many :people
+
 	acts_as_gmappable :process_geocoding => false
 
 	def gmaps4rails_address
 		"#{self.address}"
 	end
 
+	scope :tagged, -> { where.not(latitude: nil) }
+	scope :untagged, -> { where(latitude: nil) }
 
+	geocoded_by :address
 	
 end
