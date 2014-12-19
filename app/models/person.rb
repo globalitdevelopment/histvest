@@ -5,8 +5,6 @@ class Person < ActiveRecord::Base
 
 	belongs_to :location
 
-	scope :tagged, -> { where.not(latitude: nil) }
-
 	def url
 		"http://digitalarkivet.arkivverket.no/ft/person/#{pfid}"
 	end
