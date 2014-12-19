@@ -39,8 +39,10 @@ class Person < ActiveRecord::Base
 
 	def self.geocode_pending
 		Location.where(id: self.pluck(:location_id).uniq).untagged.each do |location|
+			puts "geocoding #{location.address}"
 			location.geocode
 			location.save
+			sleep 1
 		end
 	end
 
