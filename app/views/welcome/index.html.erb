@@ -51,7 +51,7 @@
 		auto.data("uiAutocomplete")._renderItem = function (ul, item) {  
 			return $("<li />")
 				.data("item.autocomplete", item)
-				.append("<a href='/topics/"+item.id+"'><img src='" + item.avatar_path + "' /><span style='font-size:18px;line-height:7px;'>" + item.value + "</span></a>")       
+				.append("<a href='"+item.url+"'><img src='" + item.avatar_path + "' /><span style='font-size:18px;line-height:7px;'>" + item.value + "</span></a>")       
 				.appendTo(ul);
 		};
 
