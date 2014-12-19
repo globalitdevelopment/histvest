@@ -27,7 +27,7 @@ require 'spec_helper'
  			expect(@ref.creator).to eq("Yngvar Halvorsen")
  			expect(@ref.lang).to eq("no")
  			expect(@ref.year).to eq(nil)
- 			expect(@ref.reference_type_id).to eq(15)
+ 			expect(@ref.reference_type_id).to eq(ReferenceType.find_by(name: "Ukjent").id)
  			expect(@ref.url).to eq(url)
  		end
  	end
@@ -43,7 +43,7 @@ require 'spec_helper'
  			expect(@ref.creator).to eq("Volpato, Giovanni (taiteilija)")
  			expect(@ref.lang).to eq("fi")
  			expect(@ref.year).to eq(nil)
- 			expect(@ref.reference_type_id).to eq(15)
+ 			expect(@ref.reference_type_id).to eq(ReferenceType.find_by(name: "Ukjent").id)
  			expect(@ref.url).to eq(url)
  		end
  	end
