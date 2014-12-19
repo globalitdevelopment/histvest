@@ -28,6 +28,13 @@ class Histvest.Views.Topics.SearchFormView extends Backbone.View
 			el: '#europeana-reference-table'
 		)
 
+		@da_references = new Histvest.Collections.DaReferencesCollection()
+		new Histvest.Views.Topics.SearchResultView(
+			collection: @da_references,
+			addedReferences: options.added_references_collection,
+			el: '#da-reference-table'
+		)
+
 	render: ->
 		$(@el).html(@template())
 		this
@@ -46,5 +53,6 @@ class Histvest.Views.Topics.SearchFormView extends Backbone.View
 		@nb_references.search(query, range)
 		@wiki_references.search(query, range)
 		@europeana_references.search(query, range)
+		@da_references.search(query, range)
 
  

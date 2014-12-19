@@ -67,3 +67,12 @@ class Histvest.Collections.EuropeanaReferencesCollection extends Histvest.Collec
 
   url: ->
     "/references/search/Europeana/" + @range + "/" + @query
+
+class Histvest.Collections.DaReferencesCollection extends Histvest.Collections.ReferencesCollection
+
+  initialize: ->
+    @spinnerIcon = '#spinner-container-da'
+    @sourceName = 'Da'
+
+  url: ->
+    "/references/search/DigitalArchive/" + @range + "/" + @query

@@ -51,7 +51,7 @@ Histvest::Application.routes.draw do
   get '/references/numberOfResultsNb/:query', to: 'references#numberOfResultsNb'
   get '/references/numberOfResultsWiki/:query', to: 'references#numberOfResultsWiki'
   get '/references/numberOfResultsEuro/:query', to: 'references#numberOfResultsEuro'
-  get '/references/numberOfResultsAr/:query', to: 'references#numberOfResultsAr'
+  get '/references/numberOfResultsDa/:query', to: 'references#numberOfResultsAr'
 
   get '/search', to: 'search#search'
   

@@ -343,6 +343,7 @@ nb:
     url: URL
     wikipedia: Wikipedia
     year: "År"
+    da: Digitalarkivet
   seach:
     no_results: Ingen resultater.
   search_stats:

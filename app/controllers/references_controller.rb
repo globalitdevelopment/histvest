@@ -84,6 +84,8 @@ class ReferencesController < ApplicationController
       @references = EuropeanaWrapper.new(params[:query]).search(params[:index])
     when "Wikipedia"
       @references = WikipediaWrapper.new(params[:query]).search(params[:index])  
+    when "DigitalArchive"
+      @references = DigitalArchiveWrapper.new(params[:query]).search(params[:index])  
     else
       @references = Array.new()
     end
@@ -121,7 +123,7 @@ class ReferencesController < ApplicationController
   def numberOfResultsAr
     query = params[:query]
 
-    ar_numbers = ArkivportalenWrapper.new(query).number_of_results
+    ar_numbers = DigitalArchiveWrapper.new(query).number_of_results
     @results = ar_numbers.nil? ? "" : ar_numbers
     render json: @results.to_json
   end

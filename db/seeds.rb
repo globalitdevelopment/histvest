@@ -32,13 +32,15 @@ ReferenceType.create!([
 	{ name: "Noter", typestrings: ['note'] },							# Notes
 	{ name: "Tidskrift", typestrings: ['journal'] },					# Journal
 	{ name: "Artikkel", typestrings: ['article'] },
+	{ name: "Person", typestrings: ['person']},
 	{ name: "Ukjent" }
 ])
 
 ReferenceSource.create!([
 	{ name: "Nasjonalbiblioteket" },
 	{ name: "Wikipedia" },
-	{ name: "Europeana" }
+	{ name: "Europeana" },
+	{ name: "Digitalarkivet" }
 ])
 
 user = User.new(

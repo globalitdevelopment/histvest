@@ -20,7 +20,7 @@ class ReferenceSource < ActiveRecord::Base
 
 	# Returns an array of References
 	def self.search_all(query)
-		WikipediaWrapper.new(query).search + NationalLibraryWrapper.new(query).search + EuropeanaWrapper.new(query).search
+		WikipediaWrapper.new(query).search + NationalLibraryWrapper.new(query).search + EuropeanaWrapper.new(query).search + DigitalArchiveWrapper.new(query).search
 	end
 
 	# Returns new Refernce object based on url
@@ -36,6 +36,8 @@ class ReferenceSource < ActiveRecord::Base
 			return NationalLibraryWrapper
 		elsif url.include? "http://www.europeana.eu"
 			return EuropeanaWrapper					
+		elsif url.include? "http://digitalarkivet.arkivverket.no"
+			return DigitalArchiveWrapper
 		else
 			return nil
 		end

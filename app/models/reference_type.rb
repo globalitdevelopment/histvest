@@ -27,7 +27,6 @@ class ReferenceType < ActiveRecord::Base
 	# References with unknown types are set with reference_type_id nil
 	def self.determine_type_id(reference_type_string)
 		refs = ReferenceType.all.select { |m| m.typestrings.include? reference_type_string.downcase.strip }
-
 		if refs.any?
 			return refs.first.id
 		else
