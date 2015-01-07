@@ -113,18 +113,55 @@ class @Gmaps4HistVest
         people_array = new Array
 
         for marker in @markers
+            marker.google_marker.count = marker.count
             topics_array.push marker.google_marker if marker.type == 'topic'
-            people_array.push marker.google_marker if marker.type == 'person'       
+            people_array.push marker.google_marker if marker.type == 'person'        
 
-        @topics_clusterer = @create_clusterer(topics_array)
-        @people_clusterer = @create_clusterer(people_array)        
+        @topics_clusterer = @create_clusterer(topics_array, 'topic')
+        @people_clusterer = @create_clusterer(people_array, 'people')        
 
-    create_clusterer: (markers_array) ->
+    create_clusterer: (markers_array, type) ->
+        if type == 'people'
+            styles = [{
+                url: '/assets/people35.png',
+                height: 35,
+                width: 35,                
+                textColor: '#ff00ff'                
+            }, {
+                url: '/assets/people45.png',
+                height: 45,
+                width: 45,                
+                textColor: '#ff0000'                
+            }, {
+                url: '/assets/people55.png',
+                height: 55,
+                width: 55,                
+                textColor: '#ffffff'                
+            }]
+        else
+            styles = []
         clusterer = new MarkerClusterer(@my_map, markers_array, { 
             maxZoom: 11, 
             gridSize: 50, 
-            styles: false            
+            styles: styles            
         })
-        
+        clusterer.setCalculator (markers, numStyles)->
+            index = 0
+            title = ""
+            count = 0            
+            for marker in markers
+                console.log marker
+                if marker.count
+                    count = count + marker.count
+                else
+                    count++
+
+            dv = count
+            while dv != 0
+                dv = parseInt(dv/10, 10)
+                index++
+
+            index = Math.min index, numStyles
+            return text: count, index: index, title: title
         clusterer
         
