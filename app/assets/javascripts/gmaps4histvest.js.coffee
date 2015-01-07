@@ -88,7 +88,7 @@ class @Gmaps4HistVest
             current_map.visible_infowindow = infowindow            
 
     create_preview_infowindow: (marker, eventtype) ->
-        marker.infowindow = new google.maps.InfoWindow({content: marker.description, maxWidth: 320})
+        marker.infowindow = new google.maps.InfoWindow({content: marker.description, maxWidth: 320, disableAutoPan: true})
         current_map = this
         google.maps.event.addListener(marker.google_marker, eventtype, @open_infowindow(current_map, marker.infowindow, marker.google_marker))
 
