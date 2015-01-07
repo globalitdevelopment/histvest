@@ -12,7 +12,8 @@ class @Gmaps4HistVest
         @my_map = new google.maps.Map(document.getElementById('map'), @my_mapOptions);
         @visible_infowindow = null
         @bounds_object = new google.maps.LatLngBounds()
-        @marker_clusterer = null
+        @people_clusterer = null        
+        @topics_clusterer = null        
         @touch_version = false
         
         # action when clicking on marker content
@@ -105,14 +106,25 @@ class @Gmaps4HistVest
                 @create_preview_infowindow(@markers[index], eventtype)
 
     clusterize: ->
-        @marker_clusterer.clearMarkers() if @marker_clusterer != null
+        @topics_clusterer.clearMarkers() if @topics_clusterer != null
+        @people_clusterer.clearMarkers() if @people_clusterer != null
 
-        markers_array = new Array
+        topics_array = new Array
+        people_array = new Array
 
         for marker in @markers
-            markers_array.push(marker.google_marker)
+            topics_array.push marker.google_marker if marker.type == 'topic'
+            people_array.push marker.google_marker if marker.type == 'person'       
 
-        @marker_clusterer = @create_clusterer(markers_array)
+        @topics_clusterer = @create_clusterer(topics_array)
+        @people_clusterer = @create_clusterer(people_array)        
 
     create_clusterer: (markers_array) ->
-        return new MarkerClusterer(@my_map, markers_array, { maxZoom: 11, gridSize: 50, styles: false })
+        clusterer = new MarkerClusterer(@my_map, markers_array, { 
+            maxZoom: 11, 
+            gridSize: 50, 
+            styles: false            
+        })
+        
+        clusterer
+        
