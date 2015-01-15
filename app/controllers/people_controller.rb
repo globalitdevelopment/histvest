@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
 			marker.json type: :person, count: location.people.count
 		end
 		@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
-		render layout: 'public'
+		render layout: touch? ? 'touch' : 'public'
 	end
 
 end

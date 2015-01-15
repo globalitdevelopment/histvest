@@ -41,4 +41,8 @@ module ApplicationHelper
   	arr.join(' ')
   end
 
+  def touch?
+  	request.subdomains.first.to_s[0,5] == "touch"
+  end
+
 end

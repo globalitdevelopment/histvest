@@ -5,6 +5,7 @@
 		<div class="infowindow-content">
 			<strong><%= location.address %></strong><br>
 			<%= person.description %>
+			<%= link_to I18n.t("infowindow.read_more"), person_path(person.pfid), class: "infowindow-readmore btn btn-danger btn-mini" if touch? %>
 		</div>		
 		<div class="clear"></div>
 	</div>

@@ -7,7 +7,7 @@
 		<h5 class="infowindow-header"><%= topic.title %></h5>
 		<div class="infowindow-content">			
 			<%= truncate_html(strip_tags(topic.content), length: 100, omission: '...') %>			
-			<%= link_to I18n.t("infowindow.read_more"), topic_path(topic), class: "infowindow-readmore btn btn-danger btn-mini" %>			
+			<%= link_to I18n.t("infowindow.read_more"), topic_path(topic), class: "infowindow-readmore btn btn-danger btn-mini" if touch? %>			
 		</div>		
 		<div class="clear"></div>
 	</div>

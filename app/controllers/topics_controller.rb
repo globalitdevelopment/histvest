@@ -142,7 +142,7 @@ class TopicsController < ApplicationController
     title @topic.title
 
     @frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
-    @touch = request.subdomains.first == "touch"
+    @touch = touch?
     if @touch
       layout = false
       action = "show"

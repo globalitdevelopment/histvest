@@ -22,10 +22,10 @@ class WelcomeController < ApplicationController
 
 		@front_page_article = Article.where(article_type: "front_page").first
 
-		# Render the site using the touch layout if the subdomain is touch.		
-		if request.subdomains.first == "touch"
+		# Render the site using the touch layout if the subdomain is touch.				
+		if touch?
 			render "touch_index", layout: "touch"
-		end
+		end		
 	end
 
 	def take_another_topic    
