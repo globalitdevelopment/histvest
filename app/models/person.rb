@@ -70,6 +70,10 @@ class Person < ActiveRecord::Base
 				person.place_of_birth = tr.css('td')[2].text
 				person.description = tr.css('td')[3].text
 				person.location = Location.find_or_create_by! address: tr.css('td')[4].text
+				if person.location.latitude.nil?
+					person.location.geocode
+					person.location.save
+				end
 				person.save!
 			end
 
