@@ -28,6 +28,30 @@ class Reference < ActiveRecord::Base
 
 	before_save :set_data_from_url
 
+	def check_alive		
+		update_columns checked_at: Time.now, is_dead_link: !self.class.check_alive(url)		
+	end
+
+	def self.check_alive(url)
+		uri = URI.parse(url)
+	  response = nil
+
+	  begin
+	    Net::HTTP.start(uri.host, uri.port) do |http|
+	      response = http.head(uri.path.size > 0 ? uri.path : "/")	      
+			  return false if response.code == '404'
+	    end
+	    true
+	  rescue => e 	    
+	    false
+	  end
+	end
+
+	def self.update_url_statuses
+		Reference.where(checked_at: nil).each &:check_alive
+		Reference.where.not(checked_at: nil).order(checked_at: :desc).each &:check_alive
+	end
+
 	private
 		# Creates a Reference from the URL if it is the only available attribute.
 		# Used by topics/new

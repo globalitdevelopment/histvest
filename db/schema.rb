@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219115125) do
+ActiveRecord::Schema.define(version: 20150115122711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 20141219115125) do
     t.integer  "reference_type_id"
     t.integer  "reference_source_id"
     t.integer  "topic_id"
+    t.boolean  "is_dead_link",        default: false
+    t.datetime "checked_at"
   end
 
   add_index "references", ["reference_source_id"], name: "index_references_on_reference_source_id", using: :btree

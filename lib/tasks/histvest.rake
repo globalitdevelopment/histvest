@@ -6,4 +6,10 @@ namespace :histvest do
 		Person.geocode_pending
 	end
 
+	desc 'Check reference links status'
+	task check_reference_links: :environment do
+		puts "Checking link "
+		Referece.update_url_statuses
+	end
+
 end
