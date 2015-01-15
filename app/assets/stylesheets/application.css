@@ -27,6 +27,7 @@ a.add-reference {
 
 /* style for topic page */
 .topic-references li { padding: 0px !important; background: none !important; }
+.topic-references li.dead-link { opacity: 0.5; text-decoration: line-through; }
 .topic-references li img { height: 20px; }
 .container.welcome-text1 {
     border-radius: 6px;
