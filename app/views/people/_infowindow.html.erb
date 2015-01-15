@@ -1,6 +1,6 @@
 <div class="infowindow">	
 	<% people.each_with_index do |person, index| %>
-	<div class="marker-topic <%= index==0 ? 'first' : '' %>" data-url="<%= person.url %>">
+	<div class="marker-topic <%= index==0 ? 'first' : '' %>" data-url="<%= person_path(person.pfid) %>">
 		<h5 class="infowindow-header"><%= person.name %> - <%= person.date_of_birth %></h5>
 		<div class="infowindow-content">
 			<strong><%= location.address %></strong><br>

@@ -13,11 +13,11 @@ class SearchController < ApplicationController
 
 		# there is no option for search from both so need to check in both firstname and lastname
 		Person.search(1, params[:term]).sample(5).each do |r|
-			results << { value: r.name, label: r.name, avatar_path: '/assets/rt-person-icon.png', url: r.url }
+			results << { value: r.name, label: r.name, avatar_path: '/assets/rt-person-icon.png', url: person_path(r.pfid) }
 		end
 
 		Person.search(1, nil, params[:term]).sample(5).each do |r|
-			results << { value: r.name, label: r.name, avatar_path: '/assets/rt-person-icon.png', url: r.url }
+			results << { value: r.name, label: r.name, avatar_path: '/assets/rt-person-icon.png', url: person_path(r.pfid) }
 		end
 
 		respond_to do |format|

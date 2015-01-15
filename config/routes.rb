@@ -23,6 +23,8 @@ Histvest::Application.routes.draw do
     :articles
 
   resources :people, only: [:index]
+  get 'person/:pfid', to: 'people#show', as: :person
+
 
   get 'misc', to: 'misc#index', :as => :misc
   post 'misc/set_article', to: 'misc#set_article' 

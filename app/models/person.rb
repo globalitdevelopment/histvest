@@ -5,8 +5,42 @@ class Person < ActiveRecord::Base
 
 	belongs_to :location
 
-	def url
+	def permalink
+		self.class.permalink(pfid)
+	end
+
+	def self.permalink(pfid)
 		"http://digitalarkivet.arkivverket.no/ft/person/#{pfid}"
+	end
+
+	def self.find_from_census pfid
+		person = find_by pfid: pfid
+		person ||= new_reference_from permalink(pfid)
+		person
+	end
+
+	def self.new_person_from(url)
+		doc = Nokogiri::XML WrapperHelper::fetch_http(url)
+		
+		pfid = get_text_with_label doc, "ID:"
+
+		person = find_by(pfid: pfid)	
+		return person if person
+
+		person = self.new
+		person.pfid = pfid
+		person.name = doc.css("h4")[0].text
+		person.date_of_birth = get_text_with_label doc, "Fødselsdato:"
+		person.place_of_birth = get_text_with_label doc, "Fødested:"
+		person.description = get_text_with_label doc, "Familiestilling:"
+		person.location = Location.find_or_create_by! address: doc.css("table.searchResultTable.bosted td")[1].text		
+		if person.location.latitude.nil?
+			person.location.geocode
+			person.location.save
+		end
+		person.save!
+		
+		person
 	end
 
 	def self.search(page=1, fornavn=nil, etternavn=nil)
@@ -50,6 +84,14 @@ class Person < ActiveRecord::Base
 			location.save
 			sleep 1
 		end
+	end
+
+private
+	
+	def self.get_text_with_label(parser, label)
+		nodes = parser.css('table.infotable td')
+		nodes.each { |td| return nodes[nodes.index(td)+1].text if td.text.strip == label.strip }
+		""
 	end
 
 end

@@ -167,10 +167,11 @@ class @Gmaps4HistVest
         
     togglePeople: =>
         showPeople = @my_map.getZoom() > 13        
-        @people_clusterer.setMap if showPeople then @my_map else null
-        for marker in @markers
-            if marker.type == 'person'
+        @people_clusterer.setMap(if showPeople then @my_map else null) if @people_clusterer?        
+        for marker in @markers            
+            if marker.type == 'person'                
                 if showPeople
                     marker.google_marker.setMap @my_map                    
                 else
                     marker.google_marker.setMap null
+        true

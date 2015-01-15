@@ -1,0 +1,105 @@
+<div class="welcome-text <%= @touch? 'touch' : 'desktop' %>">  
+  <h1>
+    <%= first_word @person.name %>
+    <%= trailing_words @person.name %>
+  </h1>      
+  <div class="button-right">
+    <%= link_to "Folketelling Siden", @person.permalink, :class => 'btn btn-success', :target => :_blank %>    
+  </div>
+  <div>
+    <table width="500" cellpadding="3">
+      <tr>
+        <th width="100">ID:</th>
+        <td><%= @person.pfid %></td>
+      </tr>
+      <tr>
+        <th>Navn:</th>
+        <td><%= @person.name %></td>
+      </tr>
+      <tr>
+        <th>Familiestilling:</th>
+        <td><%= @person.description %></td>
+      </tr>
+      <tr>
+        <th>Fødselsdato:</th>
+        <td><%= @person.date_of_birth %></td>
+      </tr>
+      <tr>
+        <th>Fødested:</th>
+        <td><%= @person.place_of_birth %></td>
+      </tr>
+      <tr>
+        <th>Bosted:</th>
+        <td><%= @person.location.try(:address) %></td>
+      </tr>
+    </table>
+    <br>
+  </div>  
+<% unless @touch %>
+<div id="topics-locations">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.1.2/src/markerclusterer_packed.js" type="text/javascript"></script>
+
+  <script>
+    $(window).load(function(){
+      Gmaps4HistVest.map = new Gmaps4HistVest();
+      Gmaps4HistVest.map.initialize();
+      Gmaps4HistVest.map.markers = <%= @location.html_safe %>;      
+      Gmaps4HistVest.map.create_markers('mouseover');
+      Gmaps4HistVest.map.set_zoom(17);
+      Gmaps4HistVest.map.set_center(new google.maps.LatLng(Gmaps4HistVest.map.markers[0].lat, Gmaps4HistVest.map.markers[0].lng));      
+    });
+  </script>
+
+  <div class="map_container">
+    <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
+  </div>
+</div>
+<% end %>
+
+  <div class="admin-table">
+    <h4><%= I18n.t("comments.comments") %></h4>
+    <div class="social-icon-right">
+      <%= render "/shared/shared_buttons", :share_url => (request.url || "histvest.no").gsub("touch.","") %>
+    </div>
+    <div id="disqus_thread"></div>
+    <% unless request.xhr? %>
+    <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'historiskevestfold'; // required: replace example with your forum shortname
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <% end%>
+    <noscript><%= I18n.t('disqus.no_script', default: 'Please enable JavaScript to view the') %> <a href="http://disqus.com/?ref_noscript"><%= I18n.t("topics.show.comments_powered_by_disqus", :default => "comments powered by Disqus.") %></a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink"><%= I18n.t('disqus.powered_by',default: 'comments powered by') %> <span class="logo-disqus"><%= I18n.t("topics.show.disqus", :default => "Disqus") %></span></a>
+  </div>
+</div>
+
+<% content_for :sidebar do %>
+<div class="map-right-location">
+  <div class="location-hd"><%= I18n.t("topics.form.locations-explanation-header", :default => "Explanation of marker colors") %></div>
+  <table class="location-marker-icons-explanation">
+    <tr>
+      <td>
+        <img src="http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" />
+      </td>
+      <td>
+        <%= I18n.t("topics.form.marker-not-connected-this-topic", :default => "Marker not connect to this topic") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png" />
+      </td>
+      <td>
+        <%= I18n.t("topics.form.marker-connected-this-topic", :default => "Marker is connected to this tema") %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% end %>
