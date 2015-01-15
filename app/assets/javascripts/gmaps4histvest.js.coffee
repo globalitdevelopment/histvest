@@ -11,15 +11,17 @@ class @Gmaps4HistVest
         }
         @my_map = new google.maps.Map(document.getElementById('map'), @my_mapOptions);
         @visible_infowindow = null
-        @bounds_object = new google.maps.LatLngBounds()
-        @people_clusterer = null        
-        @topics_clusterer = null        
+        @bounds_object = new google.maps.LatLngBounds()                
+        @topics_clusterer = null     
+        @people_clusterer = null   
         @touch_version = false
         
         # action when clicking on marker content
         $(document).on('click', '.infowindow .marker-topic[data-url]', ->
             window.location = $(this).data('url') unless $('body').hasClass('touch')
         )
+
+        google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople
 
     extend_bounds_with_objects: (objects) ->
         for obj in objects
@@ -40,8 +42,7 @@ class @Gmaps4HistVest
     adjust_to_bounds_of_related_locations: ->
         related_locations = []
         for marker in @markers
-            related_locations.push marker if marker.belongs_to_current_topic
-        console.log related_locations
+            related_locations.push marker if marker.belongs_to_current_topic        
         if related_locations.length > 1
             @extend_bounds_with_objects(related_locations)
             @set_center(@bounds_object.getCenter())
@@ -107,18 +108,18 @@ class @Gmaps4HistVest
 
     clusterize: ->
         @topics_clusterer.clearMarkers() if @topics_clusterer != null
-        @people_clusterer.clearMarkers() if @people_clusterer != null
+        @people_clusterer.clearMarkers() if @people_clusterer != null        
 
-        topics_array = new Array
+        topics_array = new Array        
         people_array = new Array
 
         for marker in @markers
             marker.google_marker.count = marker.count
             topics_array.push marker.google_marker if marker.type == 'topic'
-            people_array.push marker.google_marker if marker.type == 'person'        
+            people_array.push marker.google_marker if marker.type == 'person'            
 
         @topics_clusterer = @create_clusterer(topics_array, 'topic')
-        @people_clusterer = @create_clusterer(people_array, 'people')        
+        @people_clusterer = @create_clusterer(people_array, 'people')         
 
     create_clusterer: (markers_array, type) ->
         if type == 'people'
@@ -139,18 +140,17 @@ class @Gmaps4HistVest
                 textColor: '#ffffff'                
             }]
         else
-            styles = []
+            styles = []        
         clusterer = new MarkerClusterer(@my_map, markers_array, { 
-            maxZoom: 11, 
-            gridSize: 50, 
-            styles: styles            
+            maxZoom: 15, 
+            gridSize: 25,
+            styles: styles         
         })
         clusterer.setCalculator (markers, numStyles)->
             index = 0
             title = ""
             count = 0            
-            for marker in markers
-                console.log marker
+            for marker in markers                
                 if marker.count
                     count = count + marker.count
                 else
@@ -165,3 +165,12 @@ class @Gmaps4HistVest
             return text: count, index: index, title: title
         clusterer
         
+    togglePeople: =>
+        showPeople = @my_map.getZoom() > 13        
+        @people_clusterer.setMap if showPeople then @my_map else null
+        for marker in @markers
+            if marker.type == 'person'
+                if showPeople
+                    marker.google_marker.setMap @my_map                    
+                else
+                    marker.google_marker.setMap null
