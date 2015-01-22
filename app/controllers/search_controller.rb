@@ -36,9 +36,8 @@ class SearchController < ApplicationController
 				if @results.any?
 					redirect_to @results.first
 				elsif names.any?
-					fornavn, etternavn = Person.parse_name params[:term]
-					census_path(fornavn: fornavn, etternavn: etternavn)			
-					redirect_to "/"
+					fornavn, etternavn = Person.parse_name params[:term]								
+					redirect_to census_path(fornavn: fornavn, etternavn: etternavn)
 				else					
 					redirect_to "/"
 				end 
