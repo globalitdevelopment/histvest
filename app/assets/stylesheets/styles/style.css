@@ -294,6 +294,7 @@ box-shadow: inset 3px 3px 3px #f0f0f0; clear:both;}
 .tbbng .tbs a{padding:0 24px; background:#1a7e24 url(/assets/paging-bg-hover.jpg) repeat-x; color:#fff; border:solid 1px #0b6114; line-height:33px; border-bottom:solid 1px #0b6114;  position:relative; -webkit-border-radius:5px 5px 0 0; -moz-border-radius:5px 5px 0 0; border-radius:5px 5px 0 0; display:inline-block;}
 .tbbng .tbs a:hover, .tbbng .tbs a.active{background:url(/assets/tb-2.gif) repeat-x;  color:#3c3c3c; border-left:solid 1px #d5d5d5; border-right:solid 1px #d5d5d5; border-top:solid 1px #d5d5d5; border-bottom:solid 1px #fafafa;}
 .tbs-cntnt{ clear:both; float:left; width:96.7%; border:solid 1px #d2d2d2; margin:-1px 0 0 0; padding:15px; -webkit-border-radius:0 0 5px 5px; -moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px;}
+.tbs-cntnt.people { float: none; width: auto; }
 .tbs-cntnt table{background:#d2d2d2; }
 .tbs-cntnt tr.odd td{background:#eee;}
 .tbs-cntnt tr.evn td{background:#fff;}

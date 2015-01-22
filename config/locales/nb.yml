@@ -526,3 +526,4 @@ nb:
   will_paginate:
     next_label: Neste
     previous_label: Forrige
+    page_gap: ...

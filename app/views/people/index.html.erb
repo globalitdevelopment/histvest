@@ -1,0 +1,75 @@
+<div class="welcome-text <%= @touch? 'touch' : 'desktop' %>">  
+  <h1>
+    Treffliste: <%= params[:fornavn] %> <%= params[:etternavn] %>
+  </h1>          
+  <p><%= Person.pagination_info %></p>
+<% unless @touch %>
+<div id="topics-locations">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.1.2/src/markerclusterer_packed.js" type="text/javascript"></script>
+
+  <script>
+    $(window).load(function(){
+      Gmaps4HistVest.map = new Gmaps4HistVest();
+      Gmaps4HistVest.map.initialize();
+      Gmaps4HistVest.map.markers = <%= @location.html_safe %>;      
+      Gmaps4HistVest.map.create_markers('mouseover');
+      Gmaps4HistVest.map.set_zoom(17);
+      Gmaps4HistVest.map.set_center(new google.maps.LatLng(Gmaps4HistVest.map.markers[0].lat, Gmaps4HistVest.map.markers[0].lng));      
+    });
+  </script>
+
+  <div class="map_container">
+    <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
+  </div>
+</div>
+<% end %>
+<div id="topics-content" class="tbs-cntnt people">
+    <table width="100%" cellpadding="3" class="census-results">
+      <thead>
+        <tr>
+          <th>Namn</th>
+          <th>Fødselsdato</th>
+          <th>Fødestad</th>
+          <th>Stilling og stand</th>
+        </tr>
+      </thead>      
+      <tbody>
+        <% @results.each do |person| %>
+        <tr>
+          <td><%= link_to person.name, person.permalink, target: :_blank %></td>
+          <td><%= person.date_of_birth %></td>
+          <td><%= person.place_of_birth %></td>
+          <td><%= person.description %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div align="center"><%= will_paginate(@pagination) %></div>
+  </div>    
+</div>
+
+<% content_for :sidebar do %>
+<div class="map-right-location">
+  <div class="location-hd"><%= I18n.t("topics.form.locations-explanation-header", :default => "Explanation of marker colors") %></div>
+  <table class="location-marker-icons-explanation">
+    <tr>
+      <td>
+        <img src="http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" />
+      </td>
+      <td>
+        <%= I18n.t("topics.form.marker-not-connected-this-topic", :default => "Marker not connect to this topic") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png" />
+      </td>
+      <td>
+        <%= I18n.t("topics.form.marker-connected-this-topic", :default => "Marker is connected to this tema") %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% end %>

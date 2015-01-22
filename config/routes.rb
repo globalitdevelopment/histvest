@@ -22,7 +22,7 @@ Histvest::Application.routes.draw do
     :users,
     :articles
 
-  resources :people, only: [:index]
+  get 'census/1910', to: 'people#index', as: :census
   get 'person/:pfid', to: 'people#show', as: :person
 
 

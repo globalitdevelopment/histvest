@@ -12,14 +12,15 @@ class SearchController < ApplicationController
 		end
 
 		# there is no option for search from both so need to check in both firstname and lastname
-		Person.search(1, params[:term]).sample(5).each do |r|
-			label = "#{r.name}, #{r.place_of_birth}, #{r.description}"
-			results << { value: label, label: label, avatar_path: '/assets/rt-person-icon.png', url: person_path(r.pfid) }
-		end
-
-		Person.search(1, nil, params[:term]).sample(5).each do |r|
-			label = "#{r.name}, #{r.place_of_birth}, #{r.description}"
-			results << { value: label, label: label, avatar_path: '/assets/rt-person-icon.png', url: person_path(r.pfid) }
+		firstname, lastname = Person.parse_name params[:term]
+		names = []
+		Person.search(fornavn: firstname).each {|r| names << r.name }
+		Person.search(etternavn: lastname).each {|r| names << r.name }
+		names.uniq!
+		names.sort! {|x,y| x.index(firstname).to_i + x.index(lastname).to_i <=> y.index(firstname).to_i + y.index(lastname).to_i }
+		names[0..10].each do |name|
+			fornavn, etternavn = Person.parse_name name
+			results << { value: name, label: name, avatar_path: '/assets/rt-person-icon.png', url: census_path(fornavn: fornavn, etternavn: etternavn) }
 		end
 
 		respond_to do |format|
@@ -34,7 +35,11 @@ class SearchController < ApplicationController
 			format.html do
 				if @results.any?
 					redirect_to @results.first
-				else
+				elsif names.any?
+					fornavn, etternavn = Person.parse_name params[:term]
+					census_path(fornavn: fornavn, etternavn: etternavn)			
+					redirect_to "/"
+				else					
 					redirect_to "/"
 				end 
 			end
