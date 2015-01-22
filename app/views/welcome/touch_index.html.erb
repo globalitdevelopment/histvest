@@ -11,6 +11,7 @@
     Gmaps4HistVest.map.create_markers('click');
     Gmaps4HistVest.map.adjust_to_bounds();
     Gmaps4HistVest.map.clusterize();
+    Gmaps4HistVest.map.hide_people_on_zoom_out = true;
 
     $(window).resize(function() {
       var mapHeight = $(window).height();

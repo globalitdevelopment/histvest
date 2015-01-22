@@ -24,7 +24,7 @@ class @Gmaps4HistVest
         $(document).on('click', '.infowindow .marker-person[data-url]', ->            
             window.open $(this).data('url') unless $('body').hasClass('touch')
         )
-
+        
         google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople
 
     extend_bounds_with_objects: (objects) ->
@@ -170,6 +170,7 @@ class @Gmaps4HistVest
         clusterer
         
     togglePeople: =>
+        return unless @hide_people_on_zoom_out
         showPeople = @my_map.getZoom() > 13        
         @people_clusterer.setMap(if showPeople then @my_map else null) if @people_clusterer?        
         for marker in @markers            

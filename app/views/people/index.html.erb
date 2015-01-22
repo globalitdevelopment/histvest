@@ -13,9 +13,11 @@
       Gmaps4HistVest.map = new Gmaps4HistVest();
       Gmaps4HistVest.map.initialize();
       Gmaps4HistVest.map.markers = <%= @location.html_safe %>;      
-      Gmaps4HistVest.map.create_markers('mouseover');
-      Gmaps4HistVest.map.set_zoom(17);
-      Gmaps4HistVest.map.set_center(new google.maps.LatLng(Gmaps4HistVest.map.markers[0].lat, Gmaps4HistVest.map.markers[0].lng));      
+      Gmaps4HistVest.map.create_markers('mouseover');      
+      Gmaps4HistVest.map.clusterize();
+      Gmaps4HistVest.map.adjust_to_bounds();
+      //Gmaps4HistVest.map.set_zoom(17);
+      //Gmaps4HistVest.map.set_center(new google.maps.LatLng(Gmaps4HistVest.map.markers[0].lat, Gmaps4HistVest.map.markers[0].lng));
     });
   </script>
 
