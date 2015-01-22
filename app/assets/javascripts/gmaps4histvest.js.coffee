@@ -170,7 +170,7 @@ class @Gmaps4HistVest
         clusterer
         
     togglePeople: =>
-        return unless @hide_people_on_zoom_out
+        return # unless @hide_people_on_zoom_out
         showPeople = @my_map.getZoom() > 13        
         @people_clusterer.setMap(if showPeople then @my_map else null) if @people_clusterer?        
         for marker in @markers            
