@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
 
 	def self.find_from_census pfid
 		person = find_by pfid: pfid
-		person ||= new_reference_from permalink(pfid)
+		person ||= new_person_from permalink(pfid)
 		person
 	end
 
