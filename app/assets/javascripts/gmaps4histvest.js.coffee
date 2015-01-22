@@ -17,8 +17,12 @@ class @Gmaps4HistVest
         @touch_version = false
         
         # action when clicking on marker content
-        $(document).on('click', '.infowindow .marker-topic[data-url]', ->
+        $(document).on('click', '.infowindow .marker-topic[data-url]', ->            
             window.location = $(this).data('url') unless $('body').hasClass('touch')
+        )
+
+        $(document).on('click', '.infowindow .marker-person[data-url]', ->            
+            window.open $(this).data('url') unless $('body').hasClass('touch')
         )
 
         google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople
@@ -57,7 +61,7 @@ class @Gmaps4HistVest
         $(document).on('click', '.infowindow .marker-topic[data-url]', ->
             $(this).find('.infowindow-readmore').trigger 'click'
         )
-        $(".infowindow-readmore").click (e)->                       
+        $(".marker-topic .infowindow-readmore").click (e)->                       
             _this.visible_infowindow.close() if _this.visible_infowindow
             e.preventDefault()
             $.fancybox.showActivity()            

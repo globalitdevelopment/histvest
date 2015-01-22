@@ -1,11 +1,11 @@
 <div class="infowindow">	
 	<% people.each_with_index do |person, index| %>
-	<div class="marker-topic <%= index==0 ? 'first' : '' %>" data-url="<%= person_path(person.pfid) %>">
+	<div class="marker-person <%= index==0 ? 'first' : '' %>" data-url="<%= person.permalink %>">
 		<h5 class="infowindow-header"><%= person.name %> - <%= person.date_of_birth %></h5>
 		<div class="infowindow-content">
 			<strong><%= location.address %></strong><br>
 			<%= person.description %>
-			<%= link_to I18n.t("infowindow.read_more"), person_path(person.pfid), class: "infowindow-readmore btn btn-danger btn-mini" if touch? %>
+			<%= link_to I18n.t("infowindow.read_more"), person.permalink, class: "infowindow-readmore btn btn-danger btn-mini", target: :_blank if touch? %>
 		</div>		
 		<div class="clear"></div>
 	</div>
