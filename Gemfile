@@ -94,3 +94,9 @@ gem "figaro"
 
 # For deployment
 gem "recap"
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap', '3.2.0'
+  gem 'rails-assets-angular', '1.3.9'
+  gem 'rails-assets-leaflet', '0.7.3'  
+end

@@ -58,6 +58,9 @@ Histvest::Application.routes.draw do
   get '/references/numberOfResultsDa/:query', to: 'references#numberOfResultsAr'
 
   get '/search', to: 'search#search'
+
+  get 'v2', to: 'pages#home'
+  get 'v2/topics', to: 'pages#topics'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

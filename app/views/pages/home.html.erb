@@ -1,0 +1,37 @@
+<section ng-app="mapApp" ng-controller="mapCtrl">
+<div class="row">	
+	<div class="col-lg-2 col-md-3 hidden-sm hidden-xs">
+		<header class="clearfix">
+		<h1 class="pull-left">
+			Results
+		</h1>		
+		<div class="btn-group pull-right">
+			<input type="checkbox" ng-model="showTopics" id="show-topics" ng-change="toggleTopics()">
+			<label for="show-topics">Topics</label>
+			<input type="checkbox" ng-model="showPeople" id="show-people" ng-change="togglePeople()">			  
+			<label for="show-people">People</label>
+		</div>
+		</header>
+		<section id="results">
+			<section ng-repeat="location in locations" ng-class="{active: activeLocation.id == location.id}" id="location-{{location.id}}" ng-click="locateMarker(location)">
+				<article ng-repeat="topic in location.topics">
+					<h3>{{topic.title}}</h3>
+					<p>{{location.address}}</p>
+				</article>		
+			</section>
+		</section>
+	</div>
+	<div class="col-lg-10 col-md-9">		
+		<div id="map"></div>
+	</div>	
+</div>
+<div id="topic-popup" style="display: none;">
+	<ol>
+		<li ng-repeat="topic in activeLocation.topics">{{topic.title}}</li>	
+	</ol>
+</div>
+</section>
+
+<% content_for :scripts do %>
+	<%= javascript_include_tag "home" %>
+<% end %>
