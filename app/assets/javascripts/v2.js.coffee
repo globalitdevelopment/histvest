@@ -28,7 +28,8 @@ mapApp = angular.module 'mapApp', []
 
 mapApp.controller 'mapCtrl', ['$scope', '$http', '$templateCache', '$compile', '$timeout', ($scope, $http, $templateCache, $compile, $timeout)->	
 	$scope.showTopics = true
-	$scope.sohwPeople = false
+	$scope.showPeople = true
+	$scope.people = []
 	
 	@prepareMarker = (location)->
 		marker = L.marker [location.latitude, location.longitude], 
@@ -60,7 +61,6 @@ mapApp.controller 'mapCtrl', ['$scope', '$http', '$templateCache', '$compile', '
 		, 1500
 
 	$scope.toggleTopics = -> 		
- 		console.log $scope.locations
  		for location in $scope.locations 		
  			if $scope.showTopics	
  				location.marker.setOpacity 1
@@ -69,6 +69,30 @@ mapApp.controller 'mapCtrl', ['$scope', '$http', '$templateCache', '$compile', '
  				location.marker.setOpacity 0
  				$scope.cluster.removeLayer location.marker
 
+ 	@loadPeople = =>
+    for person in $scope.people
+      map.removeLayer person.marker
+    
+    return false unless $scope.showPeople
+
+    params = 
+      n: map.getBounds().getNorth()
+      s: map.getBounds().getSouth()
+      e: map.getBounds().getEast()
+      w: map.getBounds().getWest()
+      z: map.getZoom()
+    
+    $http.get("/v2/people.json", params: params).success (people)=>
+      $scope.people = people
+      for person in people
+        @personMarker(person)
+
+ 	$scope.togglePeople = =>
+    if $scope.showPeople      
+      @loadPeople()
+    else
+      for person in $scope.people
+	      map.removeLayer person.marker
 
 	$http.get("/v2/topics.json").success (locations)=>
 		$scope.locations = locations		
@@ -77,4 +101,23 @@ mapApp.controller 'mapCtrl', ['$scope', '$http', '$templateCache', '$compile', '
 			$scope.cluster.addLayer @prepareMarker(location)
 
 		map.addLayer $scope.cluster
+
+	@personMarker = (p)->
+    if map.getZoom() < 16
+      marker = L.circleMarker [p.latitude, p.longitude], radius: if p.count < 20 then 20 else p.count/10
+    else
+      marker = L.marker [p.latitude, p.longitude], 
+        title: p.address       
+        riseOnHover: true
+        icon: L.icon iconUrl: '/assets/leaflet/marker-icon.png'
+
+      marker.on 'mouseover', ->         
+        @bindPopup p.people.join('<br>')
+        @openPopup()
+    p.marker = marker
+    marker.addTo map		
+
+	map.on 'zoomend', @loadPeople
+	map.on 'dragend', @loadPeople
+	$timeout @loadPeople
 ]

@@ -15,6 +15,23 @@ class PeopleController < ApplicationController
 		render layout: touch? ? 'touch' : 'public'
 	end
 
+	def combined
+		z = params[:z].to_i
+		p = z/2 - 4		
+
+		if z < 16
+			scope = Person.joins(:location).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params)
+			@data = scope.group("round(latitude::numeric, #{p})").group("round(longitude::numeric, #{p})").count.to_a.map do |r|
+				{ latitude: r[0][0].to_f, longitude: r[0][1].to_f, count: r[1] }
+			end
+		else
+			@data = Location.includes(:people).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params).map do |l|
+				{ latitude: l.latitude, longitude: l.longitude, address: l.address, people: l.people.map(&:name) }
+			end
+		end
+		render json: @data
+	end
+
 	def show
 		@person = Person.find_from_census params[:pfid]
 		@location = @person.location.to_gmaps4rails do |location, marker|

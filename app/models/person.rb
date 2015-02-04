@@ -57,7 +57,7 @@ class Person < ActiveRecord::Base
 			'0711','0712','0713','0714','0715','0716','0717','0718','0719',
 			'0720','0721','0722','0723','0724','0725','0726','0727','0728',
 			'0798']
-		params[:page] = 1
+		params[:page] ||= 1
 		params[:k] = vestfold
 
 		search_url = "http://digitalarkivet.arkivverket.no/ft/sok/1910?#{params.to_query}"
