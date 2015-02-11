@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
 			end
 		else
 			@data = Location.includes(:people).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params).map do |l|
-				{ latitude: l.latitude, longitude: l.longitude, address: l.address, people: l.people.map(&:name) }
+				{ latitude: l.latitude, longitude: l.longitude, address: l.address, people: l.people.map { |p| { name: p.name, url: p.permalink }  } }
 			end
 		end
 		render json: @data

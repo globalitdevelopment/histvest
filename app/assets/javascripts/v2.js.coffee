@@ -111,8 +111,11 @@ mapApp.controller 'mapCtrl', ['$scope', '$http', '$templateCache', '$compile', '
         riseOnHover: true
         icon: L.icon iconUrl: '/assets/leaflet/marker-icon.png'
 
-      marker.on 'mouseover', ->         
-        @bindPopup p.people.join('<br>')
+      marker.on 'mouseover', ->
+        html = []
+        for per in p.people
+          html.push "<a href=\"#{per.url}\" target=\"_blank\">#{per.name}</a>" 
+        @bindPopup html.join('<br>')
         @openPopup()
     p.marker = marker
     marker.addTo map		
