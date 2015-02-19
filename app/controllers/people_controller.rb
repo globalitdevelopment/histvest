@@ -19,7 +19,7 @@ class PeopleController < ApplicationController
 		z = params[:z].to_i
 		p = z/2 - 4		
 
-		if z < 16
+		if z < 15
 			scope = Person.joins(:location).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params)
 			@data = scope.group("round(latitude::numeric, #{p})").group("round(longitude::numeric, #{p})").count.to_a.map do |r|
 				{ latitude: r[0][0].to_f, longitude: r[0][1].to_f, count: r[1] }

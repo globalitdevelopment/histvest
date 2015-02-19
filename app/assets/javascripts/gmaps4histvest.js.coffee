@@ -186,7 +186,7 @@ class @Gmaps4HistVest
 
         $.getJSON "/v2/people.json", params, (res)=>            
             @removeExistingPeople()
-            return if @my_map.getZoom() < 12           
+            return if @my_map.getZoom() < 15           
             radiusMultiplier = 100
             radiusMultiplier = 50 if @my_map.getZoom() > 12
             radiusMultiplier = 25 if @my_map.getZoom() > 14
@@ -209,7 +209,7 @@ class @Gmaps4HistVest
                         description: description.html()
 
                     @create_preview_infowindow(marker, @proper_event)                    
-                else                  
+                else                    
                     google_marker = new google.maps.Circle
                         strokeColor: '#92CD00',
                         strokeOpacity: 0.8,
