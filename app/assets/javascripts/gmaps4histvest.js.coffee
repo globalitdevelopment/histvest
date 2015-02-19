@@ -15,6 +15,8 @@ class @Gmaps4HistVest
         @topics_clusterer = null     
         @people_clusterer = null   
         @touch_version = false
+        @people = []
+        @proper_event = if isTouch? and isTouch then 'click' else 'mouseover'        
         
         # action when clicking on marker content
         $(document).on('click', '.infowindow .marker-topic[data-url]', ->            
@@ -111,44 +113,20 @@ class @Gmaps4HistVest
                 @create_preview_infowindow(@markers[index], eventtype)
 
     clusterize: ->
-        @topics_clusterer.clearMarkers() if @topics_clusterer != null
-        @people_clusterer.clearMarkers() if @people_clusterer != null        
+        @topics_clusterer.clearMarkers() if @topics_clusterer != null        
 
-        topics_array = new Array        
-        people_array = new Array
+        topics_array = new Array                
 
         for marker in @markers
             marker.google_marker.count = marker.count
-            topics_array.push marker.google_marker if marker.type == 'topic'
-            people_array.push marker.google_marker if marker.type == 'person'            
+            topics_array.push marker.google_marker if marker.type == 'topic'            
 
-        @topics_clusterer = @create_clusterer(topics_array, 'topic')
-        @people_clusterer = @create_clusterer(people_array, 'people')         
+        @topics_clusterer = @create_clusterer(topics_array, 'topic')        
 
-    create_clusterer: (markers_array, type) ->
-        if type == 'people'
-            styles = [{
-                url: '/assets/people35.png',
-                height: 35,
-                width: 35,                
-                textColor: '#ff00ff'                
-            }, {
-                url: '/assets/people45.png',
-                height: 45,
-                width: 45,                
-                textColor: '#ff0000'                
-            }, {
-                url: '/assets/people55.png',
-                height: 55,
-                width: 55,                
-                textColor: '#ffffff'                
-            }]
-        else
-            styles = []        
+    create_clusterer: (markers_array, type) ->       
         clusterer = new MarkerClusterer(@my_map, markers_array, { 
             maxZoom: 15, 
-            gridSize: 25,
-            styles: styles         
+            gridSize: 25
         })
         clusterer.setCalculator (markers, numStyles)->
             index = 0
@@ -168,15 +146,67 @@ class @Gmaps4HistVest
             index = Math.min index, numStyles
             return text: count, index: index, title: title
         clusterer
+
+    peopleBindings: =>      
+      google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople      
+
+    removeExistingPeople: =>
+        # remove existing people marker        
+        indexes = []
+        for marker, i in @markers                        
+            if marker.type == 'person' or marker.type == 'people'
+                marker.google_marker.setMap null
+                indexes = []
+
+        @markers.splice i, 1 for i in indexes
         
-    togglePeople: =>
-        return # unless @hide_people_on_zoom_out
-        showPeople = @my_map.getZoom() > 13        
-        @people_clusterer.setMap(if showPeople then @my_map else null) if @people_clusterer?        
-        for marker in @markers            
-            if marker.type == 'person'                
-                if showPeople
-                    marker.google_marker.setMap @my_map                    
-                else
-                    marker.google_marker.setMap null
-        true
+    togglePeople: =>               
+        
+        # load new from server        
+        params = 
+            n: @my_map.getBounds().getNorthEast().lat()
+            s: @my_map.getBounds().getSouthWest().lat()
+            e: @my_map.getBounds().getNorthEast().lng()
+            w: @my_map.getBounds().getSouthWest().lng()
+            z: @my_map.getZoom()
+
+        $.getJSON "/v2/people.json", params, (res)=>            
+            @removeExistingPeople()            
+            radiusMultiplier = 100
+            radiusMultiplier = 50 if @my_map.getZoom() > 12
+            radiusMultiplier = 25 if @my_map.getZoom() > 14
+            for r in res
+                if r['people']
+                    google_marker = new google.maps.Marker
+                        position: new google.maps.LatLng(r.latitude, r.longitude)
+                        map: @my_map
+                        icon: if r.people.length > 1 then "http://www.googlemapsmarkers.com/v1/#{r.people.length}/92CD00/" else "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png"
+
+                    description = $('<div class="infowindow"><h5 class="infowindow-header">'+r.address+'</h5></div>')
+                    for p, pi in r.people
+                        pel = $('<li class="marker-person"></li>');
+                        pel.append('<a class="infowindow-header" href="'+p.url+'" target="_blank">'+p.name+'</a>');
+                        pel.appendTo description
+
+                    marker = 
+                        type: 'person'
+                        google_marker: google_marker
+                        description: description.html()
+
+                    @create_preview_infowindow(marker, @proper_event)
+                    console.log @proper_event
+                else                  
+                    google_marker = new google.maps.Circle
+                        strokeColor: '#92CD00',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#2C6700',
+                        fillOpacity: 0.35,
+                        center: new google.maps.LatLng(r.latitude, r.longitude)
+                        map: @my_map
+                        radius: Math.sqrt(r.count)*radiusMultiplier
+                    marker = 
+                        type: 'people'
+                        google_marker: google_marker
+                @markers.push marker
+                    

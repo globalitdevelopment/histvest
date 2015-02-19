@@ -1,5 +1,3 @@
-#= require jquery
-#= require jquery_ujs
 #= require bootstrap/bootstrap
 #= require angular/angular
 #= require leaflet/leaflet

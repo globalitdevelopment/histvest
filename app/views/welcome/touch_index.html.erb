@@ -6,7 +6,7 @@
   $(window).load(function(){
     Gmaps4HistVest.map = new Gmaps4HistVest();
     Gmaps4HistVest.map.initialize();
-    Gmaps4HistVest.map.markers = <%= @locations.html_safe %>.concat(<%= @people.html_safe %>);
+    Gmaps4HistVest.map.markers = <%= @locations.html_safe %>;
     Gmaps4HistVest.map.touch_version = true;
     Gmaps4HistVest.map.create_markers('click');
     Gmaps4HistVest.map.adjust_to_bounds();

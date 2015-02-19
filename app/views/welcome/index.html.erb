@@ -48,7 +48,7 @@
 				window.location.href = "/search?term="+$('#textfield').val();
 			}
 		});    
-		auto.data("uiAutocomplete")._renderItem = function (ul, item) {  
+		auto.data("ui-autocomplete")._renderItem = function (ul, item) {  
 			return $("<li />")
 				.data("item.autocomplete", item)
 				.append("<a href='"+item.url+"'><img src='" + item.avatar_path + "' /><span style='font-size:18px;line-height:7px;'>" + item.value + "</span></a>")       
@@ -99,14 +99,15 @@
 
 
 	<script>
+	var isTouch = <%= touch? ? 'true' : 'false' %>;
 	$(window).load(function(){
 		Gmaps4HistVest.map = new Gmaps4HistVest();
 		Gmaps4HistVest.map.initialize()
-		Gmaps4HistVest.map.markers = <%= @locations.html_safe %>.concat(<%= @people.html_safe %>)
+		Gmaps4HistVest.map.markers = <%= @locations.html_safe %>
 		Gmaps4HistVest.map.create_markers('mouseover');
 		Gmaps4HistVest.map.adjust_to_bounds();
 		Gmaps4HistVest.map.clusterize();
-		Gmaps4HistVest.map.hide_people_on_zoom_out = true;		
+		Gmaps4HistVest.map.peopleBindings();				
 	});
 	</script>
 
