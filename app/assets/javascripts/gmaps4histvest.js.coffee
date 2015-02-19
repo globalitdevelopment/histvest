@@ -150,15 +150,29 @@ class @Gmaps4HistVest
     peopleBindings: =>      
       google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople      
 
+    togglerBindings: =>
+        $('#show_topics, #show_census').change =>
+            @topics_clusterer.setMap if $('#show_topics').is(':checked') then @my_map else null                        
+            for marker in @markers
+                if marker.type == "topic"
+                    marker.google_marker.setMap if $('#show_topics').is(':checked') then @my_map else null                        
+                if marker.type == 'person' or marker.type == 'people'
+                    marker.google_marker.setMap if $('#show_census').is(':checked') then @my_map else null                        
+            true
+
+        $('#show_topics, #show_census').change()
+
+
+
     removeExistingPeople: =>
         # remove existing people marker        
-        indexes = []
+        indexes = []        
         for marker, i in @markers                        
             if marker.type == 'person' or marker.type == 'people'
                 marker.google_marker.setMap null
-                indexes = []
+                indexes.push i
 
-        @markers.splice i, 1 for i in indexes
+        @markers.splice i, 1 for i in indexes        
         
     togglePeople: =>               
         
@@ -193,8 +207,7 @@ class @Gmaps4HistVest
                         google_marker: google_marker
                         description: description.html()
 
-                    @create_preview_infowindow(marker, @proper_event)
-                    console.log @proper_event
+                    @create_preview_infowindow(marker, @proper_event)                    
                 else                  
                     google_marker = new google.maps.Circle
                         strokeColor: '#92CD00',

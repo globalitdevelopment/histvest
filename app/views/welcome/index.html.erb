@@ -108,10 +108,15 @@
 		Gmaps4HistVest.map.adjust_to_bounds();
 		Gmaps4HistVest.map.clusterize();
 		Gmaps4HistVest.map.peopleBindings();				
+		Gmaps4HistVest.map.togglerBindings();
 	});
 	</script>
 
-	<div class="map_container"> 
+	<div align="right">
+		<label><input type="checkbox" checked="checked" id="show_topics"> Tema</label>
+		<label><input type="checkbox" checked="checked" id="show_census"> Census</label>
+	</div>
+	<div class="map_container"> 		
 	  <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
 	</div>
 	

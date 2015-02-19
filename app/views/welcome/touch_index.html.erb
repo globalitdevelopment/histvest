@@ -11,7 +11,8 @@
     Gmaps4HistVest.map.create_markers('click');
     Gmaps4HistVest.map.adjust_to_bounds();
     Gmaps4HistVest.map.clusterize();
-    Gmaps4HistVest.map.hide_people_on_zoom_out = true;
+    Gmaps4HistVest.map.peopleBindings();        
+    Gmaps4HistVest.map.togglerBindings();
 
     $(window).resize(function() {
       var mapHeight = $(window).height();
@@ -22,6 +23,10 @@
   });
   </script>
 
-  <div class="map_container" style="height: 100%; width: 100%;"> 
+  <div style="position: fixed; top: 5px; right: 100px; z-index: 9999; background: #fff; border: #ddd; padding: 5px;">
+    <label><input type="checkbox" checked="checked" id="show_topics"> Tema</label>
+    <label><input type="checkbox" checked="checked" id="show_census"> Census</label>
+  </div>
+  <div class="map_container" style="height: 100%; width: 100%;">
     <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
   </div>
