@@ -185,7 +185,8 @@ class @Gmaps4HistVest
             z: @my_map.getZoom()
 
         $.getJSON "/v2/people.json", params, (res)=>            
-            @removeExistingPeople()            
+            @removeExistingPeople()
+            return if @my_map.getZoom() < 12           
             radiusMultiplier = 100
             radiusMultiplier = 50 if @my_map.getZoom() > 12
             radiusMultiplier = 25 if @my_map.getZoom() > 14
