@@ -22,7 +22,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/histvest
-//= stub v2
 //= require_tree .
 
 

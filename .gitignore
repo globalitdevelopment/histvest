@@ -32,3 +32,4 @@
 
 #Ignore image storage folder
 public/system
+public/assets
