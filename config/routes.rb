@@ -59,8 +59,8 @@ Histvest::Application.routes.draw do
 
   get '/search', to: 'search#search'
 
-  get 'v2', to: 'pages#home'
-  get 'v2/topics', to: 'pages#topics'
+  #get 'v2', to: 'pages#home'
+  #get 'v2/topics', to: 'pages#topics'
   get 'v2/people', to: 'people#combined'
   
   # The priority is based upon order of creation:
