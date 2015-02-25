@@ -51,7 +51,6 @@ gem "uglifier"
 
 
 #Various frontend
-gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "rails-backbone"
 gem "bootstrap-sass", "~> 3.2.0"
@@ -95,6 +94,8 @@ gem "figaro"
 gem "recap"
 
 source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery', '1.11.2'
+  gem 'rails-assets-jquery-ujs', '1.0.3'
   gem 'rails-assets-bootstrap', '3.2.0'
   gem 'rails-assets-angular', '1.3.9'
   gem 'rails-assets-leaflet', '0.7.3'

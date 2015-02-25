@@ -1,3 +1,3 @@
 //= require_self
-//= require jquery
-//= require jquery_ujs
+//= require jquery/jquery
+//= require jquery-ujs/rails
