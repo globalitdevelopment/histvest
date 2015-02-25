@@ -145,8 +145,8 @@ class @Gmaps4HistVest
             return text: count, index: index, title: title
         clusterer
 
-    peopleBindings: =>      
-      google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople      
+    peopleBindings: =>            
+      google.maps.event.addListener @my_map, 'bounds_changed', @togglePeople            
 
     togglerBindings: =>
         $('#show_topics, #show_census').change =>
