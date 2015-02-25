@@ -26,8 +26,6 @@ class @Gmaps4HistVest
         $(document).on('click', '.infowindow .marker-person[data-url]', ->            
             window.open $(this).data('url') unless $('body').hasClass('touch')
         )
-        
-        google.maps.event.addListener @my_map, 'zoom_changed', @togglePeople
 
     extend_bounds_with_objects: (objects) ->
         for obj in objects
@@ -174,8 +172,7 @@ class @Gmaps4HistVest
 
         @markers.splice i, 1 for i in indexes        
         
-    togglePeople: =>               
-        
+    togglePeople: =>             
         # load new from server        
         params = 
             n: @my_map.getBounds().getNorthEast().lat()
