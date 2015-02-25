@@ -29,7 +29,7 @@
   });
 </script>
 
-<%= tinymce_assets %>
+<%= javascript_include_tag 'wysiwyg' %>
 <%= form_for @article, :html => {:multipart => true} do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">

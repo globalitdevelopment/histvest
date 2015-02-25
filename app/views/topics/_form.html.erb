@@ -15,7 +15,7 @@
     margin-bottom: 10px;
   }
 </style>
-<%= tinymce_assets %>
+<%= javascript_include_tag 'wysiwyg' %>
 <%= form_for @topic, :html => {:multipart => true} do |f| %>
   <% if @topic.errors.any? %>
     <div id="error_explanation">
