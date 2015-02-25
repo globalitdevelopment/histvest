@@ -146,7 +146,8 @@ class @Gmaps4HistVest
         clusterer
 
     peopleBindings: =>            
-      google.maps.event.addListener @my_map, 'bounds_changed', @togglePeople            
+      google.maps.event.addListener @my_map, 'bounds_changed', =>
+        setTimeout @togglePeople, 500
 
     togglerBindings: =>
         $('#show_topics, #show_census').change =>
@@ -181,7 +182,8 @@ class @Gmaps4HistVest
             w: @my_map.getBounds().getSouthWest().lng()
             z: @my_map.getZoom()
 
-        $.getJSON "/v2/people.json", params, (res)=>            
+        @peopleMutax.abort() if @peopleMutax?
+        @peopleMutax = $.getJSON "/v2/people.json", params, (res)=>            
             @removeExistingPeople()
             return if @my_map.getZoom() < 15           
             radiusMultiplier = 100
