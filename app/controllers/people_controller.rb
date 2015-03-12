@@ -4,20 +4,20 @@ class PeopleController < ApplicationController
 
 	def index
 		@results = Person.search params.permit(:fornavn, :etternavn, :page)
-		by_locations = @results.group_by(&:location_id)	
+		by_locations = @results.group_by(&:location_id)
 		@location = Location.where(id: by_locations.keys).to_gmaps4rails do |location, marker|
 			people = by_locations[location.id]
 			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => people, :location => location })
 			marker.picture picture: people.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{people.size}/009900/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png"
 			marker.json type: :person, count: people.size
-		end		
+		end
 		@pagination = WillPaginate::Collection.create(params[:page]||1, 50, Person.total_records) { |pager| pager.replace @results }
 		render layout: touch? ? 'touch' : 'public'
 	end
 
 	def combined
 		z = params[:z].to_i
-		p = z/2 - 4		
+		p = z/2 - 4
 
 		if z < 15
 			scope = Person.joins(:location).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params)
@@ -25,7 +25,7 @@ class PeopleController < ApplicationController
 				{ latitude: r[0][0].to_f, longitude: r[0][1].to_f, count: r[1] }
 			end
 		else
-			@data = Location.includes(:people).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params).map do |l|
+			@data = Location.joins(:people).includes(:people).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params).map do |l|
 				{ latitude: l.latitude, longitude: l.longitude, address: l.address, people: l.people.map { |p| { name: p.name, url: p.permalink }  } }
 			end
 		end
@@ -38,7 +38,7 @@ class PeopleController < ApplicationController
 			marker.infowindow render_to_string(:partial => "/people/infowindow", :locals => { :people => location.people, :location => location })
 			marker.picture picture: location.people.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.people.size}/009900/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png"
 			marker.json type: :person, count: location.people.count
-		end		
+		end
 		render layout: touch? ? 'touch' : 'public'
 	end
 
