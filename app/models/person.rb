@@ -106,7 +106,7 @@ class Person < ActiveRecord::Base
 				pool = [:yandex, :google, :ovi, :esri]
 				chosen_one = pool.sample
 				puts "Using #{chosen_one} for geocoding"
-				Geocoder.configure lookup: chosen_one
+				Geocoder.configure lookup: chosen_one			
 			end
 			location.save
 			sleep 1 # most of lookup service limit 1 request/second
