@@ -97,11 +97,19 @@ class Person < ActiveRecord::Base
 	end
 
 	def self.geocode_pending
-		Location.where(id: self.pluck(:location_id).uniq).untagged.each do |location|
+		Geocoder.configure(:always_raise => [Geocoder::OverQueryLimitError])
+		Location.where(id: self.pluck(:location_id).uniq).untagged.find_each do |location|
 			puts "geocoding #{location.address}"
-			location.geocode
+			begin
+				location.geocode
+			rescue Geocoder::OverQueryLimitError
+				pool = [:yandex, :google, :ovi, :esri]
+				chosen_one = pool.sample
+				puts "Using #{chosen_one} for geocoding"
+				Geocoder.configure lookup: chosen_one
+			end
 			location.save
-			sleep 1
+			sleep 1 # most of lookup service limit 1 request/second
 		end
 	end
 
