@@ -30,3 +30,10 @@ namespace :env do
     default
   end
 end
+
+set :whenever_command, "bundle exec whenever"
+set :latest_release, fetch(:deploy_to)
+
+before "deploy:update_code", "whenever:clear_crontab"
+after "deploy:tag", "whenever:update_crontab"
+after "deploy:rollback", "whenever:update_crontab"
