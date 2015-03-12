@@ -21,10 +21,10 @@ class Person < ActiveRecord::Base
 
 	def self.new_person_from(url)
 		doc = Nokogiri::XML WrapperHelper::fetch_http(url)
-		
+
 		pfid = get_text_with_label doc, "ID:"
 
-		person = find_by(pfid: pfid)	
+		person = find_by(pfid: pfid)
 		return person if person
 
 		person = self.new
@@ -33,13 +33,13 @@ class Person < ActiveRecord::Base
 		person.date_of_birth = get_text_with_label doc, "Fødselsdato:"
 		person.place_of_birth = get_text_with_label doc, "Fødested:"
 		person.description = get_text_with_label doc, "Familiestilling:"
-		person.location = Location.find_or_create_by! address: doc.css("table.searchResultTable.bosted td")[1].text		
+		person.location = Location.find_or_create_by! address: doc.css("table.searchResultTable.bosted td")[1].text
 		if person.location.latitude.nil?
 			person.location.geocode
 			person.location.save
 		end
 		person.save!
-		
+
 		person
 	end
 
@@ -64,11 +64,11 @@ class Person < ActiveRecord::Base
 		puts search_url
 		doc = Nokogiri::XML(WrapperHelper::fetch_http(search_url))
 
-		@@pagination_info = doc.css(".resultTablePage .comment.standalone").first.text		
+		@@pagination_info = doc.css(".resultTablePage .comment.standalone").first.text
 		doc.css("table.searchResultTable tbody tr").map do |tr|
 			pfid = tr.css('td a')[0].attribute('href').value.scan(/pf\d+/).first
 			person = Person.find_by(pfid: pfid)
-			
+
 			unless person
 				person = self.new
 				person.pfid = pfid
@@ -106,7 +106,7 @@ class Person < ActiveRecord::Base
 	end
 
 private
-	
+
 	def self.get_text_with_label(parser, label)
 		nodes = parser.css('table.infotable td')
 		nodes.each { |td| return nodes[nodes.index(td)+1].text if td.text.strip == label.strip }

@@ -12,4 +12,18 @@ namespace :histvest do
 		Referece.update_url_statuses
 	end
 
+	desc 'Task to crawl census and have more data'
+	task search_more_people: :environment do
+		names = Person.distinct.where("random() < 0.1").limit(10).pluck :name
+		names.each do |fullname|
+			fornavn, etternavn = Person.parse_name fullname
+			(1..20).each do |page|
+				break if Person.search(fornavn: fornavn, page: page).empty?
+			end
+			(1..20).each do |page|
+				break if Person.search(etternavn: etternavn, page: page).empty?
+			end
+		end
+	end
+
 end
