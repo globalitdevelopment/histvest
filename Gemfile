@@ -18,7 +18,7 @@ gem "protected_attributes"
 
 group :development, :test do
   # Testing (rspec)
-  
+
   gem "rspec-rails"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
@@ -38,7 +38,7 @@ group :test do
   gem "capybara"
   gem "factory_girl_rails"
   gem "fakeweb"
-end	
+end
 
 # Analyzes code coverage
 gem "simplecov", :require => false, :group => :test
@@ -56,7 +56,7 @@ gem "rails-backbone"
 gem "bootstrap-sass", "~> 3.2.0"
 gem "fancybox-rails"
 
-#Data grid 
+#Data grid
 gem "datagrid"
 gem "bson_ext"
 gem "fastercsv"
@@ -92,6 +92,7 @@ gem "figaro"
 
 # For deployment
 gem "recap"
+gem 'whenever', '~> 0.9.4'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'
@@ -99,5 +100,5 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap', '3.2.0'
   gem 'rails-assets-angular', '1.3.9'
   gem 'rails-assets-leaflet', '0.7.3'
-  gem 'rails-assets-froala-wysiwyg', '1.2.5'  
+  gem 'rails-assets-froala-wysiwyg', '1.2.5'
 end

@@ -1,4 +1,5 @@
 require 'recap/recipes/rails'
+require "whenever/capistrano"
 require 'yaml'
 
 set :application, 'histvest'
