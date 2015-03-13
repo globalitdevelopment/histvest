@@ -5,6 +5,11 @@ class Person < ActiveRecord::Base
 
 	belongs_to :location
 
+	VESTFOLD = [ '0701','0702','0703','0704','0705','0706','0707',
+		'0711','0712','0713','0714','0715','0716','0717','0718','0719',
+		'0720','0721','0722','0723','0724','0725','0726','0727','0728',
+		'0798']
+
 	def permalink
 		self.class.permalink(pfid)
 	end
@@ -53,12 +58,8 @@ class Person < ActiveRecord::Base
 	end
 
 	def self.search(params = {})
-		vestfold = [ '0701','0702','0703','0704','0705','0706','0707',
-			'0711','0712','0713','0714','0715','0716','0717','0718','0719',
-			'0720','0721','0722','0723','0724','0725','0726','0727','0728',
-			'0798']
 		params[:page] ||= 1
-		params[:k] ||= vestfold
+		params[:k] ||= VESTFOLD
 
 		search_url = "http://digitalarkivet.arkivverket.no/ft/sok/1910?#{params.to_query}"
 		puts search_url
@@ -76,11 +77,7 @@ class Person < ActiveRecord::Base
 				person.date_of_birth = tr.css('td')[1].text
 				person.place_of_birth = tr.css('td')[2].text
 				person.description = tr.css('td')[3].text
-				person.location = Location.find_or_create_by! address: tr.css('td')[4].text
-				if person.location.latitude.nil?
-					person.location.geocode
-					person.location.save
-				end
+				person.location = Location.find_or_create_by! address: tr.css('td')[4].text				
 				person.save!
 			end
 
@@ -106,7 +103,7 @@ class Person < ActiveRecord::Base
 				pool = [:yandex, :google, :ovi, :esri]
 				chosen_one = pool.sample
 				puts "Using #{chosen_one} for geocoding"
-				Geocoder.configure lookup: chosen_one			
+				Geocoder.configure lookup: chosen_one
 			end
 			location.save
 			sleep 1 # most of lookup service limit 1 request/second
