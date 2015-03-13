@@ -25,6 +25,7 @@ namespace :histvest do
 				break if Person.search(etternavn: etternavn, page: page, k: regions).empty?
 			end
 		end
+		Person.geocode_pending
 	end
 
 end
