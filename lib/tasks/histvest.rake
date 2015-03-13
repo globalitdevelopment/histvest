@@ -17,11 +17,12 @@ namespace :histvest do
 		names = Person.distinct.where("random() < 0.1").limit(10).pluck :name
 		names.each do |fullname|
 			fornavn, etternavn = Person.parse_name fullname
+			regions = Person::VESTFOLD.sample(5)
 			(1..20).each do |page|
-				break if Person.search(fornavn: fornavn, page: page).empty?
+				break if Person.search(fornavn: fornavn, page: page, k: regions).empty?
 			end
 			(1..20).each do |page|
-				break if Person.search(etternavn: etternavn, page: page).empty?
+				break if Person.search(etternavn: etternavn, page: page, k: regions).empty?
 			end
 		end
 	end
