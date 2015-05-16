@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
-ruby '2.1.0'
+ruby '2.1.6'
 
 # Webserver, rails etc
 gem "thin"
-gem 'rails', '~> 4.1.4'
+gem 'rails', '~> 4.1.10'
 gem "rb-readline"
 gem "rake"
 
