@@ -1,12 +1,9 @@
 source "https://rubygems.org"
 
-ruby '2.1.0'
+ruby '2.1.6'
 
 # Webserver, rails etc
-gem "thin"
 gem 'rails', '~> 4.1.4'
-gem "rb-readline"
-gem "rake"
 
 #Database
 gem "pg"
@@ -40,15 +37,11 @@ group :test do
   gem "fakeweb"
 end
 
-# Analyzes code coverage
-gem "simplecov", :require => false, :group => :test
-
 # Gems used only for assets and not required
 # in production environments by default.
 gem "sass-rails", ">= 3.2"
 gem "coffee-rails"
 gem "uglifier"
-
 
 #Various frontend
 gem "jquery-ui-rails"
@@ -58,7 +51,6 @@ gem "fancybox-rails"
 
 #Data grid
 gem "datagrid"
-gem "bson_ext"
 gem "fastercsv"
 gem "jeweler"
 gem "will_paginate"
@@ -93,6 +85,7 @@ gem "figaro"
 # For deployment
 gem "recap"
 gem 'whenever', '~> 0.9.4'
+gem 'unicorn'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'
