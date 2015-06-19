@@ -1,0 +1,24 @@
+---
+- name: histvest
+  hosts: prototype
+  sudo: yes
+  remote_user: loken
+  vars_files:
+    - secrets.yml
+
+  vars:
+    username: histvest
+    distro: Ubuntu 12.04
+    domain: histvest.no
+    rails_env: production
+    application: histvest
+    databases:
+      - histvest_dev
+      - histvest_production
+      - histvest_test
+
+  roles:
+    - base
+    - postgresql
+    - ruby
+    - nginx

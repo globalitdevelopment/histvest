@@ -1,0 +1,16 @@
+---
+
+- name: install nginx
+  sudo: true
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+    - nginx
+    - nginx-extras
+
+- name: copy vhost config
+  sudo: true
+  template: src=../files/default.j2 dest=/etc/nginx/sites-enabled/default owner=root group=root mode=0655
+
+- name: reload nginx
+  sudo: true
+  command: service nginx restart

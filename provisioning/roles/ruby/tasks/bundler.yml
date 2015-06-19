@@ -1,0 +1,13 @@
+---
+- name: install bundler
+  sudo: true
+  command: gem install bundler
+
+- name: Bundler | change bundler path
+  sudo: true
+  lineinfile:
+    "dest=/var/www/{{domain}}/.bundle/config
+    state=present
+    create=yes
+    line='BUNDLE_PATH: /home/{{username}}/.bundler' "
+  tags: bundler

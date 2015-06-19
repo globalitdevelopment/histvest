@@ -1,0 +1,28 @@
+---
+- name: install basic packages
+  sudo: true
+  apt: pkg={{ item }} state=latest install_recommends=no update_cache=yes
+  with_items:
+    - build-essential
+    - git
+    - python-pycurl
+    - python-software-properties
+    - curl
+    - libssl-dev
+    - libyaml-dev
+    - libsqlite3-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - libcurl4-openssl-dev
+    - ntp
+    - imagemagick
+
+- name: update apt repo
+  sudo: true
+  tags: upgrade
+  apt: update_cache=yes
+
+- name: upgrade apt packages
+  sudo: true
+  apt: upgrade=safe
+  tags: upgrade
