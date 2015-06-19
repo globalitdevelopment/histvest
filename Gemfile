@@ -86,6 +86,7 @@ gem "figaro"
 gem "recap"
 gem 'whenever', '~> 0.9.4'
 gem 'unicorn'
+gem 'dotenv'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'

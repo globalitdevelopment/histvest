@@ -81,6 +81,7 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.19)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.0.1)
     ejs (1.1.1)
     enumerize (0.8.0)
       activesupport (>= 3.2)
@@ -360,6 +361,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   datagrid
+  dotenv
   enumerize
   factory_girl_rails
   fakeweb
