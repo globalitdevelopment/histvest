@@ -5,6 +5,8 @@ ruby '2.1.6'
 # Webserver, rails etc
 gem 'rails', '~> 4.1.4'
 
+gem 'actionpack-action_caching'
+
 #Database
 gem "pg"
 gem "database_cleaner"
