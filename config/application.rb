@@ -58,7 +58,7 @@ module Histvest
     #config.cache_store = :dalli_store
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.action_mailer.default_url_options =  { :host => ENV["HOST"] }
+    config.action_mailer.default_url_options =  { :host => 'histvest.no' }
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
@@ -66,12 +66,12 @@ module Histvest
    
     config.action_mailer.smtp_settings = {   
       :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,      
-      :ssl => ENV['SMTP_SSL']=='true',
-      :enable_starttls_auto => ENV['SMTP_TLS']=='true',  #this is the important stuff!
-      :address        => ENV['SMTP_HOST'],
-      :port           => ENV['SMTP_PORT'].to_i,
-      :domain         => ENV['SMTP_DOMAIN'],
-      :authentication => ENV['SMTP_AUTH'],
+      :ssl => true,
+      :enable_starttls_auto => true,  #this is the important stuff!
+      :address        => 'smtp.domain.no',
+      :port           => 465,
+      :domain         => 'domain.no',
+      :authentication => 'plain',
       :user_name      => ENV['SMTP_USER'],
       :password       => ENV['SMTP_PASS']
     }
