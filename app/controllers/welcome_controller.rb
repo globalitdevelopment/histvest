@@ -6,12 +6,12 @@ class WelcomeController < ApplicationController
 		@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10).to_a
 		@topics = Topic.listed
 
-		@rand_topic = Topic.listed.sample
+		@rand_topic = @topics.sample
 
-		@locations = Location.includes(:topics).joins(:topics).merge(Topic.listed).to_gmaps4rails do |location, marker|												
+		@locations = Location.includes(:topics).joins(:topics).merge(@topics).to_gmaps4rails do |location, marker|												
 			marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics.map { |t| Topic.working_version(t) } })
 			marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")				
-			marker.json type: :topic, count: location.topics.count
+			marker.json type: :topic, count: location.topics.size
 		end				
 
 		@front_page_article = Article.where(article_type: "front_page").first
