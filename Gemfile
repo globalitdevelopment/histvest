@@ -89,6 +89,7 @@ gem "recap"
 gem 'whenever', '~> 0.9.4'
 gem 'unicorn'
 gem 'dotenv'
+gem 'newrelic_rpm'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'
