@@ -38,7 +38,7 @@
     font-weight: normal;
     font-style: normal;}
 * {margin:0; padding:0;}
-body {background:asset-url('body-bg.jpg') repeat top center; margin:0; padding:0; font-size:12px; font-family:'LucidaGrandeRegular', Arial, Helvetica, sans-serif; color:#333333; text-decoration:none;}
+body {background:image-url('body-bg.jpg') repeat top center; margin:0; padding:0; font-size:12px; font-family:'LucidaGrandeRegular', Arial, Helvetica, sans-serif; color:#333333; text-decoration:none;}
 
 .left {float:left;}
 .right {float:right;}
@@ -66,7 +66,7 @@ h2 {line-height:20px; font-size:24px; color:#35a641; font-family: 'zurich_bdxcn_
 /*-------------COMMEN CSS END HERE-------------*/
 
 #main-wrapper {width:100%;}
-#top-wrapper {background:asset-url('top-bg.jpg') repeat-x top; height:145px; width:100%;}
+#top-wrapper {background:image-url('top-bg.jpg') repeat-x top; height:145px; width:100%;}
 #midd-wrapper {width:1000px; margin:0 auto;}
 #midd-wrapper li a {text-decoration: none;}
 #bottom-wrapper {width:1000px; margin:0 auto;}
