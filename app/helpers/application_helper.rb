@@ -9,7 +9,7 @@ module ApplicationHelper
 	end
 
 	def icon(name, opts = {})
-    image_tag "#{name}.png", opts
+    raw image_tag("#{name}.png", opts)
 	end
 
 	# Used for nested forms. Calls the method in application.js
