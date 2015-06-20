@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
 		if !t.avatar.nil? && !t.avatar.avatar_img.nil? 
 		 x << t.avatar.avatar_img.url(:thumb)
 		else
-		 x << "/assets/no-image.png"
+		 x << image_path("no-image.png")
 		end
 		if !t.id.nil?
 		  x << t.id

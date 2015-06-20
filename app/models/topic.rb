@@ -105,7 +105,7 @@ class Topic < ActiveRecord::Base
 		if has_avatar?
 			self.avatar.avatar_img.url(size)
 		else
-			"/assets/upload-img.gif"
+			image_path("/assets/upload-img.gif")
 		end
 	end
 

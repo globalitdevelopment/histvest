@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="right-image"><%= !@topic.nil? && !@topic.avatar.nil? && !@topic.avatar.avatar_img.nil? ? image_tag(@topic.avatar.avatar_img.url(:medium)) : image_tag("/assets/no-image.png") %>
+    <div class="right-image"><%= !@topic.nil? && !@topic.avatar.nil? && !@topic.avatar.avatar_img.nil? ? image_tag(@topic.avatar.avatar_img.url(:medium)) : image_tag("no-image.png") %>
     </div>
     <div class="topic-content"><p><%= raw @topic.content %></p></div>
     <div class="ref-list admin-table">

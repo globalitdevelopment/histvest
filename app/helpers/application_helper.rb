@@ -8,8 +8,8 @@ module ApplicationHelper
 		end
 	end
 
-	def icon(name)
-		raw('<img src="/assets/'+name+'.png" />')
+	def icon(name, opts = {})
+    image_tag "#{name}.png", opts
 	end
 
 	# Used for nested forms. Calls the method in application.js

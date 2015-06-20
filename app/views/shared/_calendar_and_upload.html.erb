@@ -19,7 +19,7 @@
         </span>
         <span class="publish-calendar">
           <%= f.text_field :published_start, :value => params[:action]=='edit' && !entity.published_start.nil? ? entity.published_start.strftime('%d.%m.%Y %H:%M') : '', :class => 'form-control' %>
-          <img src="/assets/cal-icon.png" id="pub_start" class="cal-icon1" alt="">
+          <%= image_tag 'cal-icon.png', id: "pub_start", class: 'cal-icon1' %>
         </span>
       </li>
       <li>
@@ -28,7 +28,7 @@
         </span>
         <span class="publish-calendar">
           <%= f.text_field :published_end, :value => params[:action]=='edit' && !entity.published_end.nil? ? entity.published_end.strftime('%d.%m.%Y %H:%M') : '', :class => 'form-control' %>
-          <img src="/assets/cal-icon.png" id="pub_end" class="cal-icon1" alt="">
+          <%= image_tag 'cal-icon.png', id: "pub_end", class: 'cal-icon1' %>
         </span>
       </li>
       <% if entity_name == 'topic' && (can? :verify, Topic) %>
@@ -41,7 +41,7 @@
   </div>
   <div class="upload-images">
     <div class="upload-img-div" id="upload-img-div">
-      <%= !entity.nil? && !entity.avatar.nil? && !entity.avatar.avatar_img.nil? ? image_tag(entity.avatar.avatar_img.url(:thumb), :width => 100, :height => 100) : image_tag('/assets/upload-img.gif', :width => 100, :height => 100) %>
+      <%= !entity.nil? && !entity.avatar.nil? && !entity.avatar.avatar_img.nil? ? image_tag(entity.avatar.avatar_img.url(:thumb), :width => 100, :height => 100) : image_tag('upload-img.gif', :width => 100, :height => 100) %>
     </div>
     <div>
       <% avatar_name = entity.avatar.avatar_img_file_name if entity && entity.avatar && entity.avatar.avatar_img %>

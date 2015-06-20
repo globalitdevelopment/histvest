@@ -1,5 +1,5 @@
 <% if @rand_topic%>
-  <h3><%=@rand_topic.title%> <%= link_to image_tag("/assets/refresh-icon-green.jpg", width: "18",  height: "15"), take_another_topic_path, remote: true %></h3>
+  <h3><%=@rand_topic.title%> <%= link_to image_tag("refresh-icon-green.jpg", width: "18",  height: "15"), take_another_topic_path, remote: true %></h3>
   <p>
 <%
 	if (!@rand_topic.nil? && !@rand_topic.avatar.nil? && !@rand_topic.avatar.avatar_img.nil?)

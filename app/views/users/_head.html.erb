@@ -1,16 +1,16 @@
 <% if params[:user_report] &&  params[:user_report][:descending].to_s == "false"%>
-  <% up_arrow_img = image_tag("/assets/arrow-down-h.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+  <% up_arrow_img = image_tag("arrow-down-h.png") %>
+  <% down_arrow_img = image_tag("arrow-down.png") %>
 <% elsif params[:user_report] &&  params[:user_report][:descending].to_s == "true"%>
-  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-up-h.png") %>
+  <% up_arrow_img = image_tag("arrow-up.png") %>
+  <% down_arrow_img = image_tag("arrow-up-h.png") %>
 <% else %>
-  <% up_arrow_img = image_tag("/assets/arrow-up.png") %>
-  <% down_arrow_img = image_tag("/assets/arrow-down.png") %>
+  <% up_arrow_img = image_tag("arrow-up.png") %>
+  <% down_arrow_img = image_tag("arrow-down.png") %>
 <% end %>
 
-<% up_img = image_tag("/assets/arrow-up.png") %>
-<% down_img = image_tag("/assets/arrow-down.png") %>
+<% up_img = image_tag("arrow-up.png") %>
+<% down_img = image_tag("arrow-down.png") %>
 
 <tr>   
   <th width="3%" class="even">

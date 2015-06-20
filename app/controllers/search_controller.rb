@@ -20,7 +20,7 @@ class SearchController < ApplicationController
 		names.sort! {|x,y| x.index(firstname).to_i + x.index(lastname).to_i <=> y.index(firstname).to_i + y.index(lastname).to_i }
 		names[0..10].each do |name|
 			fornavn, etternavn = Person.parse_name name
-			results << { value: name, label: name, avatar_path: '/assets/rt-person-icon.png', url: census_path(fornavn: fornavn, etternavn: etternavn) }
+			results << { value: name, label: name, avatar_path: image_path('rt-person-icon.png'), url: census_path(fornavn: fornavn, etternavn: etternavn) }
 		end
 
 		respond_to do |format|
@@ -28,7 +28,7 @@ class SearchController < ApplicationController
 				if results.size > 0
 					render json: results
 				else
-					render json: [{id: nil, value: I18n.t('seach.no_results'), label: I18n.t('seach.no_results'), avatar_path: "/assets/rt-ukjent-icon.png"}].to_json
+					render json: [{id: nil, value: I18n.t('seach.no_results'), label: I18n.t('seach.no_results'), avatar_path: image_path("rt-ukjent-icon.png")}].to_json
 				end
 			end
 

@@ -1,13 +1,13 @@
 <div class="footer-new">
 	<div class="foot-wrap">
 		<div class="foot-top">
-			<div class="foot-logo"><a href="#" title=""><img src="/assets/footer-logo.jpg" alt=""></a></div>
+			<div class="foot-logo"><%= link_to image_tag('footer-logo.jpg'), root_path %></div>
 			<div class="foot-logo-rght-txt"><a target="_blank" href="http://www.tonsberg.folkebibl.no/" title=""><%= I18n.t("shared.footer.tønsberg_and_notteroy_bibliotek", :default => "Tønsberg & Nøtterøy bibliotek") %></a></div>
 			<div class="foot-logo-rght-txt foot-mid-txt">
 				<%= I18n.t("shared.footer.about_histvest", :default => "Historiske Vestfold er en tjeneste levert av Vestfoldbibliotekene. Portalen gir en geografisk innfallsvinkel til lokalhistorie i Vestfoldt.") %></div>
 				<div class="foot-social-icons">
 					<a href="https://www.facebook.com/Vestfoldbibliotekene" title="">
-						<img src="/assets/facebook-icon.jpg" alt="" />
+						<%= image_tag 'facebook-icon.jpg' %>
 					</a> 
 					<span><%= I18n.t("shared.footer.follow_us_on", :default => "Follow us on") %></span>
 				</div>
