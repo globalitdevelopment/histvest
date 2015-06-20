@@ -14,7 +14,6 @@
 #
 
 class Topic < ActiveRecord::Base
-
 	has_paper_trail :if => Proc.new { |t| t.published }
 	
 	belongs_to :user
@@ -105,7 +104,7 @@ class Topic < ActiveRecord::Base
 		if has_avatar?
 			self.avatar.avatar_img.url(size)
 		else
-			image_path("/assets/upload-img.gif")
+			ActionController::Base.helpers.image_path("upload-img.gif")
 		end
 	end
 
