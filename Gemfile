@@ -79,6 +79,7 @@ gem "paperclip"
 #gem "rmagick"
 gem "truncate_html"
 # Memcached
+gem 'dalli'
 gem "jbuilder"
 
 # to manage configurations

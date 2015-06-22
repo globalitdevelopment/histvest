@@ -16,6 +16,7 @@
     - libcurl4-openssl-dev
     - ntp
     - imagemagick
+    - memcached
 
 - name: update apt repo
   sudo: true
