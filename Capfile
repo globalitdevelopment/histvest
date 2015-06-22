@@ -9,6 +9,13 @@ task :production do
   server '185.35.184.76', :app
 end
 
+namespace :deploy do 
+  task :clear_cache do 
+    as_app 'bundle exec rake tmp:clear'
+  end
+end
+after 'deploy:restart', 'deploy:clear_cache'
+
 namespace :unicorn do
   desc "Zero-downtime restart of Unicorn"
   task :restart, :except => { :no_release => true } do
