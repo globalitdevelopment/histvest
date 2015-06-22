@@ -93,23 +93,25 @@
 </form>
 
 <div class="map" style="width: 735px;" id="map_div">    
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=mapLoad"></script>
 	<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.1.2/src/markerclusterer_packed.js" type="text/javascript"></script>
 
 
 
 	<script>
 	var isTouch = <%= touch? ? 'true' : 'false' %>;
-	$(window).load(function(){
+	var mapLoad = function() {
 		Gmaps4HistVest.map = new Gmaps4HistVest();
-		Gmaps4HistVest.map.initialize()
-		Gmaps4HistVest.map.markers = <%= @locations.html_safe %>
-		Gmaps4HistVest.map.create_markers('mouseover');
-		Gmaps4HistVest.map.adjust_to_bounds();
-		Gmaps4HistVest.map.clusterize();
-		Gmaps4HistVest.map.peopleBindings();				
-		Gmaps4HistVest.map.togglerBindings();
-	});
+		Gmaps4HistVest.map.initialize();
+		$.getJSON('/home-topics.json', function(data) {
+			Gmaps4HistVest.map.markers = data;
+			Gmaps4HistVest.map.create_markers('mouseover');
+			Gmaps4HistVest.map.adjust_to_bounds();
+			Gmaps4HistVest.map.clusterize();
+			Gmaps4HistVest.map.peopleBindings();				
+			Gmaps4HistVest.map.togglerBindings();
+		});
+	};
 	</script>
 
 	<div align="right">
