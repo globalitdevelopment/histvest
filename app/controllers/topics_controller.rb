@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :get_topic_with_latlng, :show_topic_in_touch]
   before_filter :save_in_locations, :only => [:create, :update]
 
-  caches_action :show, expires_in: 10.minutes, cache_path: Proc.new {{ touch: touch? }} 
+  caches_action :show, expires_in: 10.minutes, cache_path: Proc.new {{ touch: touch?, format: params[:format] }} 
 
   # GET /topics
   # GET /topics.json

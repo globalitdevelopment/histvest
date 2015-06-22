@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 	layout 'public'
 	respond_to :js, :only => [:take_another_topic]
 
-	caches_action :index, expires_in: 10.minutes, cache_path: Proc.new {{ touch: touch? }} 
+	caches_action :index, expires_in: 10.minutes, cache_path: Proc.new {{ touch: touch?, format: params[:format] }} 
 
 	def index
 		@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10).to_a
