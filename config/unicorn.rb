@@ -5,6 +5,8 @@ pid "tmp/unicorn.pid"
 GC.respond_to?(:copy_on_write_friendly=) and GC.copy_on_write_friendly = true
 check_client_connection false
 
+listen "unix:#{Dir.pwd}/tmp/sockets/unicorn.sock"
+
 stderr_path "log/unicorn.log"
 stdout_path "log/unicorn.log"
 
