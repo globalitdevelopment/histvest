@@ -25,6 +25,7 @@ group :development, :test do
   gem "guard-spork"
   gem "spork"
   gem "quiet_assets"
+  gem 'simplecov'
 
   # Annotate model files with fields
   gem "annotate"
