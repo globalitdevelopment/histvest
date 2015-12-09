@@ -5,10 +5,10 @@ pid "tmp/unicorn.pid"
 GC.respond_to?(:copy_on_write_friendly=) and GC.copy_on_write_friendly = true
 check_client_connection false
 
-listen "unix:#{Dir.pwd}/tmp/sockets/unicorn.sock"
+listen "unix:/tmp/unicorn.sock", backlog: 2048
 
-stderr_path "log/unicorn.log"
-stdout_path "log/unicorn.log"
+#stderr_path "log/unicorn.log"
+#stdout_path "log/unicorn.log"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
