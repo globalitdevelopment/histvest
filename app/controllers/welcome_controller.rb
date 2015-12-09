@@ -2,8 +2,6 @@ class WelcomeController < ApplicationController
 	layout 'public'
 	respond_to :js, :only => [:take_another_topic]
 
-	caches_action :index, expires_in: 10.minutes, cache_path: Proc.new {{ touch: touch?, format: params[:format] }} 
-
 	def index
 		respond_to do |format|
 			format.json {
