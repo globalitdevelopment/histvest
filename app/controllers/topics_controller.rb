@@ -145,7 +145,10 @@ class TopicsController < ApplicationController
 
   def locations
     @all_locations = Location.joins(:topics).includes(topics: :avatar).merge(Topic.published).to_gmaps4rails do |location, marker|
-      marker.infowindow render_to_string(:partial => "/welcome/infowindow", formats: [:html], :locals => { :topics => location.topics })
+      last_modified = location.topics.map(&:updated_at).max
+      marker.infowindow Rails.cache.fetch("infowindow_#{location.id}_#{last_modified}", expires_in: 1.hour) {
+        render_to_string(:partial => "/welcome/infowindow", formats: [:html], :locals => { :topics => location.topics })
+      }
 
       topic_belongs = false
       location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }

@@ -8,8 +8,11 @@ class WelcomeController < ApplicationController
 				if stale? etag: Topic.maximum(:updated_at), last_modified: Topic.maximum(:updated_at), public: true
 					@topics = Topic.listed
 					
-					@locations = Location.includes(topics: :avatar).merge(@topics).to_gmaps4rails do |location, marker|
-						marker.infowindow render_to_string(:partial => "/welcome/infowindow.html", format: :html, :locals => { :topics => location.topics.map { |t| Topic.working_version(t) } })
+					@locations = Location.joins(:topics).includes(topics: :avatar).merge(@topics).to_gmaps4rails do |location, marker|
+						last_modified = location.topics.map(&:updated_at).max
+			      marker.infowindow Rails.cache.fetch("infowindow_#{location.id}_#{last_modified}", expires_in: 1.hour) {
+			        render_to_string(:partial => "/welcome/infowindow.html", format: :html, :locals => { :topics => location.topics })
+			      }
 						marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")				
 						marker.json type: :topic, count: location.topics.size
 					end
