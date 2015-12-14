@@ -57,11 +57,13 @@
     $(window).load(function(){
       Gmaps4HistVest.map = new Gmaps4HistVest();
       Gmaps4HistVest.map.initialize();
-      Gmaps4HistVest.map.markers = <%= @all_locations.html_safe %>;
-      Gmaps4HistVest.map.set_zoom(12);
-      Gmaps4HistVest.map.create_markers('mouseover');
-      Gmaps4HistVest.map.adjust_to_bounds_of_related_locations();
-      Gmaps4HistVest.map.clusterize();
+      $.getJSON('/topics/<%= @topic.id %>/locations.json', function(data) {
+        Gmaps4HistVest.map.markers = data;
+        Gmaps4HistVest.map.set_zoom(12);
+        Gmaps4HistVest.map.create_markers('mouseover');
+        Gmaps4HistVest.map.adjust_to_bounds_of_related_locations();
+        Gmaps4HistVest.map.clusterize();
+      });
     });
   </script>
 

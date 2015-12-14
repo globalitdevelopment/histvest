@@ -18,9 +18,12 @@ Histvest::Application.routes.draw do
     :reference_sources,
     :reference_types,
     :locations,
-    :topics,
     :users,
     :articles
+
+  resources :topics do
+    get :locations, on: :member
+  end
 
   get 'census/1910', to: 'people#index', as: :census
   get 'person/:pfid', to: 'people#show', as: :person
