@@ -115,8 +115,19 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-  	@topic_locations = []
-	  @all_locations = Location.joins(:topics).merge(Topic.published).to_gmaps4rails do |location, marker|
+    begin
+      @topic = Topic.includes(:locations, :references).find params[:id]
+      @topic = Topic.working_version(@topic) if !@topic.published and (params[:moderation].nil? or current_user.nil?)
+
+      raise Exception.new if @topic.nil?
+      raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
+    rescue Exception => e
+      flash[:danger] = I18n.t('topics.topic_not_published')
+      redirect_to Topic
+      return
+    end
+
+    @all_locations = Location.joins(:topics).includes(topics: :avatar).merge(Topic.published).to_gmaps4rails do |location, marker|
       marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics })
 
       topic_belongs = false
@@ -128,18 +139,6 @@ class TopicsController < ApplicationController
         marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")
         marker.json(belongs_to_current_topic: false)
       end
-    end
-
-    begin
-      @topic = Topic.includes(:locations, :references).find params[:id]
-      @topic = Topic.working_version(@topic) if !@topic.published and (params[:moderation].nil? or current_user.nil?)
-
-      raise Exception.new if @topic.nil?
-      raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
-    rescue Exception => e
-      flash[:danger] = I18n.t('topics.topic_not_published')
-      redirect_to Topic
-      return
     end
 
     title @topic.title
