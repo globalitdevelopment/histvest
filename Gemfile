@@ -91,6 +91,7 @@ gem "recap"
 gem 'whenever', '~> 0.9.4'
 gem 'unicorn'
 gem 'dotenv'
+gem 'foreman'
 gem 'newrelic_rpm'
 
 source 'https://rails-assets.org' do

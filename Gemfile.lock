@@ -84,7 +84,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.19)
+    domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.0.2)
     ejs (1.1.1)
@@ -107,6 +107,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    foreman (0.78.0)
+      thor (~> 0.19.1)
     formatador (0.2.5)
     geocoder (1.2.12)
     git (1.2.9.1)
@@ -340,7 +342,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     unicorn (5.0.1)
       kgio (~> 2.6)
       rack
@@ -377,6 +379,7 @@ DEPENDENCIES
   fancybox-rails
   fastercsv
   figaro
+  foreman
   geocoder
   gmaps4rails (= 1.5.6)
   guard-rspec
