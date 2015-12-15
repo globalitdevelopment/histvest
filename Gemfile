@@ -1,18 +1,17 @@
 source "https://rubygems.org"
 
-ruby '2.1.6'
+ruby '2.1.7'
 
 # Webserver, rails etc
-gem "thin"
-gem 'rails', '~> 4.1.10'
-gem "rb-readline"
-gem "rake"
+gem 'rails', '~> 4.1.4'
+
+gem 'actionpack-action_caching'
 
 #Database
 gem "pg"
 gem "database_cleaner"
 gem "pg_search"
-gem 'paper_trail', '~> 3.0.6'
+gem 'paper_trail', '~> 4.0.1'
 gem "enumerize"
 gem "protected_attributes"
 
@@ -26,6 +25,7 @@ group :development, :test do
   gem "guard-spork"
   gem "spork"
   gem "quiet_assets"
+  gem 'simplecov'
 
   # Annotate model files with fields
   gem "annotate"
@@ -40,15 +40,11 @@ group :test do
   gem "fakeweb"
 end
 
-# Analyzes code coverage
-gem "simplecov", :require => false, :group => :test
-
 # Gems used only for assets and not required
 # in production environments by default.
 gem "sass-rails", ">= 3.2"
 gem "coffee-rails"
 gem "uglifier"
-
 
 #Various frontend
 gem "jquery-ui-rails"
@@ -58,7 +54,6 @@ gem "fancybox-rails"
 
 #Data grid
 gem "datagrid"
-gem "bson_ext"
 gem "fastercsv"
 gem "jeweler"
 gem "will_paginate"
@@ -85,6 +80,7 @@ gem "paperclip"
 #gem "rmagick"
 gem "truncate_html"
 # Memcached
+gem 'dalli'
 gem "jbuilder"
 
 # to manage configurations
@@ -93,6 +89,10 @@ gem "figaro"
 # For deployment
 gem "recap"
 gem 'whenever', '~> 0.9.4'
+gem 'unicorn'
+gem 'dotenv'
+gem 'foreman'
+gem 'newrelic_rpm'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'

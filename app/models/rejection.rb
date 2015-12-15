@@ -7,8 +7,8 @@
 #  user_id    :integer
 #  reason     :text
 #  unchanged  :boolean          default(TRUE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class Rejection < ActiveRecord::Base

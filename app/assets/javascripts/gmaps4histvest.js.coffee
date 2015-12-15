@@ -6,8 +6,9 @@ class @Gmaps4HistVest
 
     initialize: ->
         @my_mapOptions = {
-            zoom: 11,
+            zoom: 9,
             mapTypeId: google.maps.MapTypeId.ROADMAP
+            center: new google.maps.LatLng(59.30937138116806, 10.254896900000062)
         }
         @my_map = new google.maps.Map(document.getElementById('map'), @my_mapOptions);
         @visible_infowindow = null

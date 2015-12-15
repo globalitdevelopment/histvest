@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id             :integer          not null, primary key
+#  location_id    :integer
+#  pfid           :string(255)
+#  name           :string(255)
+#  date_of_birth  :string(255)
+#  place_of_birth :string(255)
+#  description    :string(255)
+#
+
 require 'nokogiri'
 require 'uri'
 

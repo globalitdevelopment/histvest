@@ -18,9 +18,12 @@ Histvest::Application.routes.draw do
     :reference_sources,
     :reference_types,
     :locations,
-    :topics,
     :users,
     :articles
+
+  resources :topics do
+    get :locations, on: :member
+  end
 
   get 'census/1910', to: 'people#index', as: :census
   get 'person/:pfid', to: 'people#show', as: :person
@@ -114,6 +117,7 @@ Histvest::Application.routes.draw do
   # just remember to delete public/index.html.
   
   root :to => 'welcome#index'
+  get 'home-topics', to: 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
   # This is a legacy wild controller route that's not recommended for RESTful applications.

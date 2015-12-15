@@ -5,13 +5,34 @@ require 'yaml'
 set :application, 'histvest'
 set :repository, 'https://github.com/globalitdevelopment/histvest.git'
 
-server '185.35.184.76', :app
+task :production do
+  server '185.35.184.76', :app
+end
 
-namespace :deploy do
-  task :restart do
-    as_app 'touch tmp/restart.txt'
+namespace :deploy do 
+  task :clear_cache do 
+    as_app 'bundle exec rake tmp:clear'
   end
 end
+after 'deploy:restart', 'deploy:clear_cache'
+
+namespace :unicorn do
+  desc "Zero-downtime restart of Unicorn"
+  task :restart, :except => { :no_release => true } do
+    as_app "kill -s USR2 `cat tmp/unicorn.pid`"
+  end
+
+  desc "Start unicorn"
+  task :start, :except => { :no_release => true } do
+    as_app "bundle exec unicorn -c config/unicorn.rb -D"
+  end
+
+  desc "Stop unicorn"
+  task :stop, :except => { :no_release => true } do
+    as_app "kill -s QUIT `cat tmp/unicorn.pid`"
+  end
+end
+after 'deploy:restart', 'unicorn:restart'
 
 namespace :env do
   task :set_figaro do

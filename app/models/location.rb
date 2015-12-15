@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  address    :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #  latitude   :float
 #  longitude  :float
 #  gmaps      :boolean

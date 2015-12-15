@@ -50,25 +50,26 @@
 
 <% unless @touch %>
 <div id="topics-locations">
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
-
-  <script>
-    $(window).load(function(){
-      Gmaps4HistVest.map = new Gmaps4HistVest();
-      Gmaps4HistVest.map.initialize();
-      Gmaps4HistVest.map.markers = <%= @all_locations.html_safe %>;
-      Gmaps4HistVest.map.set_zoom(12);
-      Gmaps4HistVest.map.create_markers('mouseover');
-      Gmaps4HistVest.map.adjust_to_bounds_of_related_locations();
-      Gmaps4HistVest.map.clusterize();
-    });
-  </script>
-
   <div class="map_container">
     <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"></div>
   </div>
 </div>
+<script>
+function mapLoad() {
+  Gmaps4HistVest.map = new Gmaps4HistVest();
+  Gmaps4HistVest.map.initialize();
+  $.getJSON('/topics/<%= @topic.id %>/locations.json', function(data) {
+    Gmaps4HistVest.map.markers = data;
+    Gmaps4HistVest.map.set_zoom(12);
+    Gmaps4HistVest.map.create_markers('mouseover');
+    Gmaps4HistVest.map.adjust_to_bounds_of_related_locations();
+    Gmaps4HistVest.map.clusterize();
+  });
+}
+
+</script>
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.1.2/src/markerclusterer_packed.js" type="text/javascript"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDKN-34cs1baWHGc8qPX0CKEKCQDasyWFE&callback=mapLoad"></script>
 <% end %>
 
   <div class="admin-table">

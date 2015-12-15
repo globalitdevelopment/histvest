@@ -19,6 +19,7 @@
 /.rvmrc
 /.idea
 /.idea/*.
+/provisioning/secrets.yml
 
 # Ignore application configuration
 /config/application.yml

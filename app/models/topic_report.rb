@@ -19,6 +19,6 @@ class TopicReport < BaseReport
 			reason = recent_rejected.reason.blank? ? I18n.t('topics.reason',:default=>"(not specified)") : recent_rejected.reason
 			html += image_tag("icon-disconnect.png",:alt=>reason, :title=>reason) 
 		end
-		html
+		raw html
 	}
 end

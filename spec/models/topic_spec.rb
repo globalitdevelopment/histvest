@@ -5,8 +5,8 @@
 #  id              :integer          not null, primary key
 #  title           :string(255)
 #  content         :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  user_id         :integer
 #  published       :boolean
 #  published_start :datetime

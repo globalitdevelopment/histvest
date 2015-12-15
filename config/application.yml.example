@@ -1,13 +1,5 @@
-HOST: "www.histvest.no"
 LOCALE_APP_KEY: 'place locale app key here'
 EUROPEANA_KEY: "your key here"
-SMTP_HOST: "smtp.domain.no"
-SMTP_PORT: 465
-SMTP_SSL: true
-SMTP_TTL: true
-SMTP_AUTH: 'plain'
-SMTP_DOMAIN: "domain.no"
 SMTP_USER: "noreply@domain.no"
 SMTP_PASS: "password"
-DATABASE_USERNAME: "histvest"
 DATABASE_PASSWORD: "somepassword"

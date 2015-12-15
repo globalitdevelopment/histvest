@@ -5,8 +5,8 @@
 #  id              :integer          not null, primary key
 #  title           :string(255)
 #  content         :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  user_id         :integer
 #  published       :boolean
 #  published_start :datetime
@@ -14,7 +14,6 @@
 #
 
 class Topic < ActiveRecord::Base
-
 	has_paper_trail :if => Proc.new { |t| t.published }
 	
 	belongs_to :user
@@ -52,15 +51,10 @@ class Topic < ActiveRecord::Base
 	validates :content,
 		presence: true
 
-	scope :listed, -> {
+	scope :published, -> {
 		where("(published_start <= ? and published_end >= ?) or	(published_end IS NULL and published_start IS NULL)", Time.now, Time.now)
-		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object LIKE '%published: true%')", true)		
+		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object->>'published' = 'true')", true)		
 	}
-
-	def self.published		
-		where("(published_start <= ? and published_end >= ?) or	(published_end IS NULL and published_start IS NULL)", Time.now, Time.now)
-		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object LIKE '%published: true%')", true)		
-	end
 
 	def published?
 		# not published if only start or end date is defined
@@ -75,13 +69,12 @@ class Topic < ActiveRecord::Base
 			)
 	end	
 
-	def self.working_version(topic)
-		return topic if topic.published
-		begin			
-			prev = topic.previous_version			
-			return prev if prev.published
-		end while !prev.nil?
-		topic
+	def published_version
+		if published
+			self
+		else
+			versions.where("object->>'published' = 'true'").last.try(:reify)
+		end
 	end
 
 	def to_param
@@ -105,7 +98,7 @@ class Topic < ActiveRecord::Base
 		if has_avatar?
 			self.avatar.avatar_img.url(size)
 		else
-			"/assets/upload-img.gif"
+			ActionController::Base.helpers.image_path("upload-img.gif")
 		end
 	end
 

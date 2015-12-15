@@ -1,19 +1,19 @@
 @font-face {
 	font-family: 'LucidaGrandeBold';
-	src: url('lucida_grande_bold-webfont.eot');
-	src: local('?'), url('lucida_grande_bold-webfont.woff') format('woff'), 
-		 url('lucida_grande_bold-webfont.ttf') format('truetype'), 
-		 url('lucida_grande_bold-webfont.svg#webfontrcRHLZxO') format('svg');
+	src: asset-url('lucida_grande_bold-webfont.eot');
+	src: local('?'), asset-url('lucida_grande_bold-webfont.woff') format('woff'), 
+		 asset-url('lucida_grande_bold-webfont.ttf') format('truetype'), 
+		 asset-url('lucida_grande_bold-webfont.svg#webfontrcRHLZxO') format('svg');
 	     font-weight: normal;
 	     font-style: normal;
 }
 @font-face {
     font-family: 'zurich_bdxcn_btbold';
-    src: url('zurchbxc-webfont.eot');
-    src: url('zurchbxc-webfont.eot?#iefix') format('embedded-opentype'),
-         url('zurchbxc-webfont.woff') format('woff'),
-         url('zurchbxc-webfont.ttf') format('truetype'),
-         url('zurchbxc-webfont.svg#zurich_bdxcn_btbold') format('svg');
+    src: asset-url('zurchbxc-webfont.eot');
+    src: asset-url('zurchbxc-webfont.eot?#iefix') format('embedded-opentype'),
+         asset-url('zurchbxc-webfont.woff') format('woff'),
+         asset-url('zurchbxc-webfont.ttf') format('truetype'),
+         asset-url('zurchbxc-webfont.svg#zurich_bdxcn_btbold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -21,27 +21,27 @@
 
 @font-face {
 	font-family: 'LucidaGrandeRegular';
-	src: url('lucida_grande-webfont.eot');
-	src: local('?'), url('lucida_grande-webfont.woff') format('woff'), 
-	     url('lucida_grande-webfont.ttf') format('truetype'), 
-		 url('lucida_grande-webfont.svg#webfontGb0zqiBX') format('svg');
+	src: asset-url('lucida_grande-webfont.eot');
+	src: local('?'), asset-url('lucida_grande-webfont.woff') format('woff'), 
+	     asset-url('lucida_grande-webfont.ttf') format('truetype'), 
+		 asset-url('lucida_grande-webfont.svg#webfontGb0zqiBX') format('svg');
 	     font-weight: normal;
 	     font-style: normal;
 }
 
 @font-face {
     font-family: 'oldnewspapertypesregular';
-    src: url('oldnewspapertypes.eot');
-    src: url('oldnewspapertypes.eot?#iefix') format('embedded-opentype'),
-         url('oldnewspapertypes.woff') format('woff'),
-         url('oldnewspapertypes.ttf') format('truetype'),
-         url('oldnewspapertypes.svg#oldnewspapertypesregular') format('svg');
+    src: asset-url('oldnewspapertypes.eot');
+    src: asset-url('oldnewspapertypes.eot?#iefix') format('embedded-opentype'),
+         asset-url('oldnewspapertypes.woff') format('woff'),
+         asset-url('oldnewspapertypes.ttf') format('truetype'),
+         asset-url('oldnewspapertypes.svg#oldnewspapertypesregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 
-html, body { background:url(/assets/main-bg.gif) repeat; margin:0 0 10px 0; font-family:'LucidaGrandeRegular', Arial, Helvetica, sans-serif !important; font-size:12px; padding:0;}
+html, body { background:image-url('main-bg.gif') repeat; margin:0 0 10px 0; font-family:'LucidaGrandeRegular', Arial, Helvetica, sans-serif !important; font-size:12px; padding:0;}
 ul, ol, li, h1, h2, h3, h4, h5, h6 { margin:0; padding:0;}
 img { border:0; outline:0; border:none; outline:none;}
 ol, ul, li { list-style-type:none;}
@@ -53,7 +53,7 @@ a { text-decoration:none; border:0; outline:0; border:none; outline:none;}
 .right { float:right !important;}
 h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif !important; font-size:36px; font-weight:normal;}
 
-#wrapper { background:url(/assets/top-black.gif) repeat-x 0 0; width:100%; float:left;}
+#wrapper { background:image-url('top-black.gif') repeat-x 0 0; width:100%; float:left;}
 #container { width:1000px; margin:0 auto;}
 #main-left { width:740px; float:left;}
 #main-class { width:100%; float:left;}
@@ -65,19 +65,19 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 
 #main-right { width:235px; float:right; margin-top:38px;}
 .login { width:100%; float:left; background:#fff; border:1px solid #ccc; -moz-border-radius:5px; border-radius:5px; }
-.log-black { background:url(/assets/log-black.gif) repeat-x 0 0; -moz-border-radius:4px 4px 0 0; height:31px; color:#fff; line-height:31px; border-radius:4px 4px 0 0; width:220px; font-size:13px; float:left; font-family: 'LucidaGrandeBold', Arial, Helvetica, sans-serif !important; padding:0 0 0 15px;}
-.login input { margin-bottom:10px; background:url(/assets/search-input-bg.gif) no-repeat 0 0; width:195px; border:none; float:left; height:27px; line-height:27px; color:#7e7e7e; font-size:11px; padding:0 0 0 10px;}
+.log-black { background:image-url('log-black.gif') repeat-x 0 0; -moz-border-radius:4px 4px 0 0; height:31px; color:#fff; line-height:31px; border-radius:4px 4px 0 0; width:220px; font-size:13px; float:left; font-family: 'LucidaGrandeBold', Arial, Helvetica, sans-serif !important; padding:0 0 0 15px;}
+.login input { margin-bottom:10px; background:image-url('search-input-bg.gif') no-repeat 0 0; width:195px; border:none; float:left; height:27px; line-height:27px; color:#7e7e7e; font-size:11px; padding:0 0 0 10px;}
 .login form { padding:10px 0 0 15px; display:inline-block;}
 .remem { float:left; width:100%;}
 .remem input { float:left; width:14px; height:14px; margin:2px 0 0 0; padding:0; border:none; background:none;}
 .remem label { color:#7e7e7e; font-size:11px; padding:0 0 0 10px; float:left;}
-.remem .submit { cursor:pointer; padding:0; background:url(/assets/green-bg.gif) repeat-x ; width:50px; height:27px; -moz-border-radius:3px; border-radius:3px; border-right:1px solid #197a24; border-left:1px solid #197a24; color:#fff; font-size:13px; margin:8px 0 15px 0; padding:0 0 5px 0;}
+.remem .submit { cursor:pointer; padding:0; background:image-url('green-bg.gif') repeat-x ; width:50px; height:27px; -moz-border-radius:3px; border-radius:3px; border-right:1px solid #197a24; border-left:1px solid #197a24; color:#fff; font-size:13px; margin:8px 0 15px 0; padding:0 0 5px 0;}
 
 .main-search { margin-bottom:18px; width:100%; float:left; background:#fff; border:1px solid #ccc; -moz-border-radius:5px; border-radius:5px; }
-/*.search-part { background:url(/assets/red-line.gif) repeat-x 0 0; -moz-border-radius:4px 4px 0 0; line-height:13px; height:33px; color:#fff; border-radius:4px 4px 0 0; width:220px; font-size:12px; float:left; font-family: 'LucidaGrandeBold', Arial, Helvetica, sans-serif !important; padding:4px 0 0 15px;} */
-.main-search input { margin-bottom:10px; background:url(/assets/search-input-bg-1.gif) no-repeat; width:170px; border:none; float:left; height:27px; line-height:27px; color:#7e7e7e; font-size:11px; padding:0 0 0 10px;}
+/*.search-part { background:image-url(/assets/red-line.gif) repeat-x 0 0; -moz-border-radius:4px 4px 0 0; line-height:13px; height:33px; color:#fff; border-radius:4px 4px 0 0; width:220px; font-size:12px; float:left; font-family: 'LucidaGrandeBold', Arial, Helvetica, sans-serif !important; padding:4px 0 0 15px;} */
+.main-search input { margin-bottom:10px; background:image-url('search-input-bg-1.gif') no-repeat; width:170px; border:none; float:left; height:27px; line-height:27px; color:#7e7e7e; font-size:11px; padding:0 0 0 10px;}
 .main-search form { padding:10px 0 0 15px; display:inline-block;}
-.main-search .submit { background:url(/assets/green-bg-1.gif) no-repeat right; width:25px; height:27px; float:left; margin:0px 0 0 0px;}
+.main-search .submit { background:image-url('green-bg-1.gif') no-repeat right; width:25px; height:27px; float:left; margin:0px 0 0 0px;}
 .line-h { line-height:27px;}
 
 .top-table { width:100%; float:left;}
@@ -105,7 +105,7 @@ h1 { color:#35a641; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-s
 .right-image img {border:1px solid #ccc;}
 .ref-list {float:left; margin: 0 0 20px 0;}
 .ref-list ul {margin: 0px; padding:0px; float:left;}
-.ref-list li {margin: 0px; padding:0 0 0 14px; list-style: none; background:url(/assets/arrow-black.png) no-repeat 0px 4px;}
+.ref-list li {margin: 0px; padding:0 0 0 14px; list-style: none; background:image-url('arrow-black.png') no-repeat 0px 4px;}
 .ref-list li a {text-decoration: underline;}
 .ref-list li a:hover {text-decoration: none;}
 

@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource :only => [:index, :new, :create, :edit, :update, :destroy, :batch_actions]
-  before_filter :authenticate_user!, :except => [:show, :get_topic_with_latlng, :show_topic_in_touch]
+  before_filter :authenticate_user!, :except => [:show, :locations, :get_topic_with_latlng, :show_topic_in_touch]
   before_filter :save_in_locations, :only => [:create, :update]
 
   # GET /topics
@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
 		if !t.avatar.nil? && !t.avatar.avatar_img.nil? 
 		 x << t.avatar.avatar_img.url(:thumb)
 		else
-		 x << "/assets/no-image.png"
+		 x << ActionController::Base.helpers.image_path("no-image.png")
 		end
 		if !t.id.nil?
 		  x << t.id
@@ -112,24 +112,10 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-  	@topic_locations = []
-	  @all_locations = Location.joins(:topics).merge(Topic.published).to_gmaps4rails do |location, marker|
-      marker.infowindow render_to_string(:partial => "/welcome/infowindow", :locals => { :topics => location.topics })
-
-      topic_belongs = false
-      location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }
-      if topic_belongs
-        marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/6991FD/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png")
-        marker.json(belongs_to_current_topic: true)
-      else
-        marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")
-        marker.json(belongs_to_current_topic: false)
-      end
-    end
 
     begin
       @topic = Topic.includes(:locations, :references).find params[:id]
-      @topic = Topic.working_version(@topic) if !@topic.published and (params[:moderation].nil? or current_user.nil?)
+      @topic = @topic.published_version if !@topic.published and (params[:moderation].nil? or current_user.nil?)
 
       raise Exception.new if @topic.nil?
       raise Exception.new if !@topic.published and (params[:moderation].nil? or current_user.nil?)
@@ -138,7 +124,7 @@ class TopicsController < ApplicationController
       redirect_to Topic
       return
     end
-
+  
     title @topic.title
 
     @frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
@@ -151,11 +137,32 @@ class TopicsController < ApplicationController
       action = "show"
     end
 
-    set_cache_buster
-    
     respond_to do |format|
       format.html {render :layout => layout, :action => action }
       format.json { render json: @topic.to_json(:include => [:locations, :references]) }
+    end
+  end
+
+  def locations
+    @topic = Topic.find params[:id]
+    if stale? etag: @topic, last_modified: @topic.updated_at, public: true
+      @all_locations = Location.joins(:topics).includes(topics: :avatar).merge(Topic.published).to_gmaps4rails do |location, marker|
+        last_modified = location.topics.map(&:updated_at).max
+        marker.infowindow Rails.cache.fetch("infowindow_#{location.id}_#{last_modified}", expires_in: 1.hour) {
+          render_to_string(:partial => "/welcome/infowindow", formats: [:html], :locals => { :topics => location.topics.map(&:published_version).compact })
+        }
+
+        topic_belongs = false
+        location.topics.each { |topic| topic_belongs = true if topic.to_param == params[:id] || topic.id.to_s == params[:id] }
+        if topic_belongs
+          marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/6991FD/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png")
+          marker.json(belongs_to_current_topic: true)
+        else
+          marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")
+          marker.json(belongs_to_current_topic: false)
+        end
+      end
+      render json: @all_locations
     end
   end
 

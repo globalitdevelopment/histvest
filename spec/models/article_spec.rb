@@ -6,8 +6,8 @@
 #  user_id         :integer
 #  title           :string(255)
 #  content         :text
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  published       :boolean
 #  published_start :datetime
 #  published_end   :datetime

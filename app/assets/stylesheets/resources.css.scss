@@ -3,10 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* Static admin front page */ 
-.front-page {background:url(../images/front-top.png) no-repeat top center; padding:80px 10px 0;}
-.front-page li {float:left; background:url(../images/front-nav-bg.png) no-repeat; display:block; margin-right:22px; width:178px;}
+.front-page {background:image-url('front-top.png') no-repeat top center; padding:80px 10px 0;}
+.front-page li {float:left; background:image-url('front-nav-bg.png') no-repeat; display:block; margin-right:22px; width:178px;}
 .front-page li a {display:block; width:156px; height:107px; padding:28px 11px 0; width:156px;}
-.front-page li a span {background:url(../images/front-nav-icons.png) no-repeat; width:48px; height:48px; display:block; margin:0 auto;}
+.front-page li a span {background:image-url('front-nav-icons.png') no-repeat; width:48px; height:48px; display:block; margin:0 auto;}
 .front-page li a span.user {background-position:0 0;}
 .front-page li a:hover span.user {background-position:0 -48px;}
 .front-page li a span.theme {background-position:-48px 0;}
@@ -17,6 +17,6 @@
 .front-page li a:hover span.data {background-position:-144px -48px;}
 .front-page li a span.setting {background-position:-192px 0;}
 .front-page li a:hover span.setting {background-position:-192px -48px;}
-.front-page li a em {background:url(../images/front-nav-hr.gif) repeat-x; display:block; font-style:normal; color:#666; text-shadow:2px 2px #FFF; padding:7px 0 0; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; font-size:18px; font-weight:normal; margin:25px 0 0;}
+.front-page li a em {background:image-url('front-nav-hr.gif') repeat-x; display:block; font-style:normal; color:#666; text-shadow:2px 2px #FFF; padding:7px 0 0; font-family: 'zurich_bdxcn_btbold', Arial, Helvetica, sans-serif; font-size:18px; font-weight:normal; margin:25px 0 0;}
 .front-page li a:hover em {color:#35a641;}
 .front-page li p {color:#868686; margin:20px 5px;}

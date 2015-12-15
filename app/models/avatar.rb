@@ -4,8 +4,8 @@
 #
 #  id                      :integer          not null, primary key
 #  topic_id                :integer
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  avatar_img_file_name    :string(255)
 #  avatar_img_content_type :string(255)
 #  avatar_img_file_size    :integer

@@ -9,11 +9,13 @@
 #  lang                :string(255)
 #  snippet             :string(255)
 #  url                 :string(255)
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
 #  reference_type_id   :integer
 #  reference_source_id :integer
 #  topic_id            :integer
+#  is_dead_link        :boolean          default(FALSE)
+#  checked_at          :datetime
 #
 
 require 'nokogiri'
