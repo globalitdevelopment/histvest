@@ -12,7 +12,7 @@
   var mapLoad = function() {
     Gmaps4HistVest.map = new Gmaps4HistVest();
     Gmaps4HistVest.map.initialize();
-    $.getJSON('/home-topics.json', function(data) {
+    $.getJSON('/home-topics.json', {touch: true}, function(data) {
       Gmaps4HistVest.map.markers = data;
       Gmaps4HistVest.map.touch_version = true;
       Gmaps4HistVest.map.create_markers('click');
@@ -30,5 +30,5 @@
     $(window).resize();
   };
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=mapLoad"></script>
-  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
+  <script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.1.2/src/markerclusterer_packed.js" type="text/javascript"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDKN-34cs1baWHGc8qPX0CKEKCQDasyWFE&callback=mapLoad"></script>

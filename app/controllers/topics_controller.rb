@@ -148,7 +148,7 @@ class TopicsController < ApplicationController
     if stale? etag: @topic, last_modified: @topic.updated_at, public: true
       @all_locations = Location.joins(:topics).includes(topics: :avatar).merge(Topic.published).to_gmaps4rails do |location, marker|
         last_modified = location.topics.map(&:updated_at).max
-        marker.infowindow Rails.cache.fetch("infowindow_#{location.id}_#{last_modified}", expires_in: 1.hour) {
+        marker.infowindow Rails.cache.fetch("infowindow_#{touch?}_#{location.id}_#{last_modified}", expires_in: 1.hour) {
           render_to_string(:partial => "/welcome/infowindow", formats: [:html], :locals => { :topics => location.topics.map(&:published_version).compact })
         }
 
