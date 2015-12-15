@@ -11,7 +11,7 @@ gem 'actionpack-action_caching'
 gem "pg"
 gem "database_cleaner"
 gem "pg_search"
-gem 'paper_trail', '~> 3.0.6'
+gem 'paper_trail', '~> 4.0.1'
 gem "enumerize"
 gem "protected_attributes"
 

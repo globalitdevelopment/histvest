@@ -51,15 +51,10 @@ class Topic < ActiveRecord::Base
 	validates :content,
 		presence: true
 
-	scope :listed, -> {
+	scope :published, -> {
 		where("(published_start <= ? and published_end >= ?) or	(published_end IS NULL and published_start IS NULL)", Time.now, Time.now)
-		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object LIKE '%published: true%')", true)		
+		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object->>'published' = 'true')", true)		
 	}
-
-	def self.published		
-		where("(published_start <= ? and published_end >= ?) or	(published_end IS NULL and published_start IS NULL)", Time.now, Time.now)
-		.where("published = ? OR EXISTS(SELECT 1 FROM versions WHERE item_type='Topic' AND item_id=topics.id AND object LIKE '%published: true%')", true)		
-	end
 
 	def published?
 		# not published if only start or end date is defined
@@ -74,13 +69,12 @@ class Topic < ActiveRecord::Base
 			)
 	end	
 
-	def self.working_version(topic)
-		return topic if topic.published
-		begin			
-			prev = topic.previous_version			
-			return prev if prev.published
-		end while !prev.nil?
-		topic
+	def published_version
+		if published
+			self
+		else
+			versions.where("object->>'published' = 'true'").last.reify
+		end
 	end
 
 	def to_param
