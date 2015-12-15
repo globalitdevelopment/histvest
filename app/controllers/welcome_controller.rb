@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 					
 					@locations = Location.joins(:topics).includes(topics: :avatar).merge(Topic.published).to_gmaps4rails do |location, marker|
 						last_modified = location.topics.map(&:updated_at).max
-			      marker.infowindow Rails.cache.fetch("infowindow_#{location.id}_#{last_modified}", expires_in: 1.hour) {
+			      marker.infowindow Rails.cache.fetch("infowindow_#{touch?}_#{location.id}_#{last_modified}", expires_in: 1.hour) {
 			        render_to_string(:partial => "/welcome/infowindow", formats: [:html], :locals => { :topics => location.topics.map(&:published_version).compact })
 			      }
 						marker.picture(picture: location.topics.size > 1 ? "http://www.googlemapsmarkers.com/v1/#{location.topics.size}/FD7567/" : "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png")				
