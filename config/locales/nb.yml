@@ -1,34 +1,38 @@
 nb:
+  about:
+    data: Lisens
+    license:
+      expanded: Dataene på HistVest (tema, lokasjoner, referanser og bilder) er lisensiert etter NLOD.
+    source_code: Kildekode
   activerecord:
+    attributes:
+      topic:
+        content: Content
+        title: Title
     errors:
       messages:
         record_invalid: Ugyldig data.
-    attributes:
-      topic:
-        content: Innhold
-        title: Tittel
     models:
       topic: Tema
   admin:
     news: Nyheter
+    news_description: Her kan du legge til og redigere nyheter.
     statistics: Statistikk
+    statistics_description: Her kan du se søkestatistikken
     topics: Tema
-    topics_description: Her kan du se og endre på tema.
+    topics_description: Her kan du se og endre på tema. <a href="https://drive.google.com/open?id=0B8kL5gBn2BydTzdldEhtS196TUtKMzhHSXZuaDZkaTdpbUtz&authuser=0">Brukermanual</a>
     users: Brukere
     users_description: 'Her kan du legge til og endre brukere. '
-    news_description: Her kan du legge til og redigere nyheter.
-    statistics_description: Her kan du se søkestatistikken
   article:
     delete: Slett
-    publish: Publiser
-    title: Tittel
-    unpublish: Avpubliser
     image:
       replace: Erstatt
-      upload: Laste opp
-    published: Publisert
-    published_end: Publisering slutter
-    published_start: Publisering starter
+    publish: Publiser
+    publish_ends: Publish Ends
+    publish_starts: Publish Starts
+    published: Published
+    title: Tittel
+    unpublish: Avpubliser
   articles:
     add_article: Ny artikkel
     articles: Artikler
@@ -39,7 +43,7 @@ nb:
     edit_article: Endre artikkel
     form:
       "&nbsp": "&nbsp;"
-      main_images: Hovedbilder
+      main_images: 'Hovedbilder:'
       save_and_quit: Lagre og avslutt
       time: 'Kl:'
     from_updated_at: Oppdatert
@@ -52,7 +56,6 @@ nb:
     title: Tittel
     to_updated_at: Oppdatert
     updated_at: Oppdatert
-    article_not_published: Artikkel ikke publisert
   backend:
     store: Lagre
   comments:
@@ -73,6 +76,14 @@ nb:
     edit: Endre
     show: Vis
   datagrid:
+    article_report:
+      columns:
+        actions: Actions
+        content: Content
+        created_at: Created at
+        published: Published
+        title: Title
+        updated_at: Updated at
     form:
       reset: Tilbakestill
       search: Søk
@@ -83,20 +94,20 @@ nb:
         desc: "&darr;"
     topic_report:
       columns:
+        actions: Actions
         content: Content
         created_at: Created at
         published: Published
         title: Title
-        actions: Actions
         updated_at: Updated at
-    article_report:
+    user_report:
       columns:
         actions: Actions
-        published: Published
-        content: Content
         created_at: Created at
-        title: Title
-        updated_at: Updated at
+        email: Email
+        name: Name
+        role: Role
+        status: Status
   date:
     abbr_day_names:
     - søn
@@ -253,7 +264,7 @@ nb:
   layouts:
     public:
       bibliotek: Bibliotek
-      historiske_vestfold: Historiske Vestfold
+      historiske_vestfold: " Historiske Vestfold "
     touch:
       bibliotek: Historiske Vestfold
   listing:
@@ -264,6 +275,8 @@ nb:
     listing: Liste
     longitude: Lengdegrad
     new_location: Nytt sted
+  misc:
+    references_successfully_repaired: Referansene ble oppdatert.
   next_label: Neste
   number:
     currency:
@@ -323,12 +336,15 @@ nb:
   pagination:
     first: Første
     last: Siste
+  person:
+    censur_permalink: 
   popular_search_of_week: Mest søkt denne uken
   previous_label: Forrige
   references:
     add: Legg til
     create_flash: Referanse opprettet.
     creator: Forfatter
+    da: 
     edit_reference: Endre
     europeana: Europeana
     lang: Språk
@@ -343,22 +359,13 @@ nb:
     url: URL
     wikipedia: Wikipedia
     year: "År"
-    da: Digitalarkivet
   seach:
     no_results: Ingen resultater.
   search_stats:
     last_searched: Sist søkt etter
+    search_stats: Søkestatistikk
     search_string: Søkestreng
     view_count: Antall søk
-    search_stats: Søkestatistikk
-    click_to_pick_date: Klikk for å velge en dato
-    select_time_period: Velg tidsperiode
-    last_month: Siste måned
-    this_month: Denne måneden
-    last_week: Forrige uke
-    this_week: Denne uken
-    last_24: Siste 24 timer
-    reset: Tøm
   searchs:
     search: Søk
   session:
@@ -373,10 +380,10 @@ nb:
     email_not_exists: Eposten finnes ikke i systemet
     forgot_password: Glemt passord
     instructions_sent: Instruksjoner for å nullstille passordet er sendt på epost.
+    must_be_logged_in: Du må være logget inn.
     password_changed: Passordet er blitt endret.
     send_instructions: Send instruksjoner
     wrong_token: Feil passordnullstillingsdetaljer.
-    must_be_logged_in: Du må være logget inn.
   shared:
     footer:
       about_historiske_vestfold: Om Historiske Vestfold
@@ -420,13 +427,9 @@ nb:
   topic:
     delete_image: Slett bilde.
     location_loading: Lagrer sted...
-    title: Tittel
     publish: Publiser
-    image:
-      replace: Erstatt
-      upload: Laste opp
-    published_end: Publisering slutter
-    published_start: Publisering starter
+    title: Tittel
+    topic_not_published: Tema er ikke publisert.
   topics:
     active_version: Aktiv versjon.
     add_location: Legg til sted
@@ -440,14 +443,13 @@ nb:
     create_flash: Tema opprettet
     created_at: Laget
     current_version: Nåværende versjon
-    topic_not_published: Tema er ikke publisert.
     edit_topic: Endre
     form:
       add_images: Legg til bilder
       add_locations: Legg til steder
       if_cwc2011_venue_datalength: 'if (cwc2011_venue_data.length '
       locations-explanation-header: Fargekoder
-      main_images: Hovedbilder
+      main_images: 'Hovedbilder:'
       marker-connected-this-topic: Taggen er knyttet til dette temaet
       marker-not-connected: Taggen er ikke knyttet til noen tema
       marker-not-connected-this-topic: Taggen er ikke knyttet til dette temaet
@@ -461,6 +463,8 @@ nb:
     new_version: Ny versjon
     no_results: Ingen tema å vise
     publish: Publiser
+    published_end: Publisering slutter
+    published_start: Publisering starter
     published_success: Tema ble publisert
     published_version: Publisert versjon
     reason: "(ikke spesifisert)"
@@ -497,7 +501,7 @@ nb:
       user: " Bruker"
     name: Navn
     new_user: Ny bruker
-    no_selection: Velg minst én bruker
+    no_selection: Please select atleast one user
     password: Passord
     password_confirm: Bekreft passord
     role: Rolle
@@ -516,14 +520,6 @@ nb:
       what_do_you_know_about: 'Hva vil du vite mer om? '
     link_to_touch_version: Se kun kart
     no_topics: There are no topics
-  about:
-    data: Lisens
-    license:
-      expanded: Dataene på HistVest (tema, lokasjoner, referanser og bilder) er lisensiert etter NLOD.
-    source_code: Kildekode
-  misc:
-    references_successfully_repaired: Referansene ble oppdatert.
   will_paginate:
     next_label: Neste
     previous_label: Forrige
-    page_gap: ...
