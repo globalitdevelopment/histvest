@@ -73,7 +73,7 @@ class Topic < ActiveRecord::Base
 		if published
 			self
 		else
-			versions.where("object->>'published' = 'true'").last.reify
+			versions.where("object->>'published' = 'true'").last.try(:reify)
 		end
 	end
 
