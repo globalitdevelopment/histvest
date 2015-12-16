@@ -26,6 +26,7 @@ nb:
   article:
     delete: Slett
     image:
+      upload: Opplasting
       replace: Erstatt
     publish: Publiser
     publish_ends: Publish Ends
@@ -430,6 +431,9 @@ nb:
     publish: Publiser
     title: Tittel
     topic_not_published: Tema er ikke publisert.
+    image:
+      upload: Opplasting
+      replace: Erstatt
   topics:
     active_version: Aktiv versjon.
     add_location: Legg til sted
