@@ -35,6 +35,34 @@ class Location < ActiveRecord::Base
 
 	acts_as_gmappable :process_geocoding => false
 
+	# search configuration
+
+	include Elasticsearch::Model
+
+  settings do 
+  	mapping do
+  		indexes :id, index: :not_analyzed
+  		indexes :address, analyzer: :snowball
+  		indexes :point, type: :geo_point, fielddata: {normalize: false, precision: '100m'}
+  		indexes :people do
+  			indexes :name
+  			indexes :url
+  		end 
+  	end
+  end
+
+  def as_indexed_json opts={}
+  	opts.merge!(
+  		only: [:id, :address, :latitude, :longitude],
+  		methods: [:point]
+  	)
+  	ret = as_json opts
+  	ret[:people] = people.map do |p|
+  		{name: p.name, url: Rails.application.routes.url_helpers.person_path(p.pfid)}
+  	end
+  	ret
+  end
+
 	def gmaps4rails_address
 		"#{self.address} Norway"
 	end
@@ -43,5 +71,9 @@ class Location < ActiveRecord::Base
 	scope :untagged, -> { where(latitude: nil) }
 
 	geocoded_by :address
+
+	def point
+		{ lat: latitude, lon: longitude }
+	end
 	
 end

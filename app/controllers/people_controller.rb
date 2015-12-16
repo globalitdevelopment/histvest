@@ -25,9 +25,8 @@ class PeopleController < ApplicationController
 				{ latitude: r[0][0].to_f, longitude: r[0][1].to_f, count: r[1] }
 			end
 		else
-			@data = Location.joins(:people).includes(:people).where("latitude >= :s AND latitude <= :n AND longitude >= :w AND longitude <= :e", params).map do |l|
-				{ latitude: l.latitude, longitude: l.longitude, address: l.address, people: l.people.map { |p| { name: p.name, url: p.permalink }  } }
-			end
+			search = Location.search build_query
+			@data = search.results.map {|r| r['_source']}
 		end
 		render json: @data
 	end
@@ -46,6 +45,25 @@ private
 
 	def find_frequent_searches
 		@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
+	end
+
+	def build_query
+		ret = {
+			size: 10_000,
+			query: {
+				filtered: {
+					query: { match_all: {} },
+					filter: {
+						geo_bounding_box: {
+							point: {
+								top_left: { lat: params[:n], lon: params[:w] },
+								bottom_right: { lat: params[:s], lon: params[:e] }
+							}
+						}
+					}
+				}
+			}
+		}
 	end
 
 end

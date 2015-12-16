@@ -147,8 +147,7 @@ class @Gmaps4HistVest
         clusterer
 
     peopleBindings: =>            
-      google.maps.event.addListener @my_map, 'bounds_changed', =>        
-        setTimeout @togglePeople, 500 
+      google.maps.event.addListener @my_map, 'bounds_changed', _.debounce(@togglePeople, 500)
 
     togglerBindings: =>
         $('#show_topics, #show_census').change =>
@@ -196,7 +195,6 @@ class @Gmaps4HistVest
                         position: new google.maps.LatLng(r.latitude, r.longitude)
                         map: @my_map
                         icon: if r.people.length > 1 then "http://www.googlemapsmarkers.com/v1/#{r.people.length}/92CD00/" else "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png"
-
                     description = $('<div class="infowindow"><h5 class="infowindow-header">'+r.address+'</h5></div>')
                     for p, pi in r.people
                         pel = $('<li class="marker-person"></li>');
