@@ -19,4 +19,10 @@ namespace :search do
 
   end
 
+  desc 'Just index documents'
+  task :index => :environment do
+    Person.includes(:location).import
+    Topic.includes(:locations, :references).import
+  end
+
 end

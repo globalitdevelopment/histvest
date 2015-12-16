@@ -1,5 +1,6 @@
 every 4.hours do
   rake 'histvest:search_more_people'
+  rake 'search:index'
 end
 
 every :day do
