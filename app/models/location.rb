@@ -43,7 +43,7 @@ class Location < ActiveRecord::Base
   	mapping do
   		indexes :id, index: :not_analyzed
   		indexes :address, analyzer: :snowball
-  		indexes :point, type: :geo_point, fielddata: {normalize: false, precision: '100m'}
+  		indexes :point, type: :geo_point
   		indexes :people do
   			indexes :name
   			indexes :url
