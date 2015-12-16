@@ -28,6 +28,8 @@ class SearchController < ApplicationController
 		end
 
 		results.sort_by! {|r| r['score']}
+
+		CensusSearchWorker.perform_async params[:term]
 		
 		respond_to do |format|
 			format.json { 

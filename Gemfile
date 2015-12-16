@@ -94,6 +94,7 @@ gem 'unicorn'
 gem 'dotenv'
 gem 'foreman'
 gem 'newrelic_rpm'
+gem 'sidekiq'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'
