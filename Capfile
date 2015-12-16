@@ -52,7 +52,7 @@ namespace :puma do
 
   desc "Start Puma"
   task :start, :except => { :no_release => true } do
-    as_app "bundle exec pumactl restart -C config/puma.rb -D"
+    as_app "bundle exec pumactl start -C config/puma.rb -d"
   end
 
   desc "Stop Puma"
