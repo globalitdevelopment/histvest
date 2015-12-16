@@ -44,6 +44,24 @@ namespace :unicorn do
 end
 after 'deploy:restart', 'unicorn:restart'
 
+namespace :puma do
+  desc "Zero-downtime restart of Puma"
+  task :restart, :except => { :no_release => true } do
+    as_app "bundle exec pumactl phased-restart -C config/puma.rb"
+  end
+
+  desc "Start Puma"
+  task :start, :except => { :no_release => true } do
+    as_app "bundle exec pumactl restart -C config/puma.rb -D"
+  end
+
+  desc "Stop Puma"
+  task :stop, :except => { :no_release => true } do
+    as_app "bundle exec pumactl stop -C config/puma.rb"
+  end
+end
+after 'deploy:restart', 'puma:restart'
+
 namespace :env do
   task :set_figaro do
     figaro_config = YAML.load_file('config/application.yml')

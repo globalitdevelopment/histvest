@@ -90,7 +90,8 @@ gem "figaro"
 # For deployment
 gem "recap"
 gem 'whenever', '~> 0.9.4'
-gem 'unicorn'
+gem 'puma'
+# gem 'unicorn'
 gem 'dotenv'
 gem 'foreman'
 gem 'newrelic_rpm'
