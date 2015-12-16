@@ -12,9 +12,19 @@ end
 namespace :deploy do 
   task :clear_cache do 
     as_app 'bundle exec rake tmp:clear'
+    as_app 'bundle exec rake misc:cache'
   end
 end
 after 'deploy:restart', 'deploy:clear_cache'
+
+namespace :search do
+  task :reset do
+    as_app 'bundle exec rake search:reset'
+  end
+  task :index do
+    as_app 'bundle exec rake search:index'
+  end
+end
 
 namespace :unicorn do
   desc "Zero-downtime restart of Unicorn"
