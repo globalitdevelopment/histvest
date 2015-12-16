@@ -33,6 +33,46 @@ class Topic < ActiveRecord::Base
 		@avatar_delete = value
 	end
 
+	# search configuration
+
+	include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  settings do 
+  	mapping do
+  		indexes :id, index: :not_analyzed
+  		indexes :suggest, type: :completion, analyzer: :simple, payloads: true
+  		indexes :title, analyzer: :norwegian, boost: 5
+  		indexes :content, analyzer: :norwegian
+  		indexes :visible?, index: :not_analyzed
+  		indexes :locations do
+  			indexes :address, analyzer: :norwegian, boost: 3
+  		end
+  		indexes :references do
+  			indexes :title, analyzer: :norwegian, boost: 2
+  			indexes :creator, analyzer: :norwegian, boost: 4
+  		end
+  	end
+  end
+
+  def as_indexed_json opts={}
+  	opts.merge!(
+  		only: [:id, :title, :content],
+  		methods: [:visible?, :to_params],
+  		include: {
+  			locations: { only: [:address] },
+  			references: { only: [:title, :creator] }
+  		}
+  	)
+  	ret = as_json opts
+  	ret[:suggest] = {
+  		input: [title] + locations.map(&:address) + references.map(&:title) + references.map(&:creator),
+  		output: title,
+  		payload: { url: Rails.application.routes.url_helpers.topic_path(self), avatar: avatar_path }
+  	}
+  	ret
+  end
+
 	include PgSearch
 		pg_search_scope :assoc_search,
 					:against => [:title, :content],
@@ -67,6 +107,10 @@ class Topic < ActiveRecord::Base
 				(self.published_start.nil? && self.published_end.nil?) ||
 				(self.published_start <= Time.now && self.published_end >= Time.now)
 			)
+	end
+
+	def visible?
+		self.class.published.where(id: id).exists?
 	end	
 
 	def published_version

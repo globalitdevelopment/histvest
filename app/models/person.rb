@@ -23,6 +23,36 @@ class Person < ActiveRecord::Base
 		'0720','0721','0722','0723','0724','0725','0726','0727','0728',
 		'0798']
 
+	# search configuration
+
+	include Elasticsearch::Model
+
+  settings do 
+  	mapping do
+  		indexes :name, analyzer: :snowball
+  		indexes :suggest, type: :completion, analyzer: :simple, payloads: true
+  		indexes :location do
+  			indexes :address, analyzer: :snowball
+  		end
+  	end
+  end
+
+  def as_indexed_json opts={}
+  	opts.merge!(
+  		only: [:name],
+  		include: {
+  			location: { only: [:address] }
+  		}
+  	)
+  	ret = as_json opts
+  	ret[:suggest] = {
+  		input: [name, location.address],
+  		output: "#{name}, #{location.address}",
+  		payload: { url: Rails.application.routes.url_helpers.person_path(pfid) }
+  	}
+  	ret
+  end
+
 	def permalink
 		self.class.permalink(pfid)
 	end

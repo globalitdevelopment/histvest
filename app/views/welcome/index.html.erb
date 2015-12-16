@@ -38,28 +38,6 @@
 		}
 
 </style>
-<script>
-	var auto;
-	$(document).ready(function () {
-		auto = $("#textfield").autocomplete({  
-			source: "/search.json",
-			minLength: 3,      
-			select: function(event,ui) {
-				window.location.href = "/search?term="+$('#textfield').val();
-			}
-		});    
-		auto.data("ui-autocomplete")._renderItem = function (ul, item) {  
-			return $("<li />")
-				.data("item.autocomplete", item)
-				.append("<a href='"+item.url+"'><img src='" + item.avatar_path + "' /><span style='font-size:18px;line-height:7px;'>" + item.value + "</span></a>")       
-				.appendTo(ul);
-		};
-
-		$("#textfield").keypress(function(){
-				$("#textfield").addClass('ui-autocomplete-loading');
-		})
-	});
-</script>
 <div class="green-search">
 	<div class="search-title"><%= I18n.t("welcome.index.what_do_you_know_about", :default => "Hva vil du vite mer om? ") %></div>
 	<div class="search-box">

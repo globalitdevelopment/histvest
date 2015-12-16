@@ -1,5 +1,59 @@
 class SearchController < ApplicationController
+
+	def show
+		search = Topic.__elasticsearch__.client.suggest \
+		  index: Topic.index_name,
+		  body: {
+		    topics: {
+		      text: params[:term],
+		      completion: { field: :suggest, size: 10 }
+		    }
+		  }
+
+		results = search['topics'][0]['options'].map do |r| 
+			{ value: r['text'], label: r['text'], score: r['score'], avatar_path: r['payload']['avatar'], url: hit_search_path(url: r['payload']['url'], title: r['text'], hash: search_hash(r['text'])) }
+		end
+
+		search = Person.__elasticsearch__.client.suggest \
+		  index: Person.index_name,
+		  body: {
+		    people: {
+		    	text: params[:term],
+		      completion: { field: :suggest, size: 10 }
+		    }
+		  }
+
+		results += search['people'][0]['options'].map do |r| 
+			{ value: r['text'], label: r['text'], score: r['score'], avatar_path: ActionController::Base.helpers.image_path('rt-person-icon.png'), url: hit_search_path(url: r['payload']['url'], title: r['text'], hash: search_hash(r['text'])) }
+		end
+
+		results.sort_by! {|r| r['score']}
+		
+		respond_to do |format|
+			format.json { 
+				if results.size > 0
+					render json: results
+				else
+					render json: [{id: nil, value: I18n.t('seach.no_results'), label: I18n.t('seach.no_results'), avatar_path: ActionController::Base.helpers.image_path("rt-ukjent-icon.png")}].to_json
+				end
+			}
+			format.html {
+				if results.size > 0
+					redirect_to results[0][:url]
+				else
+					redirect_to root_path, notice: I18n.t('seach.no_results')
+				end
+			}
+		end
+	end
+
+	def hit
+		SearchTopic.increment params[:title] if search_hash(params[:title]) == params[:hash]
+		redirect_to params[:url]
+	end
 	
+	# this code is very slow and contains long compuataion operation
+	# will be refactored soon
 	def search	
 		# Search published topics		
 		@results = Topic.published.assoc_search(params[:term])

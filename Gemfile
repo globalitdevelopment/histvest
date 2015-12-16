@@ -9,6 +9,7 @@ gem 'actionpack-action_caching'
 
 #Database
 gem "pg"
+gem 'elasticsearch-model', '~> 0.1.8'
 gem "database_cleaner"
 gem "pg_search"
 gem 'paper_trail', '~> 4.0.1'

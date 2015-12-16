@@ -45,4 +45,8 @@ module ApplicationHelper
   	request.subdomains.first.to_s[0,5] == "touch"
   end
 
+  def search_hash url
+    Digest::MD5.hexdigest [request.remote_ip, request.user_agent, url].join('-')
+  end
+
 end

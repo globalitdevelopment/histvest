@@ -60,7 +60,9 @@ Histvest::Application.routes.draw do
   get '/references/numberOfResultsEuro/:query', to: 'references#numberOfResultsEuro'
   get '/references/numberOfResultsDa/:query', to: 'references#numberOfResultsAr'
 
-  get '/search', to: 'search#search'
+  resource :search, controller: :search, only: [:show] do
+    get :hit
+  end
 
   #get 'v2', to: 'pages#home'
   #get 'v2/topics', to: 'pages#topics'
