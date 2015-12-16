@@ -18,6 +18,7 @@
  *= require_self
 */
 
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 a.add-reference {
