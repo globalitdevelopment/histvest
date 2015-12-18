@@ -42,7 +42,7 @@ namespace :unicorn do
     as_app "kill -s QUIT `cat tmp/unicorn.pid`"
   end
 end
-after 'deploy:restart', 'unicorn:restart'
+# after 'deploy:restart', 'unicorn:restart'
 
 namespace :puma do
   desc "Zero-downtime restart of Puma"
