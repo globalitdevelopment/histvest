@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
-    @frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10).to_a
+    find_frequent_searches
     respond_to do |format|
       if @article.published == false
         flash[:danger] = I18n.t('articles.article_not_published')

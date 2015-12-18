@@ -43,10 +43,6 @@ class PeopleController < ApplicationController
 
 private
 
-	def find_frequent_searches
-		@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10)
-	end
-
 	def build_query
 		ret = {
 			size: 10_000,

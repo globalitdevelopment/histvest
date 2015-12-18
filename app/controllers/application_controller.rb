@@ -30,4 +30,20 @@ class ApplicationController < ActionController::Base
       redirect_to(signin_url)
     end unless current_user
   end
+
+  def find_frequent_searches
+    @max = SearchTopic.where('search_topics.updated_at > ?', 1.months.ago).maximum(:view_count)
+    @frequent_topics = Topic.published
+      .joins("INNER JOIN search_topics ON search_topics.search_string = topics.title")
+      .order("CASE WHEN search_topics.view_count / #{@max} >= 0.75 THEN 0
+        WHEN search_topics.view_count / #{@max} >= 0.50 THEN 1
+        WHEN search_topics.view_count / #{@max} >= 0.25 THEN 2
+        ELSE 3
+      END")
+      .order('search_topics.updated_at')
+      .where('search_topics.updated_at > ?', 1.months.ago)
+      .limit(10)
+      .to_a
+  end
+
 end

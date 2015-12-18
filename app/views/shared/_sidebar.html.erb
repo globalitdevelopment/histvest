@@ -22,12 +22,12 @@
   <div class="top-table top-table-new">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tbody>
-        <% @frequent_topics = Topic.where(title: @frequent_searches.map {|fs| fs.search_string}) %>
         <% @frequent_topics.each_with_index do |t, i| %>
+        <% url = hit_search_path url: topic_path(t), title: t.title, hash: search_hash(t.title) %>
           <tr>
             <td align="center" class="top-td-bg" width="10%"><%= i+1 %></td>
-            <td align="left" class="top-td-padd"><%= link_to t.title, t %></td>
-            <td align="center" width="12%"><%= link_to image_tag('arrow-green.jpg'), t %></td>
+            <td align="left" class="top-td-padd"><%= link_to t.title, url %></td>
+            <td align="center" width="12%"><%= link_to image_tag('arrow-green.jpg'), url %></td>
           </tr>  
         <% end %>        
       </tbody>

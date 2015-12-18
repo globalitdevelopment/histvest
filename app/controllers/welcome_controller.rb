@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
 				end
 			}
 			format.html {
-				@frequent_searches = SearchTopic.where('created_at > ?',Time.now - 7.days).limit(10).to_a
+				find_frequent_searches
 				@front_page_article = Article.where(article_type: "front_page").first
 				@rand_topic = Topic.published.sample
 				render "touch_index", layout: "touch" if touch?
