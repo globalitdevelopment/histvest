@@ -38,13 +38,19 @@ class Topic < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  after_save do
+    begin
+      self.__elasticsearch__.delete_document unless visible?
+    rescue Elasticsearch::Transport::Transport::Errors::NotFound
+    end
+  end
+
   settings do 
     mapping do
       indexes :id, index: :not_analyzed
       indexes :suggest, type: :completion, analyzer: :simple, payloads: true
       indexes :title, analyzer: :norwegian, boost: 5
       indexes :content, analyzer: :norwegian
-      indexes :visible?, index: :not_analyzed
       indexes :locations do
         indexes :address, analyzer: :norwegian, boost: 3
       end
@@ -58,19 +64,25 @@ class Topic < ActiveRecord::Base
   def as_indexed_json opts={}
     opts.merge!(
       only: [:id, :title, :content],
-      methods: [:visible?, :to_params],
       include: {
         locations: { only: [:address] },
         references: { only: [:title, :creator] }
       }
     )
-    ret = as_json opts
+
+    if visible?
+      ret = published_version.as_json opts
+    else
+      ret = as_json opts
+    end
+    
     ret[:suggest] = {
       input: [title] + locations.map(&:address) + references.map(&:title) + references.map(&:creator),
       output: title,
       weight: search_weight,
       payload: { url: Rails.application.routes.url_helpers.topic_path(self), avatar: avatar_path }
     }
+
     ret
   end
 
