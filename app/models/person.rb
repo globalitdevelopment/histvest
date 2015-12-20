@@ -100,7 +100,7 @@ class Person < ActiveRecord::Base
 		end
 	end
 
-	def self.search(params = {})
+	def self.lookup(params = {})
 		params[:page] ||= 1
 		params[:k] ||= VESTFOLD
 

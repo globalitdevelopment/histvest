@@ -19,10 +19,10 @@ namespace :histvest do
 			fornavn, etternavn = Person.parse_name fullname
 			regions = Person::VESTFOLD.sample(5)
 			(1..20).each do |page|
-				break if Person.search(fornavn: fornavn, page: page, k: regions).empty?
+				break if Person.lookup(fornavn: fornavn, page: page, k: regions).empty?
 			end
 			(1..20).each do |page|
-				break if Person.search(etternavn: etternavn, page: page, k: regions).empty?
+				break if Person.lookup(etternavn: etternavn, page: page, k: regions).empty?
 			end
 		end
 		Person.geocode_pending

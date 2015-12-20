@@ -3,10 +3,10 @@ class CensusSearchWorker
 
   def perform name
     firstname, lastname = Person.parse_name name
-    Person.search fornavn: firstname
-    Person.search etternavn: lastname
-    Person.search fornavn: firstname, etternavn: lastname
-    Person.search etternavn: firstname, fornavn: lastname
+    Person.lookup fornavn: firstname
+    Person.lookup etternavn: lastname
+    Person.lookup fornavn: firstname, etternavn: lastname
+    Person.lookup etternavn: firstname, fornavn: lastname
   end
 
 end
