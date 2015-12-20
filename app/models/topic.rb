@@ -38,32 +38,26 @@ class Topic < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  after_save do
-    begin
-      self.__elasticsearch__.delete_document unless visible?
-    rescue Elasticsearch::Transport::Transport::Errors::NotFound
-    end
-  end
-
   settings do 
     mapping do
-      indexes :id, index: :not_analyzed
-      indexes :suggest, type: :completion, analyzer: :simple, payloads: true
-      indexes :title, analyzer: :norwegian, boost: 5
-      indexes :content, analyzer: :norwegian
+      indexes :title, analyzer: :norwegian, boost: 10
       indexes :locations do
-        indexes :address, analyzer: :norwegian, boost: 3
+        indexes :address, analyzer: :norwegian, boost: 5
       end
       indexes :references do
-        indexes :title, analyzer: :norwegian, boost: 2
-        indexes :creator, analyzer: :norwegian, boost: 4
+        indexes :title, analyzer: :norwegian, boost: 7
+        indexes :creator, analyzer: :norwegian, boost: 3
       end
+      indexes :visible?, type: :boolean
+      indexes :avatar, index: :not_analyzed
+      indexes :url, index: :not_analyzed
     end
   end
 
   def as_indexed_json opts={}
     opts.merge!(
-      only: [:id, :title, :content],
+      only: [:id, :title],
+      methods: [:visible?, :avatar_path],
       include: {
         locations: { only: [:address] },
         references: { only: [:title, :creator] }
@@ -75,14 +69,9 @@ class Topic < ActiveRecord::Base
     else
       ret = as_json opts
     end
-    
-    ret[:suggest] = {
-      input: [title] + locations.map(&:address) + references.map(&:title) + references.map(&:creator),
-      output: title,
-      weight: search_weight,
-      payload: { url: Rails.application.routes.url_helpers.topic_path(self), avatar: avatar_path }
-    }
 
+    ret[:url] = Rails.application.routes.url_helpers.topic_path(self)
+    ret[:weight] = search_weight
     ret
   end
 
@@ -123,7 +112,9 @@ class Topic < ActiveRecord::Base
   end
 
   def visible?
-    self.class.published.where(id: id).exists?
+    ((published_start.nil? && published_end.nil?) || 
+    (published_start && published_end && published_start <= Time.now && published_end >= Time.now)) &&
+    published || versions.where("object->>'published' = 'true'").exists?
   end 
 
   def published_version

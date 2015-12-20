@@ -15,34 +15,21 @@ namespace :search do
     sleep 1
     Topic.__elasticsearch__.refresh_index!
     sleep 1
-    Topic.published.includes(:locations, :references, :avatar).import
-    Topic.where.not(id: Topic.published.ids).each do |topic| 
-      begin
-        topic.__elasticsearch__.delete_document
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
-      end
-    end
+    Topic.includes(:locations, :references, :avatar).import
 
     # reset locations
     Location.__elasticsearch__.create_index! force: true
     sleep 1
     Location.__elasticsearch__.refresh_index!
     sleep 1
-    Location.joins(:people).includes(:people).import
-
+    Location.tagged.joins(:people).includes(:people).import
   end
 
   desc 'Just index documents'
   task :index => :environment do
     Person.includes(:location).import
-    Location.joins(:people).includes(:people).import
-    Topic.published.includes(:locations, :references, :avatar).import
-    Topic.where.not(id: Topic.published.ids).each do |topic| 
-      begin
-        topic.__elasticsearch__.delete_document
-      rescue Elasticsearch::Transport::Transport::Errors::NotFound
-      end
-    end
+    Location.tagged.joins(:people).includes(:people).import
+    Topic.includes(:locations, :references, :avatar).import
   end
 
 end

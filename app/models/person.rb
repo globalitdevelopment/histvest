@@ -29,28 +29,22 @@ class Person < ActiveRecord::Base
 
   settings do 
   	mapping do
-  		indexes :name, analyzer: :snowball
-  		indexes :suggest, type: :completion, analyzer: :simple, payloads: true
+  		indexes :name, analyzer: :norwegian, boost: 10
+      indexes :pfid, index: :not_analyzed
   		indexes :location do
-  			indexes :address, analyzer: :snowball
+  			indexes :address, analyzer: :norwegian
   		end
   	end
   end
 
   def as_indexed_json opts={}
   	opts.merge!(
-  		only: [:name],
+  		only: [:name, :pfid],
   		include: {
   			location: { only: [:address] }
   		}
   	)
-  	ret = as_json opts
-  	ret[:suggest] = {
-  		input: [name, location.address],
-  		output: "#{name}, #{location.address}",
-  		payload: { url: Rails.application.routes.url_helpers.person_path(pfid) }
-  	}
-  	ret
+  	as_json opts
   end
 
 	def permalink

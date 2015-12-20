@@ -42,7 +42,7 @@ class Location < ActiveRecord::Base
   settings do 
   	mapping do
   		indexes :id, index: :not_analyzed
-  		indexes :address, analyzer: :snowball
+  		indexes :address, analyzer: :norwegian
   		indexes :point, type: :geo_point
   		indexes :people do
   			indexes :name
