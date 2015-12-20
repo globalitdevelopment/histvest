@@ -244,10 +244,6 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.2)
-    pg_search (1.0.3)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     protected_attributes (1.0.9)
       activemodel (>= 4.0.1, < 5.0)
     pry (0.10.1)
@@ -421,7 +417,6 @@ DEPENDENCIES
   paper_trail (~> 4.0.1)
   paperclip
   pg
-  pg_search
   protected_attributes
   puma
   quiet_assets

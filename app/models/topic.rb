@@ -75,16 +75,6 @@ class Topic < ActiveRecord::Base
     ret
   end
 
-  include PgSearch
-    pg_search_scope :assoc_search,
-          :against => [:title, :content],
-          :associated_against => {
-            :locations => [:address],
-            :references => [:title, :creator, :snippet]},
-          :using => {
-            :tsearch => {:prefix => true}
-          }
-
   validates :title,
     presence: true,
     uniqueness: true,
