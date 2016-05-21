@@ -12,10 +12,10 @@ Histvest::Application.configure do
   config.action_controller.perform_caching = true
 
   # Memcahced store
-  config.cache_store = :dalli_store, nil, expires_in: 1.day, pool_size: 5
+  config.cache_store = :dalli_store, nil, {expires_in: 1.day, pool_size: 5}
 
   # session store
-  config.session_store = :dalli_store, nil, expires_in: 1.day, pool_size: 5
+  config.session_store = :dalli_store, nil, {expires_in: 1.day, pool_size: 5}
 
   # config.action_dispatch.rack_cache = {
   #   :metastore    => "memcached://localhost:11211/meta",
