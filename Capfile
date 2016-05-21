@@ -5,6 +5,8 @@ require 'yaml'
 set :application, 'histvest'
 set :repository, 'https://github.com/globalitdevelopment/histvest.git'
 
+set :foreman_template_option, -> { "--env #{application_home}/.env --concurrency worker=1" }
+
 task :production do
   server '185.35.184.76', :app
 end
