@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby '2.3.1'
 
 # Webserver, rails etc
-gem 'rails', '~> 4.1.4'
+gem 'rails', '~> 4.1.15'
 
 gem 'actionpack-action_caching'
 
@@ -29,7 +29,7 @@ group :development, :test do
   gem 'simplecov'
 
   # Annotate model files with fields
-  gem "annotate"
+  # gem "annotate"
 
   gem "better_errors"
   gem "binding_of_caller"
@@ -89,7 +89,7 @@ gem "figaro"
 
 # For deployment
 gem "recap"
-gem 'whenever', '~> 0.9.4'
+gem 'whenever'
 gem 'puma'
 # gem 'unicorn'
 gem 'dotenv'
