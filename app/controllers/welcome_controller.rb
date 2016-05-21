@@ -1,7 +1,9 @@
 class WelcomeController < ApplicationController
 	layout 'public'
 	respond_to :js, :only => [:take_another_topic]
-	
+
+	caches_action :index, expires_in: 15.minutes, if: -> { request.format.json? }
+
 	def index
 		respond_to do |format|
 			format.json {
