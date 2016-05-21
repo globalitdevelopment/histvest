@@ -1,6 +1,8 @@
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 
-#preload_app!
+threads 0, 10
+
+preload_app!
 
 environment ENV['RAILS_ENV'] || 'development'
 
@@ -9,10 +11,15 @@ pidfile "tmp/unicorn.pid"
 bind "unix:/tmp/unicorn.sock"
 
 on_worker_boot do
-
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
+  end
 
   # reload .env
   require 'dotenv'
   ENV.update Dotenv::Environment.new "#{ENV['HOME']}/.env" if File.exist? "#{ENV['HOME']}/.env"
+end
+
+before_fork do
+  ActiveRecord::Base.connection_pool.disconnect!
 end
