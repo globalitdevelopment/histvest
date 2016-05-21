@@ -1,6 +1,6 @@
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 
-threads 0, 10
+threads 0, 5
 
 preload_app!
 
