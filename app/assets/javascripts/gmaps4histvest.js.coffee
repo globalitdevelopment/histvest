@@ -122,10 +122,11 @@ class @Gmaps4HistVest
 
         @topics_clusterer = @create_clusterer(topics_array, 'topic')        
 
-    create_clusterer: (markers_array, type) ->       
+    create_clusterer: (markers_array, type) ->  
         clusterer = new MarkerClusterer(@my_map, markers_array, { 
             maxZoom: 15, 
-            gridSize: 25
+            gridSize: 25,
+            imagePath: "https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m"
         })
         clusterer.setCalculator (markers, numStyles)->
             index = 0
