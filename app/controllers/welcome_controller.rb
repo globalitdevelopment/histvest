@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 	layout 'public'
 	respond_to :js, :only => [:take_another_topic]
-
+	
 	def index
 		respond_to do |format|
 			format.json {

@@ -12,13 +12,15 @@ Histvest::Application.configure do
   config.action_controller.perform_caching = true
 
   # Memcahced store
-  config.cache_store = :dalli_store
+  config.cache_store = :dalli_store, nil, expires_in: 1.day, pool_size: 5
 
-  # config.action_dispatch.rack_cache = {
-  #   :metastore    => Dalli::Client.new,
-  #   :entitystore  => 'file:tmp/cache/rack/body',
-  #   :allow_reload => false
-  # }
+  # session store
+  config.session_store = :dalli_store, nil, expires_in: 1.day, pool_size: 5
+
+  config.action_dispatch.rack_cache = {
+    :metastore    => "memcached://localhost:11211/meta",
+    :entitystore  => "memcached://localhost:11211/body"
+  }
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = true
