@@ -28,38 +28,16 @@ namespace :search do
   end
 end
 
-namespace :unicorn do
-  desc "Zero-downtime restart of Unicorn"
-  task :restart, :except => { :no_release => true } do
-    as_app "kill -s USR2 `cat tmp/unicorn.pid`"
-  end
-
-  desc "Start unicorn"
-  task :start, :except => { :no_release => true } do
-    as_app "bundle exec unicorn -c config/unicorn.rb -D"
-  end
-
-  desc "Stop unicorn"
-  task :stop, :except => { :no_release => true } do
-    as_app "kill -s QUIT `cat tmp/unicorn.pid`"
-  end
-end
-# after 'deploy:restart', 'unicorn:restart'
 
 namespace :puma do
-  desc "Zero-downtime restart of Puma"
-  task :restart, :except => { :no_release => true } do
-    as_app "bundle exec pumactl phased-restart -C config/puma.rb"
-  end
-
-  desc "Start Puma"
-  task :start, :except => { :no_release => true } do
-    as_app "bundle exec pumactl start -C config/puma.rb -d"
-  end
-
-  desc "Stop Puma"
-  task :stop, :except => { :no_release => true } do
-    as_app "bundle exec pumactl stop -C config/puma.rb"
+  [:start, :stop, :status, :restart].each do |name|
+    task name, :except => { :no_release => true } do
+      if name == :start
+        as_app "bundle exec puma -C config/puma.rb -d"
+      else
+        as_app "bundle exec pumactl #{name} -C config/puma.rb"  
+      end
+    end
   end
 end
 after 'deploy:restart', 'puma:restart'
