@@ -17,7 +17,7 @@ gem "uglifier"
 
 #Various frontend
 gem "jquery-ui-rails"
-gem "rails-backbone"
+gem "rails-backbone", '0.9.10'
 gem "bootstrap-sass", "~> 3.2.0"
 gem "fancybox-rails"
 
@@ -33,7 +33,7 @@ gem "bcrypt"
 
 # To fetch lat/lon or address of Locations, maps
 gem "geocoder"
-gem "gmaps4rails", "1.5.6"
+gem "gmaps4rails", "1.5.7"
 
 # To fetch data fra third parties
 gem "localeapp"

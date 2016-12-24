@@ -16,8 +16,8 @@ class Histvest.Views.Topics.LocationMapView extends Backbone.GoogleMaps.MarkerCo
 		"click #add-location" 		: 'addLocation'
 		"keypress #add-location-input" : 'addLocationKey'
 
-	constructor: ->
-		super
+	constructor: (opts={})->
+		super opts
 		@collection.on('reset', @render, this)
 		@collection.on('add', @appendLocation, this)
 		@collection.on('remove', @render, this)		
