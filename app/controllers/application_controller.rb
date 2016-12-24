@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_frequent_searches
-    @max = SearchTopic.where('search_topics.updated_at > ?', 1.months.ago).maximum(:view_count)
+    @max = SearchTopic.where('search_topics.updated_at > ?', 1.months.ago).maximum(:view_count) || 0.0
     @frequent_topics = Topic.published
       .joins("INNER JOIN search_topics ON search_topics.search_string = topics.title")
       .order("CASE WHEN search_topics.view_count / #{@max} >= 0.75 THEN 0
@@ -44,6 +44,14 @@ class ApplicationController < ActionController::Base
       .where('search_topics.updated_at > ?', 1.months.ago)
       .limit(10)
       .to_a
+
+    if @frequent_topics.empty?
+      @frequent_topics = Topic.published
+        .joins("INNER JOIN search_topics ON search_topics.search_string = topics.title")
+        .order("search_topics.view_count DESC")
+        .limit(10)
+        .to_a
+    end
   end
 
 end
