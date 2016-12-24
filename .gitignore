@@ -6,7 +6,7 @@
 
 # Ignore bundler config
 /.bundle
-
+/.env
 /.hg
 
 # Ignore the default SQLite database.

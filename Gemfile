@@ -1,49 +1,17 @@
 source "https://rubygems.org"
 
-ruby '2.3.1'
-
-# Webserver, rails etc
-gem 'rails', '~> 4.1.15'
+gem 'rails', '~> 4.2'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+gem 'pg'
+gem 'enumerize'
+gem 'elasticsearch-model', '~> 0.1.9'
+gem 'paper_trail'
 
 gem 'actionpack-action_caching'
-
-#Database
-gem "pg"
-gem 'elasticsearch-model', '~> 0.1.8'
-gem "database_cleaner"
-# gem "pg_search"
-gem 'paper_trail', '~> 4.0.1'
-gem "enumerize"
 gem "protected_attributes"
+gem 'responders'
 
-group :development, :test do
-  # Testing (rspec)
-
-  gem "rspec-rails"
-  gem "selenium-webdriver"
-  gem "shoulda-matchers"
-  gem "guard-rspec"
-  gem "guard-spork"
-  gem "spork"
-  gem "quiet_assets"
-  gem 'simplecov'
-
-  # Annotate model files with fields
-  # gem "annotate"
-
-  gem "better_errors"
-  gem "binding_of_caller"
-end
-
-group :test do
-  gem "capybara"
-  gem "factory_girl_rails"
-  gem "fakeweb"
-end
-
-# Gems used only for assets and not required
-# in production environments by default.
-gem "sass-rails", ">= 3.2"
+gem "sass-rails"
 gem "coffee-rails"
 gem "uglifier"
 
@@ -68,34 +36,41 @@ gem "geocoder"
 gem "gmaps4rails", "1.5.6"
 
 # To fetch data fra third parties
-gem "mechanize"
-
-# Authentication
-gem "cancan"
-
-# Copywriting, I18N
 gem "localeapp"
-
-#Image uploader
+gem "mechanize"
+gem "cancan"
 gem "paperclip"
-#gem "rmagick"
 gem "truncate_html"
-# Memcached
-gem 'dalli'
 gem "jbuilder"
-
-# to manage configurations
-gem "figaro"
-
-# For deployment
-gem "recap"
-gem 'whenever'
 gem 'puma'
-# gem 'unicorn'
-gem 'dotenv'
-gem 'foreman'
-gem 'newrelic_rpm'
 gem 'sidekiq'
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers"
+  gem 'simplecov'
+end
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "quiet_assets"
+  gem "recap"
+end
+
+group :test do
+  gem "capybara"
+  gem "factory_girl_rails"
+  gem "fakeweb"
+end
+
+group :production do
+  gem 'dalli'
+  gem 'newrelic_rpm'
+  gem 'whenever'
+end
+
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '1.11.2'

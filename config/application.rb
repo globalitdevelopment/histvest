@@ -63,6 +63,8 @@ module Histvest
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
+
+    config.active_record.raise_in_transactional_callbacks = true
    
     config.action_mailer.smtp_settings = {   
       :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,      
@@ -75,6 +77,7 @@ module Histvest
       :user_name      => ENV['SMTP_USER'],
       :password       => ENV['SMTP_PASS']
     }
+
 
     Paperclip::Railtie.insert
   end
