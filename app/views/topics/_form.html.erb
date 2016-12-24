@@ -163,11 +163,11 @@
   </div>
 <% end %>
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDKN-34cs1baWHGc8qPX0CKEKCQDasyWFE"></script>
 <script type="text/javascript">
   // get icons in a hash for quick access
-  var icon_red = "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png";
-  var icon_blue = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+  var icon_red = "https://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png";
+  var icon_blue = "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
   var reference_type_icons = {};  
   <% ReferenceType.all.each do |rt| %>
   reference_type_icons["<%= rt.id %>"] = <%= raw image_tag(rt.icon, :alt=>rt.name, :title=>rt.name).to_json %>;
