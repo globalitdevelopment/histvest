@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
 gem 'rails', '~> 4.2'
-gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'pg'
 gem 'enumerize'
 gem 'elasticsearch-model', '~> 0.1.9'
@@ -46,6 +45,7 @@ gem 'puma'
 gem 'sidekiq'
 
 group :development, :test do
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
   gem "rspec-rails"
   gem "selenium-webdriver"
   gem "shoulda-matchers"

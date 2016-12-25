@@ -5,6 +5,10 @@ set :application, 'histvest'
 set :repository, 'https://github.com/globalitdevelopment/histvest.git'
 
 task :production do
+  server '46.101.237.203', :app
+end
+
+task :old do
   server '185.35.184.76', :app
 end
 

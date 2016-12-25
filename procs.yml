@@ -1,0 +1,11 @@
+apps:
+  - name: web
+    script: ./bin/puma
+    args: -C config/puma.rb
+    cwd: /home/histvest/app
+    interpreter: ruby
+  - name: worker
+    script: ./bin/sidekiq
+    args: -C config/sidekiq.yml
+    cwd: /home/histvest/app
+    interpreter: ruby
