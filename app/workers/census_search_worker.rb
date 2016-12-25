@@ -1,5 +1,5 @@
 class CensusSearchWorker
-  include Sidekiq::Worker
+  #include Sidekiq::Worker
 
   def perform name
     firstname, lastname = Person.parse_name name
