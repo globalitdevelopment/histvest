@@ -1,16 +1,18 @@
+RAILS_ENV = ENV.fetch('RAILS_ENV') { 'development' }
+
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 
 threads 0, 5
 
-preload_app!
+preload_app! unless RAILS_ENV == 'development'
 
-environment ENV['RAILS_ENV'] || 'development'
+environment RAILS_ENV
 
 pidfile "tmp/pids/puma.pid"
 
-bind "unix:/tmp/puma.sock"
+bind "unix:///tmp/puma.sock"  unless RAILS_ENV == 'development'
 
-plugin :tmp
+plugin :tmp_restart
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do
