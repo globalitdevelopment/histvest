@@ -6,9 +6,11 @@ preload_app!
 
 environment ENV['RAILS_ENV'] || 'development'
 
-pidfile "tmp/unicorn.pid"
+pidfile "tmp/pids/puma.pid"
 
-bind "unix:/tmp/unicorn.sock"
+bind "unix:/tmp/puma.sock"
+
+plugin :tmp
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do

@@ -18,7 +18,7 @@ class SearchController < ApplicationController
 			}
 		end
 
-		CensusSearchWorker.perform_async params[:term]
+		# CensusSearchWorker.perform_async params[:term]
 		
 		respond_to do |format|
 			format.json { 

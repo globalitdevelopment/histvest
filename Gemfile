@@ -42,7 +42,7 @@ gem "paperclip"
 gem "truncate_html"
 gem "jbuilder"
 gem 'puma'
-gem 'sidekiq'
+# gem 'sidekiq'
 
 group :development, :test do
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
@@ -66,6 +66,7 @@ group :test do
 end
 
 group :production do
+  gem 'dotenv'
   gem 'dalli'
   gem 'newrelic_rpm'
   gem 'whenever'

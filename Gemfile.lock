@@ -82,7 +82,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.3)
-    connection_pool (2.2.1)
     dalli (2.7.6)
     datagrid (1.5.1)
       rails (>= 3.2.22.2)
@@ -232,8 +231,6 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.5)
-    rack-protection (1.5.3)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)
@@ -280,7 +277,6 @@ GEM
       capistrano (~> 2.9)
       open4
       thor
-    redis (3.3.2)
     request_store (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -320,11 +316,6 @@ GEM
     semver (1.0.1)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    sidekiq (4.2.7)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
-      rack-protection (>= 1.5.0)
-      redis (~> 3.2, >= 3.2.1)
     simplecov (0.12.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -371,6 +362,7 @@ DEPENDENCIES
   coffee-rails
   dalli
   datagrid
+  dotenv
   dotenv-rails
   elasticsearch-model (~> 0.1.9)
   enumerize
@@ -406,7 +398,6 @@ DEPENDENCIES
   sass-rails
   selenium-webdriver
   shoulda-matchers
-  sidekiq
   simplecov
   truncate_html
   uglifier
