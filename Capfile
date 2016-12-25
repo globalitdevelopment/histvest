@@ -30,17 +30,17 @@ namespace :search do
 end
 
 namespace :puma do
-  [:start, :stop, :status, :restart].each do |name|
+  [:start, :stop, :delete, :status, :restart].each do |name|
     task name, :except => { :no_release => true } do
-      if name == :start
-        as_app "bundle exec puma -C config/puma.rb -d"
-      else
-        as_app "bundle exec pumactl #{name} -C config/puma.rb"  
-      end
+      as_app "pm2 #{name} procs.yml --only web"
     end
   end
+
+  task :reload do
+    as_app "touch tmp/restart.txt"
+  end
 end
-after 'deploy:restart', 'puma:restart'
+after 'deploy:restart', 'puma:reload'
 
 set :whenever_command, "bundle exec whenever"
 set :latest_release, fetch(:deploy_to)
