@@ -67,6 +67,7 @@ end
 
 group :production do
   gem 'dotenv'
+  gem 'connection_pool'
   gem 'dalli'
   gem 'newrelic_rpm'
   gem 'whenever'

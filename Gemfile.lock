@@ -82,6 +82,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.3)
+    connection_pool (2.2.1)
     dalli (2.7.6)
     datagrid (1.5.1)
       rails (>= 3.2.22.2)
@@ -360,6 +361,7 @@ DEPENDENCIES
   cancan
   capybara
   coffee-rails
+  connection_pool
   dalli
   datagrid
   dotenv
