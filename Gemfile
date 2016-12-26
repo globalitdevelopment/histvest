@@ -35,7 +35,7 @@ gem "geocoder"
 gem "gmaps4rails", "1.5.7"
 
 # To fetch data fra third parties
-gem "localeapp"
+#gem "localeapp"
 gem "mechanize"
 gem "cancan"
 gem "paperclip"
