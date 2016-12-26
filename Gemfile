@@ -48,8 +48,10 @@ group :development, :test do
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
   gem "rspec-rails"
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
+  gem 'database_cleaner'
+  gem 'spork'
 end
 
 group :development do

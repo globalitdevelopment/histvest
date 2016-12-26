@@ -123,6 +123,17 @@ RSpec.configure do |config|
   #possibel capybara fix
   config.include Capybara::DSL
 
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+
+      # Or, choose the following (which implies all of the above):
+      with.library :rails
+    end
+  end
+
+
 
   # For JavaScript testing to work, use_transactionsl_fixtures had to be 
   # set to false. This means that we will have to clean the database:
