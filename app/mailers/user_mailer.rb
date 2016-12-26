@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "Historiske Vestfold <outgoing@globalit.no>"
+  default from: "Historiske Vestfold <postmaster@histvest.no>"
   
   def get_new_password(user)
     @user = user
