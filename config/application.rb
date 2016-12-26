@@ -21,5 +21,6 @@ module Histvest
     config.active_record.raise_in_transactional_callbacks = true
 
     Paperclip::Railtie.insert
+    PaperTrail.config.track_associations = false
   end
 end
