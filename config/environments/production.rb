@@ -31,16 +31,14 @@ Histvest::Application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
-  # See everything in the log (default is :info)
+  # Use a different logger for distributed setups
+  require 'syslog/logger'
+  config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new('web'))
   config.log_level = :error
-
-  # Prepend all log lines with the following tags
+  config.log_formatter = ::Logger::Formatter.new
   config.log_tags = [ :request_id ]
 
-  # Use a different logger for distributed setups
-  config.log_formatter = ::Logger::Formatter.new
-  config.logger = ActiveSupport::TaggedLogging.new config.logger
-
+  
   config.action_mailer.default_url_options =  { :host => 'histvest.no' }
 
   config.action_mailer.delivery_method = :smtp
