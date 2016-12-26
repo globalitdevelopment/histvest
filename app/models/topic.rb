@@ -141,7 +141,7 @@ class Topic < ActiveRecord::Base
   end
 
   def search_weight
-    @@max ||= SearchTopic.maximum(:view_count)
+    @@max ||= SearchTopic.maximum(:view_count) || 1.0
     @@weights ||= Hash[SearchTopic.pluck(:search_string, :view_count)]
     weight = 1
     weight += @@weights[title].to_i * 10/ @@max
