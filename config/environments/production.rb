@@ -36,7 +36,7 @@ Histvest::Application.configure do
   config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new('web'))
   config.log_level = :error
   config.log_formatter = ::Logger::Formatter.new
-  config.log_tags = [ :request_id ]
+  config.log_tags = [ :uuid ]
 
   
   config.action_mailer.default_url_options =  { :host => 'histvest.no' }
